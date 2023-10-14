@@ -1,0 +1,229 @@
+<?php
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+?>
+<?php
+/**
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+// TODO: Refactoring Options to one template ?>
+<fieldset class="fieldset admin__fieldset form-inline " id="global_fieldset2">
+    <legend class="legend"><span><?php /* @escapeNotVerified */
+            echo __('Role-Specific Settings') ?></span></legend>
+    <br/>
+
+    <div class="global_setings">
+        <div class="field">
+            <label class="label" for="advanced_settings_show_all_customers">
+                <span><?php echo __('Show All Customers') ?></span>
+            </label>
+
+            <div class="control">
+                <?php $_readonly = ($block->getFieldValueUseConfig('use_config_show_all_customers')) ? ' disabled="disabled" ' : '';?>
+                <select id="advanced_settings_show_all_customers"
+                        name="<?php echo $block->getSuffix(); ?>[show_all_customers]" <?php echo $_readonly; ?>>
+                    <option value="1"<?php if ($block->getFieldValue('show_all_customers')
+                        == 1
+                    ): ?> selected="selected"<?php endif; ?>><?php echo __('Yes') ?></option>
+                    <option value="0"<?php if ($block->getFieldValue('show_all_customers')
+                        == 0
+                    ): ?> selected="selected"<?php endif; ?>><?php echo __('No') ?></option>
+                </select>
+                <input type="hidden" id="advanced_settings_show_all_customers_default"
+                       value="<?php echo $block->getFieldValueUseConfig('use_config_show_all_customers'); ?>">
+                <?php $_checked =
+                    ($block->getFieldValueUseConfig('use_config_show_all_customers')) ? 'checked="checked"' : '' ?>
+                <input type="checkbox" id="advanced_use_config_show_all_customers"
+                       name="<?php echo $block->getSuffix(); ?>[use_config_show_all_customers]"
+                       value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);">
+                <label for="advanced_use_config_show_all_customers"><?php echo __('Use Config Settings') ?></label>
+                <script>
+                    require(['prototype'], function () {
+                        toggleValueElements($('advanced_use_config_show_all_customers'), $('advanced_use_config_show_all_customers').parentNode);
+                    });
+                </script>
+            </div>
+            <?php if (!$block->isSingleStoreMode()): ?>
+                <div class="field-service"><?php echo __('[GLOBAL]') ?></div>
+            <?php endif; ?>
+
+        </div>
+
+        <div class="field">
+            <label class="label" for="advanced_settings_allow_null_category">
+                <span><?php /* @escapeNotVerified */
+                    echo __('Show products without categories') ?></span>
+            </label>
+
+            <div class="control">
+                <?php ($block->getFieldValueUseConfig('use_config_allow_null_category')) ?
+                    $_readonly = ' disabled="disabled" '
+                    : $_readonly = ''; ?>
+                <select id="advanced_settings_allow_null_category"
+                        name="<?php echo $block->getSuffix(); ?>[allow_null_category]" <?php /* @escapeNotVerified */
+                echo $_readonly; ?>>
+                    <option value="1"<?php if ($block->getFieldValue('allow_null_category')
+                        == 1
+                    ): ?> selected="selected"<?php endif; ?>><?php /* @escapeNotVerified */
+                        echo __('Yes') ?></option>
+                    <option value="0"<?php if ($block->getFieldValue('allow_null_category')
+                        == 0
+                    ): ?> selected="selected"<?php endif; ?>><?php /* @escapeNotVerified */
+                        echo __('No') ?></option>
+                </select>
+                <input type="hidden" id="advanced_settings_allow_null_category_default"
+                       value="<?php /* @escapeNotVerified */
+                       echo $block->getFieldValueUseConfig('use_config_allow_null_category'); ?>">
+                <?php $_checked =
+                    ($block->getFieldValueUseConfig('use_config_allow_null_category')) ? 'checked="checked"' : '' ?>
+                <input type="checkbox" id="advanced_use_config_allow_null_category"
+                       name="<?php echo $block->getSuffix(); ?>[use_config_allow_null_category]"
+                       value="1" <?php /* @escapeNotVerified */
+                echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);">
+                <label for="advanced_use_config_allow_null_category"><?php /* @escapeNotVerified */
+                    echo __('Use Config Settings') ?></label>
+                <script>
+                    require(['prototype'], function () {
+                        toggleValueElements($('advanced_use_config_allow_null_category'), $('advanced_use_config_allow_null_category').parentNode);
+                    });
+                </script>
+            </div>
+            <?php if (!$block->isSingleStoreMode()): ?>
+                <div class="field-service"><?php /* @escapeNotVerified */
+                    echo __('[GLOBAL]') ?></div>
+            <?php endif; ?>
+
+        </div>
+
+        <div class="field">
+            <label class="label" for="advanced_settings_allow_delete">
+                <span><?php echo __('Allow deleting products, images, categories') ?></span>
+            </label>
+
+            <div class="control">
+                <?php ($block->getFieldValue('advanced_use_config_allow_delete')) ? $_readonly = ' disabled="disabled" '
+                    : $_readonly = ''; ?>
+                <select id="advanced_settings_allow_delete"
+                        name="<?php echo $block->getSuffix(); ?>[allow_delete]" <?php echo $_readonly; ?>>
+                    <option value="1"<?php if ($block->getFieldValue('allow_delete')
+                        == 1
+                    ): ?> selected="selected"<?php endif; ?>><?php echo __('Yes') ?></option>
+                    <option value="0"<?php if ($block->getFieldValue('allow_delete')
+                        == 0
+                    ): ?> selected="selected"<?php endif; ?>><?php echo __('No') ?></option>
+                </select>
+                <input type="hidden" id="advanced_settings_allow_delete"
+                       value="<?php echo $block->getFieldValueUseConfig('use_config_allow_delete'); ?>">
+                <?php $_checked =
+                    ($block->getFieldValueUseConfig('use_config_allow_delete')) ? 'checked="checked"' : '' ?>
+                <input type="checkbox" id="advanced_use_config_allow_delete"
+                       name="<?php echo $block->getSuffix(); ?>[use_config_allow_delete]"
+                       value="1" <?php echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);">
+                <label for="advanced_use_config_allowdelete"><?php echo __('Use Config Settings') ?></label>
+                <script>
+                    require(['prototype'], function () {
+                        toggleValueElements($('advanced_use_config_allow_delete'), $('advanced_use_config_allow_delete').parentNode);
+                    });
+                </script>
+            </div>
+            <?php if (!$block->isSingleStoreMode()): ?>
+                <div class="field-service"><?php echo __('[GLOBAL]') ?></div>
+            <?php endif; ?>
+
+        </div>
+
+        <div class="field">
+            <label class="label" for="advanced_settings_view_all">
+                <span><?php /* @escapeNotVerified */
+                    echo __('Hide Content with “All Store Views” scope') ?></span>
+            </label>
+
+            <div class="control">
+                <?php ($block->getFieldValueUseConfig('use_config_view_all')) ? $_readonly = ' disabled="disabled" '
+                    : $_readonly = ''; ?>
+                <select id="advanced_settings_view_all"
+                        name="<?php echo $block->getSuffix(); ?>[view_all]" <?php /* @escapeNotVerified */
+                echo $_readonly; ?>>
+                    <option value="1"<?php if ($block->getFieldValue('view_all')
+                        == 1
+                    ): ?> selected="selected"<?php endif; ?>><?php /* @escapeNotVerified */
+                        echo __('Yes') ?></option>
+                    <option value="0"<?php if ($block->getFieldValue('view_all')
+                        == 0
+                    ): ?> selected="selected"<?php endif; ?>><?php /* @escapeNotVerified */
+                        echo __('No') ?></option>
+                </select>
+                <input type="hidden" id="advanced_settings_view_default" value="<?php /* @escapeNotVerified */
+                echo $block->getFieldValueUseConfig('use_config_view_all'); ?>">
+                <?php $_checked = ($block->getFieldValueUseConfig('use_config_view_all')) ? 'checked="checked"' : '' ?>
+                <input type="checkbox" id="advanced_use_config_view_all"
+                       name="<?php echo $block->getSuffix(); ?>[use_config_view_all]"
+                       value="1" <?php /* @escapeNotVerified */
+                echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);">
+                <label for="advanced_use_config_view_all"><?php /* @escapeNotVerified */
+                    echo __('Use Config Settings') ?></label>
+                <script>
+                    require(['prototype'], function () {
+                        toggleValueElements($('advanced_use_config_view_all'), $('advanced_use_config_view_all').parentNode);
+                    });
+                </script>
+            </div>
+            <?php if (!$block->isSingleStoreMode()): ?>
+                <div class="field-service"><?php /* @escapeNotVerified */
+                    echo __('[GLOBAL]') ?></div>
+            <?php endif; ?>
+        </div>
+
+
+        <div class="field">
+            <label class="label" for="advanced_settings_manage_global_attribute">
+                <span><?php /* @escapeNotVerified */
+                    echo __('Allow to update global attributes') ?></span>
+            </label>
+
+            <div class="control">
+                <?php ($block->getFieldValueUseConfig('use_config_manage_global_attribute')) ?
+                    $_readonly = ' disabled="disabled" ' : $_readonly = ''; ?>
+                <select id="advanced_settings_manage_global_attribute" name="<?php echo $block->getSuffix(
+                ); ?>[manage_global_attribute]" <?php /* @escapeNotVerified */
+                echo $_readonly; ?>>
+                    <option value="1"<?php if ($block->getFieldValue('manage_global_attribute')
+                        == 1
+                    ): ?> selected="selected"<?php endif; ?>><?php /* @escapeNotVerified */
+                        echo __('Yes') ?></option>
+                    <option value="0"<?php if ($block->getFieldValue('manage_global_attribute')
+                        == 0
+                    ): ?> selected="selected"<?php endif; ?>><?php /* @escapeNotVerified */
+                        echo __('No') ?></option>
+                </select>
+                <input type="hidden" id="advanced_settings_view_default" value="<?php /* @escapeNotVerified */
+                echo $block->getFieldValueUseConfig('use_config_manage_global_attribute'); ?>">
+                <?php $_checked =
+                    ($block->getFieldValueUseConfig('use_config_manage_global_attribute')) ? 'checked="checked"' : '' ?>
+                <input type="checkbox" id="advanced_use_config_manage_global_attribute"
+                       name="<?php echo $block->getSuffix(); ?>[use_config_manage_global_attribute]"
+                       value="1" <?php /* @escapeNotVerified */
+                echo $_checked ?> onclick="toggleValueElements(this, this.parentNode);">
+                <label for="advanced_use_config_manage_global_attribute"><?php /* @escapeNotVerified */
+                    echo __('Use Config Settings') ?></label>
+                <script>
+                    require(['prototype'], function () {
+                        toggleValueElements($('advanced_use_config_manage_global_attribute'), $('advanced_use_config_manage_global_attribute').parentNode);
+                    });
+                </script>
+            </div>
+            <?php if (!$block->isSingleStoreMode()): ?>
+                <div class="field-service"><?php /* @escapeNotVerified */
+                    echo __('[GLOBAL]') ?></div>
+            <?php endif; ?>
+        </div>
+
+
+
+    </div>
+</fieldset>
+
+

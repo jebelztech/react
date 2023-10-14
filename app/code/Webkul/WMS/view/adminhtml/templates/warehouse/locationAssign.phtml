@@ -1,0 +1,493 @@
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<?php // phpcs:disable Magento2.Functions.DiscouragedFunction ?>
+<div class="assignRacksHintOverlay">
+    <div class="assignRacksHintContainer">
+        <div class="rackContainerHeader">
+            <label><?= $block->escapeHtml(__("Racks")); ?></label>
+            <span class="closeRacksButton"></span>
+        </div>
+        <div class="rackButtonContainer">
+            <span class="spinner rackSpinner hidden">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <button class="assignRackButton rackButton"><?= $block->escapeHtml(__("Submit")); ?></button>
+        </div>
+        <div class="productContainer">
+            <div class="productImageContainer">
+                <img class="currentProductImage" src=""/>
+            </div>
+            <div class="productNameContainer">
+                <label class="currentProductStaticTitle"><?= $block->escapeHtml(__("Assign Rack to")); ?></label>
+                <label class="currentProductName"></label>
+            </div>
+            <div class="productQtyContainer" style="display:none" >
+                <label class="currentProductQtyLabel"><?= $block->escapeHtml(__("Qty")); ?></label>
+                <label class="currentProductQty"></label>
+            </div>
+        </div>
+        <div class="scrollerRacksContainer"></div>
+    </div>
+</div>
+<button style="display: none;" id="openModelId" type="button" class="action" data-trigger="trigger">
+    <span data-bind="i18n: 'Click Here'"></span>
+</button>
+<div data-bind="mageInit: {
+        'Magento_Ui/js/modal/modal':{
+            'type': 'popup',
+            'title': 'Attention!',
+            'trigger': '[data-trigger=trigger]',
+            'responsive': true,
+            'buttons': [{
+                text: jQuery.mage.__('Close'),
+                class: 'action'
+            }]
+        }}">
+</div>
+<?php
+    $theme = $block->getHelper()->getConfigData("wms/configuration/layout_theme");
+if ($theme == "light") { ?>
+    <?= "<div class='whiteTheme' id='assignHintOverlay'>";?>
+<?php } else { ?>
+    <?= "<div id='assignHintOverlay'>";?>
+<?php }   ?>
+    <div id="assignHintContainer">
+        <span class="closeButton"></span>
+        
+        <div class="symbolization">
+            <div class="eachSymbolBlock">
+                <span class="symbolColor fullSymbol"></span>
+                <label class="symbolLabel"><?= $block->escapeHtml(__("Fully Occupied")); ?></label>
+            </div>
+            <div class="eachSymbolBlock">
+                <span class="symbolColor semiSymbol"></span>
+                <label class="symbolLabel"><?= $block->escapeHtml(__("Semi Occupied")); ?></label>
+            </div>
+            <div class="eachSymbolBlock">
+                <span class="symbolColor assignedSymbol"></span>
+                <label class="symbolLabel"><?= $block->escapeHtml(__("Product Assigned")); ?></label>
+            </div>
+            <div class="eachSymbolBlock">
+                <span class="symbolColor emptySymbol"></span>
+                <label class="symbolLabel"><?= $block->escapeHtml(__("Empty")); ?></label>
+            </div>
+        </div>
+        <div class="scrollerContainer">
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <td class="diagonalContainer">
+                            <div class="diagonalLine"></div>
+                            <label class="diagonalRow"><?= $block->escapeHtml(__("Row")); ?></label>
+                            <label class="diagonalColumn"><?= $block->escapeHtml(__("Column")); ?></label>
+                        </td>
+<?php           $locationArray = $block->getLocationArray();
+                $warehouse = $block->getCurrentWarehouse();
+                $columnCount = $warehouse->getColumnCount();
+for ($col=1; $col <= $columnCount; $col++) {
+    echo "<td>".$block->escapeHtml(__("Column"))." ".$block->escapeHtml($col)."</td>";
+    if ($col != $columnCount) {
+        echo "<td class='emptyColumn'></td>";
+    }
+}   ?>
+                    </tr>
+                </thead>
+<?php           $rowCount = $warehouse->getRowCount();
+                $shelvesPerCluster = $warehouse->getShelvesPerCluster();
+                $racksPerShelf = $warehouse->getRacksPerShelf();
+                echo "<tbody>";
+                $width = 0;
+for ($row=1; $row <= $rowCount; $row++) {
+    if ($row % 2 !== 0) {
+        echo "<tr>";
+        for ($c=0; $c <= ($columnCount*2); $c++) {
+            echo "<td class='emptyRow'></td>";
+        }
+        echo "</tr>";
+    }
+    echo "<tr><td>".$block->escapeHtml(__("Row"))." ".$block->escapeHtml($row)."</td>";
+    $width = 150;
+    for ($col=1; $col <= $columnCount; $col++) {
+        echo "<td>";
+        for ($shelf=65; $shelf < ($shelvesPerCluster+65); $shelf++) {
+            $occupancyStatus = 0;
+            $indexes = [];
+            $rackData = [];
+            $productIds = [];
+            for ($rack=1; $rack <= $racksPerShelf; $rack++) {
+                $count = count($locationArray);
+                for ($i=0; $i < $count; $i++) {
+                    $data = $locationArray[$i];
+                    
+                    if ($data["row"] == $row
+                    && $data["column"] == $col
+                    && $data["shelf"] == chr($shelf) && $data["rack"] == $rack) {
+                        
+                        if ($data["product_id"] > 0) {
+                            $occupancyStatus++;
+                            $productIds[] = $data["product_id"];
+                            $rackData[$rack] = $data["product_id"];
+                        }
+                        $indexes[] = $i;
+                    }
+                }
+            }
+            $class = "";
+            if ($occupancyStatus > 0 && $occupancyStatus < $racksPerShelf) {
+                $class .= " semiSymbol";
+            }
+            if ($occupancyStatus == $racksPerShelf) {
+                $class .= " fullSymbol";
+            }
+            
+            echo "<div class='eachBlock".$block->escapeHtml($class).
+            "' data-index='".$block->escapeHtml(implode(",", $indexes)).
+            "' data-racksCount='".$block->escapeHtml($racksPerShelf)."' data-row='".$block->escapeHtml($row).
+            "' data-column='".$block->escapeHtml($col)."' data-shelf='".$block->escapeHtml(chr($shelf)).
+            "' data-rackData='".$block->escapeHtml(json_encode($rackData))."' data-productId='".
+            $block->escapeHtml(implode(",", $productIds))."'>";
+                echo "R:".$block->escapeHtml($row).", ";
+                echo "C:".$block->escapeHtml($col).", ";
+                echo "S:".$block->escapeHtml(chr($shelf));
+            echo "</div>";
+            
+            $width += 75;
+        }
+        echo "</td>";
+        if ($col != $columnCount) {
+            echo "<td class='emptyColumn'></td>";
+            $width += 50;
+        }
+    }
+    echo "</tr>";
+}
+                echo "</tbody><style>.grid{width:".$block->escapeHtml($width)."px;}</style>";    ?>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(
+        [
+            "jquery",
+            'Magento_Ui/js/modal/alert'
+        ], function($, alert) {
+            var warehouseSourceCode = '<?= $block->escapeHtmlAttr($warehouse->getSource()); ?>'
+            var productId = 0,
+                productName = "",
+                productImage = "",
+                productSku = "",
+                ajaxInProgress = false,
+                locationArray = <?= /* @noEscape */ $block->getLocationJson();?>;
+                window.assignedProductQty =  <?= /* @noEscape */$block->getLocationTotalQty();?>;
+            $("body").on("click", ".col-action", function () {
+                productId = $(this).parents("tr").find("td").eq(0).text().trim();
+                productName = $(this).parents("tr").find("td").eq(2).text().trim();
+                productSku = $(this).parents("tr").find("td").eq(3).text().trim();
+                productImage = $(this).parents("tr").find("td").eq(1).find("img").attr("src");
+                productQty = $(this).parents("tr").find("td").eq(4).text().trim();
+                window.currentProductQty = productQty;
+                window.remainingProductQty = parseInt(
+                    window.currentProductQty
+                    ) - parseInt(
+                        window.assignedProductQty
+                    );
+                $(".currentProductName").text(productName);
+                $(".currentProductQty").text(productQty);
+                $(".currentProductImage").attr("src", productImage);
+                $("#assignHintOverlay").show();
+                $("#assignHintContainer").animate(
+                    {
+                        "right": "0px"
+                    }, 500
+                );
+                $(".scrollerContainer").find(".eachBlock").each(function() {
+                    var thisThis = $(this);
+                    thisThis.removeClass("assignedShelfSymbol");
+                    var productIds = thisThis.attr("data-productId");
+                    if (typeof productIds != "undefined") {
+                        productIds = productIds.split(",");
+                        if ($.inArray(productId, productIds) >= 0) {
+                            thisThis.addClass("assignedShelfSymbol");
+                        }
+                    }
+                });
+            });
+
+            $("body").on("click", ".eachRackBlockCheckbox", function() {
+                var thisThis = $(this);
+                if (thisThis.attr("data-productid") !== "") {
+                    thisThis.attr("data-productid", "").next().removeClass("occupied");
+                } else {
+                    thisThis.attr("data-productid", productId).next().addClass("occupied");
+                }
+            });
+
+            $("body").on("click", ".eachBlock", function () {
+                let allClasses = $(this).attr("class").split(/\s+/);
+                var thisThis = $(this);
+                var row = thisThis.attr("data-row");
+                var shelf = thisThis.attr("data-shelf");
+                var column = thisThis.attr("data-column");
+                var racksCount = thisThis.attr("data-racksCount");
+                var indexes = thisThis.attr("data-index").split(",");
+                var rackData = JSON.parse(thisThis.attr("data-rackData"));
+                var rackHtml = "";
+                var height = $(window).height()-245;
+                $(".scrollerRacksContainer").css("height", height+"px");
+                for (let rack=1; rack <= racksCount; rack++) {
+                    for (let j=0; j<indexes.length; j++) {
+                        if (typeof locationArray[indexes[j]] !== "undefined") {
+                            const element = locationArray[indexes[j]];
+                            if (element["row"] == row
+                            && element["column"] == column
+                            && element["shelf"] == shelf
+                            && element["rack"] == rack) {
+                                proId = rackData[rack] ? rackData[rack] : "";
+                                if (rack%2 == 0) {
+                                    rackHtml += "<div class='eachRackBlock eachRackBlockEven'>";
+                                } else {
+                                    rackHtml += "<div class='eachRackBlock'>";
+                                }
+                                if (proId != "") {
+                                    rackHtml += "<div class='eachRackBlockHead'>"+
+                                        "<input value='"+element["id"]+"' data-productId='"+proId+
+                                        "' disabled='disabled' checked='checked' type='checkbox' "+
+                                        "class='eachRackBlockCheckbox'/>"+
+                                        "<label class='eachRackBlockHeadLabel'>"+
+                                        "Empty rack and assign product</label>"+
+                                    "</div>";
+                                    rackHtml += "<div class='eachRackBlockHead'>"+
+                                        "<input value='"+element["id"]+"' data-productId='"+proId+
+                                        "' disabled='disabled'  type='checkbox' "+
+                                        "class='eachRackQtyBlockCheckbox eachRackBlockCheckbox'/>"+
+                                        "<input min='0' element-id='"+element["id"]+"' value='"+
+                                        element["location_qty"]+"' data-productId='"+proId+
+                                        "' disabled='disabled' type='number' "+
+                                        "class='eachRackBlockTextbox'/>"+
+                                        "<label class='eachRackBlockHeadLabel'>"+
+                                        "Available Qty</label>"+
+                                    "</div>";
+                                } else {
+                                    rackHtml += "<div class='eachRackBlockHead'>"+
+                                        "<input value='"+element["id"]+"' data-productId='"+
+                                        proId +"' type='checkbox' class='eachRackBlockCheckbox'/>"+
+                                        "<label class='eachRackBlockHeadLabel'>"+
+                                        "<?= $block->escapeHtml(__("Assign product")); ?>"+"</label>"+
+                                    "</div>";
+                                    rackHtml += "<div class='eachRackBlockHead'>"+
+                                        "<input min='0' element-id='"+element["id"]+"' value='"+
+                                        element["location_qty"]+"' data-productId='"+
+                                        proId +"' type='number' class='eachRackBlockTextbox'/>"+
+                                        "<label class='eachRackBlockHeadLabel'>"+
+                                        "<?= $block->escapeHtml(__("Update location qty")); ?>"+"</label>"+
+                                    "</div>";
+                                }
+                                rackHtml += "<div class='eachRackBlockBody'>";
+                                if (proId != "") {
+                                    rackHtml += "<div class='eachRackBlockLocationContainer occupied'>";
+                                } else {
+                                    rackHtml += "<div class='eachRackBlockLocationContainer'>";
+                                }
+                                rackHtml += "<label class='eachRackBlockLocation'>"+
+                                        "R:"+row+", C:"+column+"</br>S:"+shelf+", Ra:"+rack+
+                                    "</label>"+
+                                "</div>"+
+                                "<div class='eachRackBlockData'>";
+                                    if (proId != "") {
+                                        rackHtml += "<a href='"+element["url"]+
+                                        "' target='_blank' class='eachRackBlockProductName'>"+
+                                            element["name"]+
+                                        "</a>";
+                                    } else {
+                                        rackHtml += "<label class='eachRackBlockAssignmentLabel'>"+
+                                            "<?= $block->escapeHtml(__("Available for new product")); ?>"+
+                                        "</label>";
+                                    }
+                                rackHtml += "</div>"+
+                                "</div>";
+                                if (proId != "") {
+                                    rackHtml += "<div class='eachRackBlockChangeAssignmentContainer'>"+
+                                        "<input type='checkbox' class='eachRackBlockChangeAssignmentCheckbox' "+
+                                        " checked='checked'/>"+
+                                        "<label class='eachRackBlockChangeAssignmentLabel'>"+
+                                        "Use Already Assigned Product</label>"+
+                                    "</div>";
+                                }
+                                rackHtml += "</div>";
+                            }
+                        }
+                    }
+                }
+                $(".scrollerRacksContainer").html(rackHtml);
+                $(".assignRacksHintOverlay").fadeIn("fast");
+                $(".assignRacksHintContainer").animate(
+                    {
+                        "right": "0px"
+                    }, 200
+                );
+            });
+
+            $(".closeRacksButton").on("click", function() {
+                $(".assignRacksHintContainer").animate(
+                    {
+                        "right": "-21%"
+                    }, 200, ()=>{
+                        $(".assignRacksHintOverlay").fadeOut("fast");
+                    }
+                );
+            });
+
+            $("body").on("change", ".eachRackQtyBlockCheckbox", function () {
+                var thisThis = $(this);
+                if (thisThis.prop("checked")) {
+                    thisThis.next().removeAttr("disabled");
+                } else {
+                    thisThis.next().attr("disabled", "disabled");
+                }
+            });
+
+            $("body").on("change", ".eachRackBlockChangeAssignmentCheckbox", function(){
+                var thisThis = $(this);
+                if (thisThis.prop("checked")) {
+                    var prevValue = thisThis.attr("data-prevValue");
+                    if (prevValue != "") {
+                        thisThis.parents(".eachRackBlock").find(
+                            ".eachRackBlockCheckbox"
+                            ).attr(
+                                "data-productid",
+                                prevValue
+                            ).prop("checked", true).attr("disabled", "disabled");
+                    } else {
+                        thisThis.parents(".eachRackBlock").find(
+                            ".eachRackBlockCheckbox"
+                            ).prop("checked", true).attr("disabled", "disabled");
+                    }
+                } else {
+                    thisThis.attr(
+                        "data-prevValue",
+                        thisThis.parents(".eachRackBlock").find(
+                            ".eachRackBlockCheckbox"
+                        ).attr("data-productid")
+                    );
+                    thisThis.parents(".eachRackBlock").find(
+                        ".eachRackBlockCheckbox"
+                    ).attr("data-productid", productId).removeAttr("disabled");
+                }
+            });
+
+            $(".assignRacksHintOverlay").on("click", function(event) {
+                if (event.target == event.currentTarget) {
+                    $(".assignRacksHintContainer").animate(
+                        {
+                            "right": "-21%"
+                        }, 200, ()=>{
+                            $(".assignRacksHintOverlay").fadeOut("fast");
+                        }
+                    );
+                }
+            });
+
+            $(".closeButton").on("click", function() {
+                productId = 0;
+                $("#assignHintContainer").animate(
+                    {
+                        "right": "-81%"
+                    }, 500, ()=>{
+                        $("#assignHintOverlay").hide();
+                    }
+                );
+            });
+
+            $("#assignHintOverlay").on("click", function(event) {
+                if (event.target == event.currentTarget) {
+                productId = 0;
+                    $("#assignHintContainer").animate(
+                        {
+                            "right": "-81%"
+                        }, 500, ()=>{
+                            $("#assignHintOverlay").hide();
+                        }
+                    );
+                }
+            });
+
+            $(".assignRackButton").on("click", function(){
+                if (!ajaxInProgress) {
+                    ajaxInProgress = true;
+                    var data = {};
+                    $(".scrollerRacksContainer").find(".eachRackBlockCheckbox").each(function(){
+                        var thisThis = $(this);
+                        if (!thisThis.prop("disabled")) {
+                            if (thisThis.prop("checked")) {
+                                data[thisThis.val()] = productId;
+                            } else {
+                                data[thisThis.val()] = 0;
+                            }
+                        }
+                    });
+                    var dataQty = {};
+                    $(".scrollerRacksContainer").find(".eachRackBlockTextbox").each(function(){
+                        var thisThis = $(this);
+                        let elementId = thisThis.attr("element-id");
+                        dataQty[elementId] = thisThis.val();
+                        dataQty[elementId] = thisThis.val();
+                    });
+                    $(".rackSpinner").removeClass("hidden");
+                    $.ajax({
+                        url: "<?= $block->escapeHtml($block->getAssignLocationUrl()); ?>",
+                        type: "POST",
+                        data: {
+                            data: data,
+                            dataQty :dataQty,
+                            productSku: productSku,
+                            warehouseSourceCode: warehouseSourceCode,
+                            assignedProductQty : window.remainingProductQty,
+                            form_key: "<?= $block->escapeHtml($block->getFormKey()); ?>"
+                        },
+                        dataType: "json",
+                        success: (content) => {
+                            $(".rackSpinner").addClass("hidden");
+                            ajaxInProgress = false;
+                            if (content.success) {
+                                location.reload();
+                            } else {
+                                alert({
+                                    title: $.mage.__('Product Assignment'),
+                                    content: $.mage.__(content.message),
+                                    actions: {
+                                        always: function(){}
+                                    }
+                                });
+                            }
+                        },
+                        error: () => {
+                            $(".rackSpinner").addClass("hidden");
+                            ajaxInProgress = false;
+                        }
+                    });
+                }
+            });
+        }
+    );
+</script>
+<?php // phpcs:enable ?>

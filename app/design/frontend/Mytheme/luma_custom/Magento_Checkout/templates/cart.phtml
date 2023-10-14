@@ -1,0 +1,152 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<style>
+#block-shipping{
+    display: none;
+}
+</style>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $block \Magento\Checkout\Block\Cart
+ */
+
+if ($block->getItemsCount()) {
+    // phpcs:ignore Magento2.Security.LanguageConstruct.DirectOutput
+    echo $block->getChildHtml('with-items');
+} else {
+    // phpcs:ignore Magento2.Security.LanguageConstruct.DirectOutput
+    echo $block->getChildHtml('no-items');
+}
+?>
+
+
+<?php
+//$customerId = 3; //CUSTOMER_ID
+ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+  $customer_session = $objectManager->get('\Magento\Customer\Model\Session');
+  $customerId=$customer_session->getCustomer()->getId();
+
+
+$wishlist = $objectManager->get('\Magento\Wishlist\Model\Wishlist');
+$wishlistCollection = $wishlist->loadByCustomerId($customerId)->getItemCollection();
+
+/*
+if(count($wishlistCollection)) {
+    foreach ($wishlistCollection as $_item) {
+        echo $_item->getProduct()->getName();echo "<br>";
+        echo $_item->getProduct()->getId();echo "<br>";
+    }
+} else {
+    echo __("No Item found in your wishlist");
+}
+*/
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$pos='';
+$viewMode = 'grid';
+$imageDisplayArea = 'category_page_grid';
+$showDescription = false;
+$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+$_helper = $block->getData('outputHelper');
+
+
+?>
+
+                
+            <?php if(count($wishlistCollection)){?>
+               <div class="wishlist-cart-products">
+                <label class="wishlist-heading">Wishlist (<?php echo count($wishlistCollection)?> items)</label>
+              
+               <?php foreach ($wishlistCollection as $_item):?>
+                <?php 
+
+                $_product = $objectManager->create('Magento\Catalog\Model\Product')->load($_item->getProductId());
+                $listBlock = $objectManager->get('\Magento\Catalog\Block\Product\ListProduct');
+                $Wishlist_Block = $objectManager->get('\Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Remove');
+                $addToCartUrl =  $listBlock->getAddToCartUrl($_product);
+               
+                                ?>
+                   
+                     
+                      <div class="product-item-info"
+                     id="product-item-info_<?= /* @noEscape */ $_product->getId() ?>"
+                     data-container="product-<?= /* @noEscape */ $viewMode ?>">
+                    <?php
+                    $productImage = $listBlock->getImage($_product, $imageDisplayArea);
+                    if ($pos != null) {
+                        $position = 'left:' . $productImage->getWidth() . 'px;'
+                            . 'top:' . $productImage->getHeight() . 'px;';
+                    }
+                    ?>
+                    <?php // Product Image ?>
+                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                       class="product photo product-item-photo"
+                       tabindex="-1">
+                        <?php echo  $productImage->toHtml() ?>
+                    </a>
+                    <div class="product details product-item-details">
+                        <?php $_productNameStripped = $listBlock->stripTags($_product->getName(), null, true); ?>
+                        <strong class="product name product-item-name">
+                            <a class="product-item-link"
+                               href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>">
+                                <?= $listBlock->escapeHtml($_product->getName()) ?>
+                            </a>
+                        </strong>
+                        <?= $listBlock->getReviewsSummaryHtml($_product, $templateType) ?>
+                        <?= /* @noEscape */ $listBlock->getProductPrice($_product) ?>
+
+                        <?= $listBlock->getProductDetailsHtml($_product) ?>
+
+                        <div class="product-item-inner">
+                            <div class="product actions product-item-actions">
+                                <div class="actions-primary">
+                                    <?php if ($_product->isSaleable()):?>
+                                        <?php //$postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form"
+                                              data-product-sku="<?= $escaper->escapeHtml($_product->getSku()) ?>"
+                                              action="<?= $addToCartUrl ?>"
+                                              method="post">
+                                       
+                                      
+                                            <?= $listBlock->getBlockHtml('formkey') ?>
+                                            <button type="submit"
+                                                    title="<?= $escaper->escapeHtmlAttr(__('Add to Cart')) ?>"
+                                                    class="action tocart primary"
+                                                    >
+                                                <span><?= $escaper->escapeHtml(__('Add to Cart')) ?></span>
+                                            </button>
+                                        </form>
+                                    <?php else:?>
+                                        <?php if ($_product->isAvailable()):?>
+                                            <div class="stock available">
+                                                <span><?= $escaper->escapeHtml(__('In stock')) ?></span></div>
+                                        <?php else:?>
+                                            <div class="stock unavailable">
+                                                <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+
+
+
+<a href="javascript:void(0)" data-role="remove" data-post-remove='<?= /* @noEscape */ $Wishlist_Block->getItemRemoveParams($_item) ?>' title="<?= $block->escapeHtmlAttr(__('Remove Item')) ?>" class="btn-remove action delete">
+    <span><?= $block->escapeHtml(__('Remove item')) ?></span>
+</a>
+
+
+                                </div>
+     
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                   <?php endforeach ?>
+               </div>
+    <?php } ?>

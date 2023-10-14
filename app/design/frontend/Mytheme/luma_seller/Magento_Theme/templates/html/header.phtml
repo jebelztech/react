@@ -1,0 +1,65 @@
+<div class="marketplace-header">
+    <div class="container-fluid">
+        <div class="row">
+           
+		     <div class="col-md-8">
+                <a class="marketplace-logo" href="https://seller-qader.ezmartech.com/"><img src="/media/logo/stores/3/seller-logo.png" title="QaderExpress " alt="QaderExpress " width="170"></a>
+               
+                <nav class="navbar navbar-expand-lg">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsmarketplace" aria-controls="navbarsmarketplace" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-bar bar1"></span>
+        <span class="navbar-toggler-bar bar2"></span>
+        <span class="navbar-toggler-bar bar3"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsmarketplace">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Seller Training</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">QaderExpress .com</a>
+            </li>
+          </ul>
+        </div>
+      
+    </nav>
+            </div>
+			
+			
+			
+			
+			
+            <div class="col-md-4">
+			
+			<form class="form form-login" action="/customer/account/loginPost/" method="post" id="login-form" novalidate="novalidate">
+     <?= $block->getBlockHtml('formkey') ?> 
+              <div class="marketplace-login">
+                 <p>Login <a href="/customer/account/forgotpassword/">Forgot Password?</a></p>
+                 <div class="marketplace-box">
+                     <input type="email" placeholder="E-mail" name="login[username]" required>
+                     <input type="password" placeholder="Password" name="login[password]" required>
+                     <button class="btn" type="submit" > Log in </button>
+                 </div> 
+              </div>
+            
+						<input type="hidden" name="vendor_login" value="1">
+						</form>
+			</div>
+			
+			
+			
+        </div>
+    </div>  
+</div>
+
+

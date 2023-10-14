@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Result\Page">
+        <plugin name="add_body_class" type="Etail\Alsultan\Plugin\BodyClass"/>
+    </type>
+    <type name="Magento\Directory\Model\ResourceModel\Region\Collection">
+        <plugin name="custom_region_filter" type="Etail\Alsultan\Plugin\RegionFilter" />
+    </type>
+</config>

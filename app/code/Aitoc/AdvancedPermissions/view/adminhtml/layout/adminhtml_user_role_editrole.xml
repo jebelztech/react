@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Aitoc_AdvancedPermissions::css/adv.css"/>
+        <css src="Aitoc_AdvancedPermissions::css/category-selector.css"/>
+    </head>
+    <body>
+        <referenceBlock name="adminhtml.user.editroles">
+            <block class="Aitoc\AdvancedPermissions\Block\Role\Tab\Advanced" name="aitoc.advancedpermissions.role.tab.advanced"/>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">aitoc_advanced_permissions</argument>
+                <argument name="block" xsi:type="string">aitoc.advancedpermissions.role.tab.advanced</argument>
+                <argument name="after" xsi:type="string">account</argument>
+            </action>
+            <block class="Aitoc\AdvancedPermissions\Block\Role\Tab\Settings" name="aitoc.advancedpermissions.role.tab.settings" template="Aitoc_AdvancedPermissions::role/settings.phtml"/>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">aitoc_advanced_settings</argument>
+                <argument name="block" xsi:type="string">aitoc.advancedpermissions.role.tab.settings</argument>
+                <argument name="after" xsi:type="string">aitoc_advanced_permissions</argument>
+            </action>
+            <block class="Aitoc\AdvancedPermissions\Block\Role\Tab\Editor" name="adminhtml.permissions.tab.product.editor"/>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">aitoc_advanced_product_editor</argument>
+                <argument name="block" xsi:type="string">adminhtml.permissions.tab.product.editor</argument>
+                <argument name="after" xsi:type="string">aitoc_advanced_settings</argument>
+            </action>
+            <block class="Aitoc\AdvancedPermissions\Block\Role\Tab\Create" name="adminhtml.permissions.tab.product.create"/>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">aitoc_advanced_product_create</argument>
+                <argument name="block" xsi:type="string">adminhtml.permissions.tab.product.create</argument>
+                <argument name="after" xsi:type="string">aitoc_advanced_product_editor</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Template" name="aitoc.advancedpermissions.advanced.js" template="Aitoc_AdvancedPermissions::role/advanced.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Framework\View\Element\Template" name="adminhtml.permissions.editroles.attribute"
+                   template="Aitoc_AdvancedPermissions::role/product/editor/grid_js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

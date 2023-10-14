@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_MobikulCore
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <wms>
+            <configuration>
+                <apiusername><![CDATA[mobikul]]></apiusername>
+                <apikey><![CDATA[mobikul123]]></apikey>
+                <racks_per_shelf><![CDATA[5]]></racks_per_shelf>
+                <enablesinglelogin><![CDATA[1]]></enablesinglelogin>
+            </configuration>
+        </wms>
+    </default>
+</config>

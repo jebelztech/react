@@ -1,0 +1,81 @@
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+#printable{
+    font-size: 30px;
+    text-align: center;
+}
+#printable div{
+    line-height: 35px;
+}
+#printall{
+    display: grid;
+    padding: 10px;
+    grid-gap: 10px;
+    background-color: #FFFFFF;
+    grid-template-columns: 33% 33% 33%;
+}
+.eachBlock{
+    padding: 20px 0;
+    font-size: 30px;
+    text-align: center;
+    background-color: rgba(239, 239, 239, 0.8);
+}
+* {
+    box-sizing: inherit;
+}
+*::before, *::after {
+    box-sizing: inherit;
+}
+body {
+    color: #41362f;
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.36;
+    font-style: normal;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.page-main-actions:not(._hidden), .page-actions._fixed {
+    width: 100%;
+    padding: 1.5rem 0;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    background: #f8f8f8 none repeat scroll 0 0;
+}
+.page-main-actions {
+    content: "";
+    display: table;
+    margin: 0 0 3rem;
+}
+.page-actions {
+    float: right;
+    padding-right: 1.5rem;
+}
+.page-actions-buttons {
+    float: right;
+    display: flex;
+    justify-content: flex-end;
+}
+#print{
+    cursor:pointer;
+    border: 1px solid;
+    padding: 10px 25px;
+}
+#print span{
+    font-size: 20px;
+    margin-right: 10px;
+}
+td{
+    text-align: left;
+    vertical-align: top;
+    padding: 10px !important;
+}

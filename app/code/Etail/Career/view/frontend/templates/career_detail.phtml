@@ -1,0 +1,209 @@
+<?php $career = $block->loadCareer(); ?>
+<?php //echo "<pre>"; print_r($career['title']); echo "</pre>";?>
+<section class="career-details">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2><?= $career['name']?></h2>
+				<p class="location m-0"><?= $career['address']?></p>
+				<?= $career['description']?>
+			</div>
+		</div>
+	</div>
+	<form action="<?= $block->getBaseUrl()."career/index/career"?>" method="post" enctype="multipart/form-data">
+		<div class="carrerDetails-form">
+	        <div class="container">
+	            <h4 class="mb-4">Fill in the Details</h4>
+            	<div class="p-4 bg-info">
+                	<input type="hidden" name="career_detail" value="<?= $career['career_id']?>">
+                	<input type="hidden" name="job_title" value="<?= $career['name']?>">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-white" for="Firstname">First name</label>
+                                <input type="text" name="firstname" id="firstname" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-white" for="lastname">Last name</label>
+                                <input type="text" name="lastname" id="lastname" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-white" for="email">Email</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-white" for="inputPhone">Phone</label>
+                                <input type="text" name="phone" id="phone" class="form-control" id="inputPhone">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white" for="inputCity">Location (City) </label>
+                                <input type="text" name="city" class="form-control" id="inputCity">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <a class="text-white" href="#">Locate me</a>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group files">
+                                <label>Upload Resume (.docx|.pdf)</label>
+                                <input type="file" name="resume" id="resume" class="form-control" multiple="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group files">
+                                <label>Upload Portfolio (.docx|.pdf)</label>
+                                <input type="file" name="portfolio" id="portfolio" class="form-control" multiple="">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-4">
+                            <div class="form-btn">
+                                <button type="submit" class="btn bg-light">Submit Application</button>
+                            </div>   
+                        </div>
+                    </div>
+            	</div>
+	        </div>
+	    </div>
+	</form>
+</section>
+
+<style>
+.carrerDetails-form .bg-info {
+    background-color: #f7f7fa !important;
+}
+.carrerDetails-form .text-white {
+    color: #222 !important;
+}   
+.carrerDetails-form .form-control {
+    height: 43px !important;
+    border: none !important;
+    font-size: 14px !important;
+     border: 1px solid #c2c2c2 !important;
+}   
+    .conpany_name,
+    .location {
+        font-size: 13px !important;
+    }
+
+    .What_list {
+        list-style: disc;
+        padding: 0 0 0 30px;
+    }
+
+    .What_list_num {
+        list-style: decimal;
+        padding: 0 0 0 30px;
+    }
+
+    .What_list_num li,
+    .What_list li {
+        font-size: 14px;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    form a,
+    form button,
+    form span {
+        font-size: 14px !important;
+    }
+.files input { 
+    padding: 10px 10px;
+    text-align: center !important;
+    margin: 0;
+    width: 100% !important;
+} 
+.files{ position:relative}
+.files:after {  pointer-events: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 50px;
+    right: 0;
+    height: 56px;
+    content: ""; 
+    display: block;
+    margin: 0 auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+} 
+/*.files:before {
+    position: absolute;
+    bottom: 10px;
+    left: 0;  pointer-events: none;
+    width: 100%;
+    right: 0;
+    height: 57px;
+    content: " or drag it here. ";
+    display: block;
+    margin: 0 auto;
+    color: #2ea591;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: center;
+} */
+.carrerDetails-form h4 {
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px !important;
+    display: block;
+} 
+.carrerDetails-form button.btn.bg-light {
+    color: #222;
+    border: 0;
+    padding: 10px 40px; 
+    letter-spacing: 0;
+    font-size: 15px;
+    background: #ddd !important;
+    text-transform: uppercase;
+}
+.carrerDetails-form .form-group label {
+    font-size: 14px;
+} 
+.carrerDetails-form .input-text, .carrerDetails-form .select {
+    border: 1px solid #c2c2c2
+}
+.career-details {
+	margin-top: 30px;
+}    
+@media (max-width:767px) {
+.columns .column.main {
+    padding: 0 0px;
+}
+
+.career-details p {
+    font-size: 13px;
+}
+.What_list_num li, .What_list li {
+    font-size: 13px;
+}
+.carrerDetails-form h4 {
+    font-size: 18px; 
+    margin-top: 20px;
+    margin-bottom: 15px !important; 
+} 
+.form-btn {
+    text-align: center;
+}
+.carrerDetails-form button.btn.bg-light{
+    padding: 10px 18px;
+}   
+    
+    
+    
+} 
+    
+    
+</style>

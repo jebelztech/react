@@ -1,0 +1,30 @@
+<?php $storeData = $block->getStoreData()?>
+<ul class="footer-cmslimkbox">
+    <!-- <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('Abu Dhabi')?></a></li>
+    <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('Dubai')?></a></li>
+    <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/sh_en/___from_store/<?= $storeData['current']?>"><?= __('Sharjah')?></a></li>
+    <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('North Emirates')?></a></li> --> 
+    <?php if($storeData['current']!="de" && $storeData['current']!="en_us"):?>
+        <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('Abu Dhabi')?></a></li>
+        <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('Dubai')?></a></li>
+        <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/sh_en/___from_store/<?= $storeData['current']?>"><?= __('Sharjah')?></a></li>
+        <li><a href="https://alsultansweets.ae/stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('North Emirates')?></a></li>
+    <?php else:?>
+        <li><a href="https://alsultansweets.ae/"><?= __('Abu Dhabi')?></a></li>
+        <li><a href="https://alsultansweets.ae/"><?= __('Dubai')?></a></li>
+        <li><a href="https://alsultansweets.ae/"><?= __('Sharjah')?></a></li>
+        <li><a href="https://alsultansweets.ae/"><?= __('North Emirates')?></a></li>
+    <?php endif;?>
+    <li class='bounceInDown'>
+        <ul>
+            <li class='sub-menu1'><a href="javascript:void(0);"><?= __('International Store')?> &nbsp;&nbsp;<div class='fa fa-caret-down right'></div></a>
+                <ul>
+                    <li><a href="https://alsultansweets.ae/us/"><?= __('USA')?></a></li>
+                    <!-- <li><a href="{{store direct_url=''}}stores/store/redirect/___store/default/___from_store/<?= $storeData['current']?>"><?= __('Bahrain')?></a></li> -->
+                    <li><a href="https://alsultansweets.ae/tr/"><?= __('Turkey')?></a></li>
+                    <li><a href="https://alsultansweets.ae/de/"><?= __('Germany')?></a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

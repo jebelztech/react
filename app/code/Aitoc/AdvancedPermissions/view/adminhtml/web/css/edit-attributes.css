@@ -1,0 +1,12 @@
+/*
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+
+.admin__scope-old .attributes-edit-form .field-price .control .admin__control-text[disabled],
+.admin__scope-old .attributes-edit-form .field-special_price .control .admin__control-text[disabled],
+.admin__scope-old .attributes-edit-form .field-gift_wrapping_price .control .admin__control-text[disabled],
+.admin__scope-old .attributes-edit-form .field-msrp .control .admin__control-text[disabled],
+.admin__scope-old .attributes-edit-form .field-cost .control .admin__control-text[disabled],
+.admin__scope-old .attributes-edit-form .field-gift_wrapping_price .control .admin__control-text[disabled] {
+    background-color: #e9e9e9;
+}

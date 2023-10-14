@@ -1,0 +1,10 @@
+<config 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="branches_email"
+              label="Branches Email"
+              file="branches_email.html"
+              type="html"
+              module="Etail_Alsultan"
+              area="frontend"
+    />
+</config>

@@ -1,0 +1,114 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Pos
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<div class="page-main-actions">
+    <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+        <div class="page-actions-inner" data-title="Joust Duffle Bag">
+            <div class="page-actions-buttons">
+                <button 
+                    id="print"
+                    title="Print"
+                    type="button"
+                    class="action- scalable action-secondary">
+                    <span>&#128438;</span>
+                    <?= $block->escapeHtml(__("Print"));?>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+try {
+
+    $barcodeAttribute = $block->helper->getConfigData("wms/configuration/barcode_attribute");
+    $productCollection = $block->filter->getCollection($block->collectionFactory->create());
+    $productCollection->addAttributeToSelect("name");
+    if ($barcodeAttribute != "sku") {
+        $productCollection->addAttributeToSelect($barcodeAttribute);
+    }
+    $target = $block->storeManager->getStore()->getBaseUrl(
+        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+    );
+    $targetDir = $block->directoryList->getPath("media");
+} catch (\Throwable $t) {
+    throw $t;
+}
+?>
+<div id="printall">
+<?php
+try {
+    foreach ($productCollection as $product) {
+        if (!$block->driverInterface->isFile($block->escapeHtml(
+            $targetDir
+        )."/"."wms"."/"."product"."/".$block->escapeHtml(
+            $product->getId()
+        )."/".$block->escapeHtml(
+            $product->getData($barcodeAttribute)
+        ).".png")) {
+            $basePath = $block->escapeHtml(
+                $targetDir
+            )."/"."wms"."/"."product"."/".$block->escapeHtml(
+                $product->getId()
+            )."/";
+            $fileName = str_replace(" ", "_", $product->getData($barcodeAttribute)).".png";
+            if (!$block->driverInterface->isFile($basePath.$fileName)) {
+                $block->ioFile->mkdir($basePath, 0777);
+                $block->helperBarcode->generatebarcode(
+                    $basePath.$fileName,
+                    $product->getData($barcodeAttribute),
+                    100,
+                    "horizontal",
+                    "code128",
+                    false,
+                    1
+                );
+            }
+        }
+        echo '<div class="eachBlock"><div><b>'.$block->escapeHtml(
+            $product->getName()
+        ).'</b></div><div><b>'.$block->escapeHtml($product->getData(
+            $barcodeAttribute
+        )).'</b></div><div><img src="'.$block->escapeHtml(
+            $target
+        )."/"."wms"."/"."product"."/".$block->escapeHtml(
+            $product->getId()
+        )."/".$block->escapeHtml(
+            $product->getData($barcodeAttribute)
+        ).'.png"/></div></div>';
+    }
+    if (!count($productCollection)) {
+        echo '<div class="eachBlock">'.$block->escapeHtml(__("No BarCode Found")).'</div>';
+    }
+} catch (\Throwable $t) {
+    throw $t;
+}
+?>
+</div>
+<script type="text/javascript">
+    function printBarcode()  {
+        var printWindow = window.open("", "PRINT", "height=400,width=600");
+        printWindow.document.write(
+            "<html><head><style>body,html{width:100%;}#printall{display:grid;grid-template-columns:50%"+
+             "50%;grid-gap:10px;background-color:#FFFFFF;padding:10px;}"+
+             ".eachBlock{background-color:rgba(239, 239, 239, 0.8);text-align:center;"+
+             "padding:20px 0;font-size:30px;}</style><title>Product Barcode</title></head><body>"
+            );
+        printWindow.document.write("<div id='printall'>"+document.getElementById(
+            "printall"
+        ).innerHTML+"</div>");
+        printWindow.document.write("</body></html>");
+        printWindow.document.close();
+        printWindow.focus(); // necessary for IE >= 10
+        printWindow.print();
+        return true;
+    }
+    document.querySelector('#print').addEventListener('click', printBarcode);
+</script>

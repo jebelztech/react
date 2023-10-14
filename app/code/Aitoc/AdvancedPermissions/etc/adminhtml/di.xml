@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+<!--
+  ~ Copyright © 2018 Aitoc. All rights reserved.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="containerWeightDisabled" xsi:type="array">
+                    <item name="class" xsi:type="string">Aitoc\AdvancedPermissions\Ui\DataProvider\Product\Form\Modifier\ContainerWeightDisabled</item>
+                    <item name="sortOrder" xsi:type="number">250</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Magento\Store\Model\System\Store" type="Aitoc\AdvancedPermissions\Model\Store\System\Store"/>
+    <preference for="Magento\Customer\Model\ResourceModel\Online\Grid\Collection" type="Aitoc\AdvancedPermissions\Model\ResourceModel\Online\Grid\Collection"/>
+    <preference for="Magento\Backend\Block\Dashboard\Tab\Products\Ordered" type="Aitoc\AdvancedPermissions\Block\Dashboard\Products\Ordered"/>
+    <preference for="Magento\Backend\Block\Dashboard\Tab\Products\Viewed" type="Aitoc\AdvancedPermissions\Block\Dashboard\Products\Viewed"/>
+
+    <preference for="Magento\Catalog\Block\Adminhtml\Product" type="Aitoc\AdvancedPermissions\Block\Product\Product"/>
+    <preference for="Magento\ConfigurableProduct\Block\Adminhtml\Product\Edit\Button\Save" type="Aitoc\AdvancedPermissions\Block\Product\Edit\Button\Save"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Attribute\Grid" type="Aitoc\AdvancedPermissions\Block\Product\Attribute\Grid"/>
+
+    <preference for="Magento\Backend\Block\Dashboard\Tab\Customers\Most" type="Aitoc\AdvancedPermissions\Block\Dashboard\Customers\Most"/>
+    <preference for="Magento\Backend\Block\Dashboard\Tab\Customers\Newest" type="Aitoc\AdvancedPermissions\Block\Dashboard\Customers\Newest"/>
+    <preference for="Magento\Backend\Block\Dashboard\Sales" type="Aitoc\AdvancedPermissions\Block\Dashboard\Sales"/>
+    <preference for="Magento\Backend\Block\Dashboard\Totals" type="Aitoc\AdvancedPermissions\Block\Dashboard\Totals"/>
+    <preference for="Magento\Backend\Block\Dashboard\Orders\Grid" type="Aitoc\AdvancedPermissions\Block\Dashboard\Orders\Grid"/>
+    <preference for="Magento\Backend\Helper\Dashboard\Order" type="Aitoc\AdvancedPermissions\Helper\Dashboard\Order"/>
+    
+    <preference for="Magento\Cms\Ui\Component\DataProvider" type="Aitoc\AdvancedPermissions\Ui\DataProvider\CommonDataProvider"/>
+    <preference for="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" type="Aitoc\AdvancedPermissions\Ui\DataProvider\CommonDataProvider"/>
+    <preference for="Magento\Customer\Ui\Component\DataProvider" type="Aitoc\AdvancedPermissions\Ui\DataProvider\CustomerDataProvider"/>
+    
+    <preference for="Magento\Catalog\Controller\Adminhtml\Product\MassDelete" type="Aitoc\AdvancedPermissions\Controller\Adminhtml\Product\MassDelete"/>
+    <preference for="Magento\Catalog\Controller\Adminhtml\Category\Delete" type="Aitoc\AdvancedPermissions\Controller\Adminhtml\Category\Delete"/>
+    <preference for="Magento\Catalog\Controller\Adminhtml\Category\Edit" type="Aitoc\AdvancedPermissions\Controller\Adminhtml\Category\Edit"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Attributes" type="Aitoc\AdvancedPermissions\Block\Product\Edit\Action\Attribute\Tab\Attributes"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Edit\Action\Attribute\Tab\Inventory" type="Aitoc\AdvancedPermissions\Block\Product\Edit\Action\Attribute\Tab\Inventory"/>
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Websites" type="Aitoc\AdvancedPermissions\Ui\DataProvider\Product\Form\Modifier\Websites"/>
+    <preference for="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Categories" type="Aitoc\AdvancedPermissions\Ui\DataProvider\Product\Form\Modifier\Categories"/>
+    <preference for="Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Gallery" type="Aitoc\AdvancedPermissions\Block\Product\Helper\Form\Gallery"/>
+    <preference for="Magento\Framework\View\Element\UiComponentFactory" type="Aitoc\AdvancedPermissions\Model\Rewrite\View\Element\UiComponentFactory"/>
+
+    <preference for="Magento\CatalogImportExport\Model\Export\Product" type="\Aitoc\AdvancedPermissions\Model\CatalogImportExport\Export\Product"/>
+
+    <preference for="Magento\Newsletter\Model\ResourceModel\Queue\Collection" type="Aitoc\AdvancedPermissions\Model\ResourceModel\Newsletter\Queue\Collection"/>
+    <preference for="Magento\Newsletter\Model\ResourceModel\Queue\Grid\Collection" type="Aitoc\AdvancedPermissions\Model\ResourceModel\Newsletter\Queue\Grid\Collection"/>
+
+    <type name="Magento\Eav\Model\Entity\Attribute\Backend\DefaultBackend">
+        <plugin name="save_eav_value" type="Aitoc\AdvancedPermissions\Plugin\Eav\Model\Entity\Attribute\Backend\DefaultBackend" sortOrder="1"/>
+    </type>
+    <type name="Magento\Store\Model\StoreManager">
+        <plugin name="aroundStoremanager" type="Aitoc\AdvancedPermissions\Plugin\Model\Store\StoreManager" sortOrder="1"/>
+    </type>
+    <type name="Magento\Backend\Block\Store\Switcher">
+        <plugin name="aroundWebsitesforProduct" type="Aitoc\AdvancedPermissions\Plugin\Block\Switcher" sortOrder="2"/>
+    </type>
+    <type name="Magento\Framework\Authorization">
+        <plugin name="Aitoc_AdvancedPermissions_isAllowed" type="Aitoc\AdvancedPermissions\Plugin\Authorization" sortOrder="3"/>
+    </type>
+    <type name="Magento\Framework\Data\Collection\AbstractDb">
+        <plugin name="Aitoc_AdvancedPermissions_AbstractDb_count" type="Aitoc\AdvancedPermissions\Plugin\Data\Collection\AbstractDb" sortOrder="10"/>
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Collection">
+        <plugin name="Aitoc_AdvancedPermissions_OrderCollection" type="Aitoc\AdvancedPermissions\Plugin\Order\Collection" sortOrder="10"/>
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Form\Renderer\Fieldset\Element">
+        <plugin name="Aitoc_AdvancedPermissions_Product_Element" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Block\Adminhtml\Form\Renderer\Fieldset\Element" sortOrder="10" />
+    </type>
+
+
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Weight">
+        <plugin name="Aitoc_AdvancedPermissions_Product_Weigh" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Block\Adminhtml\Product\Helper\Form\Weight" sortOrder="10" />
+    </type>
+    <type name="Magento\CatalogInventory\Block\Adminhtml\Form\Field\Stock">
+        <plugin name="Aitoc_AdvancedPermissions_Product_Stock" type="Aitoc\AdvancedPermissions\Plugin\CatalogInventory\Block\Adminhtml\Form\Field\Stock" sortOrder="10" />
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Tab\Inventory">
+        <plugin name="Aitoc_AdvancedPermissions_Product_Inventory" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Block\Adminhtml\Product\Edit\Tab\Inventory" sortOrder="10" />
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Category">
+        <plugin name="sliceCategoryIds" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Block\Adminhtml\Product\Helper\Form\Category" sortOrder="4"/>
+    </type>
+    <type name="Magento\Catalog\Block\Adminhtml\Category\Tree">
+        <plugin name="sliceCategorySuggest" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Block\Adminhtml\Category\Tree" sortOrder="5"/>
+    </type>
+    <type name="Magento\Catalog\Ui\DataProvider\Product\ProductDataProvider">
+        <plugin name="sliceProductWithoutCategory" type="Aitoc\AdvancedPermissions\Plugin\Ui\DataProvider\Product\ProductDataProvider" sortOrder="8"/>
+    </type>
+
+    <type name="Magento\User\Controller\Adminhtml\User\Role\SaveRole">
+        <plugin name="adv_save_roles" type="Aitoc\AdvancedPermissions\Plugin\Controller\Adminhtml\User\Role\SaveRole" sortOrder="4"/>
+    </type>
+    <type name="Magento\User\Controller\Adminhtml\User\Role\Delete">
+        <plugin name="adv_delete_roles" type="Aitoc\AdvancedPermissions\Plugin\Controller\Adminhtml\User\Role\DeleteRole" sortOrder="4"/>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter">
+        <plugin name="sliceCategorySuggest" type="Aitoc\AdvancedPermissions\Plugin\Ui\DataProvider\RegularFilter" sortOrder="7"/>
+    </type>
+    <type name="Magento\Sales\Model\ResourceModel\Order\Customer\Collection">
+        <plugin name="Aitoc_AdvancedPermissions_Create_Order_Customer_Collection_Filter" type="Aitoc\AdvancedPermissions\Plugin\Order\Customer\Collection" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Create">
+        <plugin name="Aitoc_AdvancedPermissions_Create_Order" type="Aitoc\AdvancedPermissions\Plugin\Controller\Adminhtml\Order\Create" sortOrder="10"/>
+    </type>
+
+    <type name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Categories">
+        <plugin name="Aitoc_AdvancedPermissions_Product_Create_Allowed_Catigories" type="Aitoc\AdvancedPermissions\Plugin\Ui\DataProvider\ProductFormModifierCategories" sortOrder="10"/>
+    </type>
+    <type name="Magento\Eav\Block\Adminhtml\Attribute\Edit\Options\Options">
+        <plugin name="Aitoc_AdvancedPermissions_Eav_Block_Adminhtml_Attribute_Edit_Options_Options" type="Aitoc\AdvancedPermissions\Plugin\Eav\Block\Adminhtml\Attribute\Edit\Options" sortOrder="1"/>
+    </type>
+    <type name="Magento\Catalog\Ui\Component\Product\Form\Categories\Options">
+        <plugin name="Aitoc_AdvancedPermissions_Catalog_Ui_Component_Product_Form_Categories_Options" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Ui\Component\Product\Form\Categories\OptionsPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\Reporting">
+        <plugin name="Aitoc_AdvancedPermissions_Sales_Grid_Collection" type="Aitoc\AdvancedPermissions\Plugin\Sales\Order\Grid"/>
+    </type>
+
+    <type name="Magento\Sales\Model\ResourceModel\Order\Grid\Collection">
+        <plugin name="Aitoc_AdvancedPermissions_Sales_OrderResourceModelGridCollection" type="\Aitoc\AdvancedPermissions\Plugin\Sales\Order\Model\ResourceModel\Grid\Collection"/>
+    </type>
+
+    <type name="Magento\Customer\Model\Metadata\AttributeMetadataCache">
+        <plugin name="Aitoc_AdvancedPermissions_Customer_AttributeMetadataCache" type="Aitoc\AdvancedPermissions\Plugin\Customer\Model\Metadata\AttributeMetadataCachePlugin"/>
+    </type>
+
+    <type name="Magento\Eav\Model\Entity\AttributeCache">
+        <plugin name="Aitoc_AdvancedPermissions_EavAttributeCache" type="Aitoc\AdvancedPermissions\Plugin\Eav\Model\Entity\AttributeCachePlugin"/>
+    </type>
+
+    <type name="Magento\Newsletter\Model\ResourceModel\Subscriber\Collection">
+        <plugin name="Aitoc_AdvancedPermissions_SubscriberCollection" type="Aitoc\AdvancedPermissions\Plugin\Newsletter\Model\ResourceModel\Subscriber\CollectionPlugin"/>
+    </type>
+
+    <type name="Aitoc\DeleteOrders\Model\ResourceModel\Archive\Collection">
+        <plugin name="Aitoc_DeleteOrders_ArchiveCollection" type="Aitoc\AdvancedPermissions\Plugin\DeleteOrders\Model\ResourceModel\Archive\CollectionPlugin"/>
+    </type>
+
+    <type name="Magento\Catalog\Ui\DataProvider\Product\Attributes\Listing">
+        <plugin name="Aitoc_AdvancedPermissions_Attributes_DataProdvider" type="Aitoc\AdvancedPermissions\Plugin\Catalog\Ui\DataProvider\Product\Attributes\Listing"/>
+    </type>
+
+
+</config>

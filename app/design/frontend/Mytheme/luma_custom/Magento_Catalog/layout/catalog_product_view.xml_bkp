@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <head>
+        <css src="Magento_Catalog::css/detail.css" />
+    </head>
+
+    <body>
+        <!--move element="page.main.title" destination="product.info.main" before="-"/-->
+
+        <!--move element="product.info.overview" destination="product.info.price" after="product.price.final"/-->
+
+ 
+            
+
+                <move element="product.info.overview" destination="product.info.price" after="product.info" />
+
+                <referenceContainer name="content.top.most">
+                    <container name="custom.block.subname" htmlTag="div" htmlClass="custom-product-subname" before="-">
+                        <block class="Magento\Catalog\Block\Product\View" name="custom_subname" template="Magento_Catalog::product/view/before_title.phtml" />
+                    </container>
+                </referenceContainer>
+                <move element="custom.block.subname" destination="product.info.main" before="page.main.title" />
+
+                <!-- <move element="product.info.addtocart" destination="product.info.main" after="product.info.price" /> -->
+
+                <referenceContainer name="content.after.cart">
+                    <container name="custom.block.aftercart" htmlTag="div" htmlClass="custom-block-aftercart" before="-">
+                        <block class="Magento\Catalog\Block\Product\View" name="custom_blockaftercar" template="Magento_Catalog::product/view/after_cart.phtml" />
+                    </container>
+                </referenceContainer>
+                <move element="custom.block.aftercart" destination="product.info.main" after="product.info.addtocart" />
+                <referenceBlock name="product.info.overview" remove="true" />
+
+                <!--block class="Magento\Catalog\Block\Product\View" name="vat.info" template="Magento_Catalog::product/tex.phtml" after="product.price.final">
+		  </block-->
+        <referenceBlock name="recently.view.products" remove="true" /> 
+    </body>
+</page>

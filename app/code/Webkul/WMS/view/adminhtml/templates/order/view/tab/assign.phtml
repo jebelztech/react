@@ -1,0 +1,229 @@
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<div class="mainContainer">
+    <div class="staffSpinnerContainer hidden">
+        <span class="spinner staffSpinner">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </div>
+    <form method="POST" action="<?= $block->escapeHtml($block->getFormUrl()); ?>">
+        <div class="page-main-actions">
+            <div class="page-actions">
+                <div class="page-actions-inner">
+                    <div class="page-actions-buttons">
+                        <button
+                        title="<?= $block->escapeHtml(__("Assign Order")); ?>"
+                        type="submit"
+                        class="action- scalable primary">
+                            <span><?= $block->escapeHtml(__("Assign Order")); ?></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+<?php   $assignData = $block->getAssignmentDetails();
+        $thisOrder = $block->getOrder();   ?>
+        <input type="hidden" name="form_key" value="<?= $block->escapeHtml($block->getFormKey()); ?>" />
+        <input type="hidden" name="increment_id" value="<?= $block->escapeHtml($thisOrder->getIncrementId()); ?>" />
+        <div class="admin__table-wrapper">
+            <table class="data-table admin__table-primary edit-order-table">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-product">
+                            <span><?= $block->escapeHtml(__("Product")); ?></span>
+                        </th>
+                        <th class="col-ordered-qty">
+                            <span><?= $block->escapeHtml(__("Qty")); ?></span>
+                        </th>
+                        <th class="col-status">
+                            <span><?= $block->escapeHtml(__("Warehouse")); ?></span>
+                        </th>
+                        <th class="col-price-original">
+                            <span><?= $block->escapeHtml(__("Staff")); ?></span>
+                        </th>
+                    </tr>
+                </thead>
+<?php           foreach ($block->getOrderItems() as $item) {
+                $itemProductId = $item->getProductId();    ?>
+                <tbody class="even">
+                    <tr>
+                        <td class="col-product">
+                            <div id="order_item_2">
+                                <div id="order_item_2_title" class="product-title">
+                                    <?= $block->escapeHtml($item->getName()) ?>
+                                </div>
+                                <div class="product-sku-block">
+                                    <span>
+    <?php                                   $sku = $block->escapeHtml($item->getSku());     ?>
+        <?= $block->escapeHtml(__("SKU")); ?>:
+                                    </span>
+    <?= $block->escapeHtml(implode("<br />", $block->getCatalogHelper()->splitSku($sku))); ?>
+                                </div>
+    <?php                       if ($block->getOrderOptions($item)) { ?>
+                                <dl class="item-options">
+        <?php                               foreach ($block->getOrderOptions($item) as $_option) { ?>
+                                        <dt><?= $block->escapeHtml($_option["label"]) ?>:</dt>
+                                        <dd>
+            <?php                                       if (isset($_option["custom_view"]) && $_option["custom_view"]) {
+                                                echo $block->escapeHtml($block->getCustomizedOptionValue($_option));
+            } else {
+                $_option = $block->getFormattedOption($_option["value"]);
+                $dots = "dots" . uniqid();?>
+                <?= $block->escapeHtml($_option["value"]); ?>
+                <?php
+                if (isset($_option["remainder"]) && $_option["remainder"]) { ?>
+                                            <span id="<?= /* @noEscape */ $dots; ?>"> ...</span>
+                                                    <?php  $id = "id" . uniqid(); ?>
+                                            <span id="<?= /* @noEscape */ $id; ?>">
+                                                    <?= $block->escapeHtml($_option["remainder"]) ?></span>
+                                            <script>
+                                                require(["prototype"], function() {
+                                                    $("<?= /* @noEscape */ $id; ?>").hide();
+                                                    $("<?= /* @noEscape */ $id; ?>").up().observe(
+                                                        "mouseover",
+                                                        function() {
+                                                        $("<?= /* @noEscape */ $id; ?>").show();
+                                                    });
+                                                    $("<?= /* @noEscape */ $id; ?>").up().observe(
+                                                        "mouseover",
+                                                        function() {
+                                                        $("<?= /* @noEscape */ $dots; ?>").hide();
+                                                    });
+                                                    $("<?= /* @noEscape */ $id; ?>").up().observe(
+                                                        "mouseout",
+                                                        function() {
+                                                        $("<?= /* @noEscape */ $id; ?>").hide();
+                                                    });
+                                                    $("<?= /* @noEscape */ $id; ?>").up().observe(
+                                                        "mouseout",
+                                                        function() {
+                                                        $("<?= /* @noEscape */ $dots; ?>").show();
+                                                    });
+                                                });
+                                            </script>
+                                        <?php }
+            } ?>
+                                    </dd>
+                            <?php } ?>
+                            </dl>
+                    <?php } ?>
+                        </div>
+                        </td>
+                        <td class="col-ordered-qty">
+                            <?= $block->escapeHtml(__("Ordered ")).$item->getQtyOrdered()*1; ?>
+                        </td>
+                        <td class="col-status">
+                            <select 
+                            data-productid="<?= $block->escapeHtml($itemProductId); ?>"
+                            class="warehouseSelection admin__control-select"
+                            name="warehouse_id[<?= $block->escapeHtml($itemProductId); ?>]"
+                            <?= false === $block->canAssignWarehouse() ? " disabled": "" ?>
+                            >
+    <?php                           $warehouseList = $block->getWarehouseList($sku);
+    if ($warehouseList->getSize()) {
+        foreach ($warehouseList as $eachWarehouse) {
+            if ($block->isWarehouseSelected($itemProductId, $eachWarehouse->getId(), $thisOrder->getId())) {
+                echo "<option selected='selected' value='".
+                    $block->escapeHtml($eachWarehouse->getId())."'>".
+                    $block->escapeHtml($eachWarehouse->getTitle())."</option>";
+            } else {
+                echo "<option value='".
+                    $block->escapeHtml($eachWarehouse->getId())."'>".
+                    $block->escapeHtml($eachWarehouse->getTitle())."</option>";
+            }
+        }
+    } else {
+        echo "<option value=''>".$block->escapeHtml(__("No Warehouse Available."))."</option>";
+    }   ?>
+                            </select>
+                        </td>
+                        <td class="col-subtotal">
+                            <select class="staff_data admin__control-select"
+                            name="staff_id[<?= $block->escapeHtml($itemProductId); ?>]"
+                            <?= false === $block->canAssignWarehouse() ? " disabled": "" ?>
+                            >
+                                <option value=''><?= $block->escapeHtml(__("No Staff Avaialable.")); ?></option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+<?php           }   ?>
+            </table>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    require(
+        [
+            "jquery"
+        ], function($) {
+
+            var staffId = '<?= $block->escapeHtml($assignData->getStaffId()) ?? ""; ?>';
+            $("body").on("change", ".warehouseSelection", function() {
+                var thisThis = $(this);
+                var warehouseId = thisThis.val();
+                var productId = thisThis.attr("data-productid");
+                if (warehouseId > 0) {
+                    $(".staffSpinnerContainer").removeClass("hidden");
+                    $.ajax({
+                        url: "<?= $block->escapeHtml($block->getStaffListUrl()); ?>",
+                        type: "POST",
+                        data: {
+                            productId: productId,
+                            warehouseId: warehouseId,
+                            orderId: "<?= $block->escapeHtml($thisOrder->getId()); ?>"
+                        },
+                        dataType: "json",
+                        success: (content) => {
+                            $(".staffSpinnerContainer").addClass("hidden");
+                            if (content.length > 0) {
+                                var html = "";
+                                for(var i=0; i<content.length; i++) {
+                                    var data = content[i];
+                                    if (data["isSelected"] == 1) {
+                                        html += "<option selected='selected' value='";
+                                        html += data["id"]+"'>"+data["name"]+" ("+data["activeOrder"]+")</option>";
+                                    } else {
+                                        html += "<option value='"+data["id"]+"'>";
+                                        html += data["name"]+" ("+data["activeOrder"]+")</option>";
+                                    }
+                                }
+                                thisThis.parents("tbody").find(".staff_data").html(html);
+                            }
+                        },
+                        error: () => {
+                            $(".staffSpinnerContainer").addClass("hidden");
+                        }
+                    });
+                }
+            });
+
+            $(".admin__page-nav-item").on("click", function() {
+                $(".edit-order-table").find(".warehouseSelection").each(function() {
+                    $(this).trigger("change");
+                });
+            });
+
+        }
+    );
+</script>

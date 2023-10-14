@@ -1,0 +1,65 @@
+<?php
+// copyright call
+
+//$baseUrl = $block->getBaseUrl();
+
+/*$copyright_text = \Magento\Framework\App\ObjectManager::getInstance()
+	->get('Magento\Framework\App\Config\ScopeConfigInterface')
+	->getValue('design/footer/copyright');*/
+?>
+<div class="footer-container">
+<?php
+    echo $this->getLayout()
+        ->createBlock(\Magento\Cms\Block\Block::class)
+        ->setBlockId('footer') //replace my_cmsblock_identifier with real CMS bock identifier
+        ->toHtml();
+?>
+</div>
+
+<script>
+    require([
+        'jquery'
+    ], function($, $t) {
+        // Set the date we're counting down to 
+        $(document).ready(function() {   
+            if($( window ).width()<=768) {
+                jQuery('.footer-box h4').click(function() {
+                    var $this = $(this);
+                    jQuery('.navUL:visible').slideUp(function() {
+                        jQuery(this).prev().find('i').removeClass('fa-minus');
+                        jQuery(this).prev().find('i').addClass('fa-plus');
+                    });
+                    jQuery(this).find('i').removeClass('fa-plus').addClass('fa-minus');
+                    jQuery(this).next('.navUL:hidden').slideDown();
+                });
+            }
+        });
+        $(document).ajaxComplete(function (event, xhr, settings) {
+            if (settings.url.indexOf("customer/section/load/?sections=cart") > 0) {
+                cartObj = xhr.responseJSON;
+                if(cartObj.messages.messages.length>=1) jQuery('.minicart-wrapper > .showcart').trigger('click');
+                //console.log(cartObj.messages.messages.length);
+                //console.log('ex tax: ' + cartObj.cart.subtotal_excl_tax);
+                //console.log('inc tax: ' + cartObj.cart.subtotal_incl_tax);
+                //console.log('subtotal: ' + cartObj.cart.subtotal);
+            }
+        });
+    });
+</script>
+
+<style>
+@media only screen and (min-width: 768px){
+    .footer-box i.fa {
+        display: none;
+    }
+}    
+@media only screen and (max-width: 767px){
+    .navUL {
+        display: none;
+    }
+}
+.contactno span:lang(ar) {
+    direction: ltr;
+    display: inline-block;
+}
+</style>

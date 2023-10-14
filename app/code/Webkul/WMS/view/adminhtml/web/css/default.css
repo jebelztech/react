@@ -1,0 +1,26 @@
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+@font-face {
+    font-family: "wms";
+    src: url("../fonts/wms.woff") format("woff"), url("../fonts/wms.ttf") format("truetype"), url("../fonts/wms.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+.admin__menu .item-warehouse.parent.level-0 > a:before {
+    font-family: "wms";
+    content: "\e900";
+}
+
+.display-none {
+    display: none;
+}

@@ -1,0 +1,488 @@
+
+<?php $baseUrl = $block->getBaseUrl(); ?>
+<div class="delivery-details-box">
+    <h3>Delivery Details <a data-toggle="modal" id="click-me" class="tooltip-icon-link"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+    </h3>
+    <p><b>Complimentary Shipping</b> to <a href="#" class="delivery-days-shipto">Choose a country</a> .</p>
+</div>
+
+
+<div class="modal-wrapper" id="Delivery-Details">
+    <div class="modal-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Shipping & Delivery</h5>
+                <span class="btn-close">
+                </span>
+            </div>
+            <div class="modal-body">
+                <div class="static-pages">
+                    <!-- <p class="cms-page-heading1">Shipping &amp; Delivery&nbsp;</p> -->
+                    <p class="cms-page-heading2">Processing Time</p>
+                    <p>alsultan utilizes priority shipping to deliver your order within 2-5 working days.</p>
+                    <p>All orders are processed within 24 hours of order acceptance (Monday to Saturday, excluding holidays).</p>
+                    <p>You will receive a Shipment Confirmation email once your order has shipped containing your tracking number(s).</p>
+                    <p class="cms-page-heading2">Shipping rates</p>
+                    <p>alsultan has a variable shipping fee depending on the delivery destination and size of the order. </p>
+                    <p>To find out exact shipping costs, please add your desired items into the cart and indicate delivery address to your basket. The final shipping fee will be calculated at the checkout.</p>
+
+                    <p class="cms-page-heading2">International Shipping</p>
+                    <p>Orders may be subject to import duties, VAT, taxes and customs clearance charges of the destination country. These additional charges, if any, are the sole responsibility of the customer.</p>
+                    <p>alsultan cannot be held accountable for charges incurred during the delivery of your order/package.</p>
+                    <p>Delivery delays may occur if your package is selected for inspection by your country’s Customs Department or Agency.</p>
+                    <p>In case of any exchange/cancellation queries, kindly go through our <a href="https://alsultan.com/en_in/returns_policy">Returns &amp; Refunds</a> page.</p>
+                    <p>For multiple delivery enquiries, kindly send an email to <a href="mailto:customercare@alsultan.com">customercare@alsultan.com</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal-wrapper full-width-modal">
+    <div class="modal-container">
+        <div class="ship-to-modal">
+            <span class="btn-close">
+         
+            </span>
+
+            <div class="ship-to-logo bateel-modal-logo">
+            <img src="<?php echo $baseUrl ;?>media/logo/stores/1/Logo-Fav.jpg" alt="">
+            </div>
+            <p class="modal-desc">Select the country where you want your purchases delivered</p>
+            <div class="countries-wrap">
+                <ul class="continents">
+                    <li class="continent">
+                        <span class="continent-name">Europe</span>
+                        <ul class="countries">
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="GB">
+                                    <span>United Kingdom</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="DE">
+                                    <span>Germany</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="FR">
+                                    <span>France</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="BG">
+                                    <span>Bulgaria</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="CY">
+                                    <span>Cyprus</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="CZ">
+                                    <span>Czech Republic</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="DK">
+                                    <span>Denmark</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="EE">
+                                    <span>Estonia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="FI">
+                                    <span>Finland</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="GI">
+                                    <span>Gibraltar</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="GR">
+                                    <span>Greece</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="HU">
+                                    <span>Hungary</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="IE">
+                                    <span>Ireland</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="LV">
+                                    <span>Latvia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="LU">
+                                    <span>Luxembourg</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="MK">
+                                    <span>North Macedonia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="ME">
+                                    <span>Montenegro</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="NL">
+                                    <span>Netherlands</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="NO">
+                                    <span>Norway</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="PL">
+                                    <span>Poland</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="SK">
+                                    <span>Slovakia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="SE">
+                                    <span>Sweden</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="CH">
+                                    <span>Switzerland</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="continent">
+                        <span class="continent-name active">Middle East</span>
+                        <ul class="countries">
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="AE">
+                                    <span>United Arab Emirates</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="SA">
+                                    <span>Saudi Arabia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="SA">
+                                    <span class="add-space">المملكة العربية السعودية (KSA - AR)</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="BH">
+                                    <span>Bahrain</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="EG">
+                                    <span>Egypt</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="JO">
+                                    <span>Jordan</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="KW">
+                                    <span>Kuwait</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="LB">
+                                    <span>Lebanon</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="OM">
+                                    <span>Oman</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="TR">
+                                    <span>Turkey</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="continent">
+                        <span class="continent-name">Asia</span>
+                        <ul class="countries">
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="SG">
+                                    <span>Singapore</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="BN">
+                                    <span>Brunei</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="IN">
+                                    <span>India</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="JP">
+                                    <span>Japan</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="HK">
+                                    <span>Hong Kong SAR China</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="KZ">
+                                    <span>Kazakhstan</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="MY">
+                                    <span>Malaysia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="MV">
+                                    <span>Maldives</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="PK">
+                                    <span>Pakistan</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="PH">
+                                    <span>Philippines</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="KR">
+                                    <span>South Korea</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="TW">
+                                    <span>Taiwan, Province of China</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="UZ">
+                                    <span>Uzbekistan</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="VN">
+                                    <span>Vietnam</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="continent">
+                        <span class="continent-name"                                                                                                                                                            >Americas &amp; Oceania</span>
+                        <ul class="countries">
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="US">
+                                    <span>United States</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="AU">
+                                    <span>Australia</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="CA">
+                                    <span>Canada</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="DO">
+                                    <span>Dominican Republic</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="HN">
+                                    <span>Honduras</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="NZ">
+                                    <span>New Zealand</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="continent">
+                        <span class="continent-name">Africa</span>
+                        <ul class="countries">
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="DZ">
+                                    <span>Algeria</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="BJ">
+                                    <span>Benin</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="KE">
+                                    <span>Kenya</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="NG">
+                                    <span>Nigeria</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="SN">
+                                    <span>Senegal</span>
+                                </a>
+                            </li>
+
+                            <li class="country">
+                                <a class="country_name" href="#" data-country-code="ZA">
+                                    <span>South Africa</span>
+                                 
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    require(['jquery'], function($, $t) {
+                // Set the date we're counting down to
+                $(document).ready(function() {
+                    $("#click-me").click(function(){
+                        $("#Delivery-Details").css({
+                            'overflow': 'visible',
+                            'visibility' : 'visible',
+                        })
+                        $("#Delivery-Details .modal-container").css({
+                            'transform' : 'translateY(0%)',
+                            '-webkit-transform' : 'translateY(0%)'
+                        });
+                    })
+                    $(".delivery-days-shipto").click(function(){
+                        $(".full-width-modal").css({
+                            'overflow': 'visible',
+                            'visibility' : 'visible',
+                        })
+                        $(".full-width-modal .modal-container").css({
+                            'transform' : 'translateY(0%)',
+                            '-webkit-transform' : 'translateY(0%)'
+                        });
+                        $("body").css({
+                            'overflow' : 'hidden',
+                        });
+                    })
+
+                    $(".btn-close").click(function(){
+                        $(".modal-wrapper").css({
+                            'overflow': 'hidden',
+                            'visibility' : 'hidden',
+                        })
+                        $(".modal-wrapper .modal-container").css({
+                            'transform' : 'translateY(-200%)',
+                            '-webkit-transform' : 'translateY(-200%)'
+                        });
+                        $("body").css({
+                            'overflow' : 'visible',
+                        });
+                    });
+
+                    $(".continent-name").click(function(){
+                        $(".countries").removeClass('active');
+                        $(this).closest(".countries").addClass('active');
+                    })
+                });
+                });
+</script>

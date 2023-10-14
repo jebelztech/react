@@ -1,0 +1,125 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+// phpcs:disable Generic.Files.LineLength.TooLong
+
+/** @var \Magento\Contact\Block\ContactForm $block */
+/** @var \Magento\Contact\ViewModel\UserDataProvider $viewModel */
+
+$viewModel = $block->getViewModel();
+?>
+
+<div id="content-wrapper">
+
+
+    <div class="row mb-5">
+        <div class="col-md-4 col-lg-3">
+            <div id="left-column">
+                <div class="contact-rich">
+                    <h4>Store information</h4>
+                    <div class="block">
+                        <div class="icon"><i class="material-icons"></i></div>
+                        <div class="data">Abu Adel Trading, Khawlan St, Sana'a, Yemen</div>
+                    </div>
+                    <hr>
+                    <div class="block">
+                        <div class="icon"><i class="material-icons"></i></div>
+                        <div class="data">
+                            Call us:<br>
+                            <a href="tel:+971567360090">+971567360090</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="block">
+                        <div class="icon"><i class="material-icons"></i></div>
+                        <div class="data email">
+                            Email us:<br>
+                        </div>
+                        <a href="mailto:info@qadarexpress.com">info@Qadarexpress.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-lg-9">
+            <section class="contact-form"> 
+                <form class="form contact" action="<?= $block->escapeUrl($block->getFormAction()) ?>" id="contact-form" method="post" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>" data-mage-init='{"validation":{}}'>
+                    <fieldset class="fieldset">
+                        <legend class="legend"><span><?= $block->escapeHtml(__('Write Us')) ?></span></legend><br />
+                        <div class="field note no-label">
+                            <?= $block->escapeHtml(__('Jot us a note and we’ll get back to you as quickly as possible.')) ?>
+                        </div>
+                        <div class="field name required">
+                            <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+                            <div class="control">
+                                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="<?= $block->escapeHtmlAttr($viewModel->getUserName()) ?>" class="input-text" type="text" data-validate="{required:true}" />
+                            </div>
+                        </div>
+                        <div class="field email required">
+                            <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                            <div class="control">
+                                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" value="<?= $block->escapeHtmlAttr($viewModel->getUserEmail()) ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}" />
+                            </div>
+                        </div>
+                        <div class="field telephone">
+                            <label class="label" for="telephone"><span><?= $block->escapeHtml(__('Phone Number')) ?></span></label>
+                            <div class="control">
+                                <input name="telephone" id="telephone" title="<?= $block->escapeHtmlAttr(__('Phone Number')) ?>" value="<?= $block->escapeHtmlAttr($viewModel->getUserTelephone()) ?>" class="input-text" type="tel" />
+                            </div>
+                        </div>
+                        <div class="field comment required">
+                            <label class="label" for="comment">
+                                <span><?= $block->escapeHtml(__('What’s on your mind?')) ?></span>
+                            </label>
+                            <div class="control">
+                                <textarea name="comment" id="comment" title="<?= $block->escapeHtmlAttr(__('What’s on your mind?')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($viewModel->getUserComment()) ?></textarea>
+                            </div>
+                        </div>
+                        <?= $block->getChildHtml('form.additional.info') ?>
+                    </fieldset>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <input type="hidden" name="hideit" id="hideit" value="" />
+                            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary">
+                                <span><?= $block->escapeHtml(__('Submit')) ?></span>
+                            </button>
+                        </div>
+                    </div>
+                </form> 
+
+            </section>
+
+        </div>
+
+
+        <div class="col-md-12 col-lg-12">
+            <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3847.8068513849826!2d44.2258501!3d15.3327283!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1603daed5c51567b%3A0xa3173dc203a8aa37!2sAbu%20Adel%20Trading!5e0!3m2!1sen!2sin!4v1639383236039!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/block-submit-on-send": {
+                "formId": "contact-form"
+            }
+        }
+    }
+</script>

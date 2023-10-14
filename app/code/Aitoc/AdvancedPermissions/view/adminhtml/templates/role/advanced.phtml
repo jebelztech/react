@@ -1,0 +1,131 @@
+<?php
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+?>
+<?php
+/**
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+
+?>
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function (jQuery) {
+        jQuery(document).ready(function () {
+            clear();
+            disableAitTabs();
+
+            jQuery("#role_info_tabs_aitoc_advanced_product_editor, #role_info_tabs_aitoc_advanced_product_create").click(
+                function(event) {
+                    if (jQuery(this).hasClass('aithide')) {
+                        event.preventDefault();
+                        event.stopImmediatePropagation();
+                    }
+                });
+
+            if (jQuery("#radio_limits_two").attr("checked")) {
+                ShowTwo();
+                enableAitTabs();
+            }
+            if (jQuery("#radio_limits_three").attr("checked")) {
+                ShowThree();
+                enableAitTabs();
+            }
+            jQuery('input[name="radio_limits"]').on("click", function () {
+                if (jQuery(this).val() == 0) {
+                    clear();
+                    disableAitTabs();
+                }
+                if (jQuery(this).val() == 1) {
+                    clear();
+                    ShowTwo();
+                    enableAitTabs();
+                }
+                if (jQuery(this).val() == 2) {
+                    clear();
+                    ShowThree();
+                    enableAitTabs();
+                }
+            });
+            jQuery('input[name="store[]"]').on("click", function () {
+                if (jQuery(this).prop("checked")) {
+                    jQuery(this).attr("checked", "checked");
+                    jQuery('input[name="storesview[' + jQuery(this).val() + '][]"]').attr("checked", "checked");
+                    jQuery('div.field-category_ids' + jQuery(this).val()).show();
+                } else {
+                    jQuery(this).removeAttr("checked");
+                    jQuery('input[name="storesview[' + jQuery(this).val() + '][]"]').removeAttr("checked");
+                    jQuery('div.field-category_ids' + jQuery(this).val()).hide();
+                }
+            });
+            jQuery('input.storesview').on("click", function () {
+                var parent = jQuery(this).attr("data-parent");
+                var store = jQuery("#select_store_" + parent);
+                if (!jQuery(store).prop("checked")) {
+                    jQuery(store).attr("checked", "checked");
+                }
+                if (jQuery('div.field-category_ids' + jQuery(store).val()).css("display") == 'none') {
+                    jQuery('div.field-category_ids' + jQuery(store).val()).show();
+                }
+                if (!jQuery(this).prop("checked")) {
+                    jQuery(this).removeAttr("checked");
+                    var countsAll = jQuery('input[name="storesview[' + jQuery(store).val() + '][]"][checked="checked"]').size();
+                    console.log(countsAll);
+                    if (!countsAll) {
+                        jQuery(store).removeAttr("checked");
+                        jQuery('div.field-category_ids' + jQuery(store).val()).hide();
+                    }
+                } else {
+                    jQuery(this).attr("checked", "checked");
+                }
+
+            });
+
+            function clear() {
+                jQuery("fieldset#limits_store").hide();
+                jQuery("fieldset#limits_website").hide();
+            }
+
+            function disableAitTabs()
+            {
+                var tabEditor = jQuery('#role_info_tabs_aitoc_advanced_product_editor');
+                var tabCreate = jQuery('#role_info_tabs_aitoc_advanced_product_create');
+
+                tabEditor.addClass('aithide');
+
+                tabCreate.addClass('aithide');
+
+            }
+
+            function enableAitTabs()
+            {
+                var tabEditor = jQuery('#role_info_tabs_aitoc_advanced_product_editor');
+                var tabCreate = jQuery('#role_info_tabs_aitoc_advanced_product_create');
+
+                if(tabEditor.hasClass('aithide'))
+                {
+                    tabEditor.removeClass('aithide');
+                }
+
+                if(tabCreate.hasClass('aithide'))
+                {
+                    tabCreate.removeClass('aithide');
+                }
+            }
+
+            function ShowTwo() {
+                jQuery("fieldset#limits_store").show();
+            }
+
+            function ShowThree() {
+                jQuery("fieldset#limits_website").show();
+            }
+
+        });
+    });
+</script>

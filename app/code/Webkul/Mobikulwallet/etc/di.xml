@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Mobikulwallet
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Webkul\MobikulApi\Controller\Customer\OrderList">
+        <plugin name="MobikulWalletOrderListAfterPlugin" type="Webkul\Mobikulwallet\Plugin\Controller\Customer\OrderList" sortOrder="2"/>
+    </type>
+    <type name="Webkul\MobikulApi\Controller\Customer\OrderDetails">
+        <plugin name="MobikulWalletOrderDetailsAfterPlugin" type="Webkul\Mobikulwallet\Plugin\Controller\Customer\OrderDetails" sortOrder="2"/>
+    </type>
+    <type name="\Webkul\MobikulApi\Controller\Checkout\UpdateCart">
+        <plugin name="Webkul_Mobikulwallet::beforeUpdateCart" type="Webkul\Mobikulwallet\Plugin\Controller\Checkout\UpdateCart" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApi\Controller\Checkout\AddToCart">
+        <plugin name="Webkul_Mobikulwallet::beforeAddToCart" type="Webkul\Mobikulwallet\Plugin\Controller\Checkout\AddToCart" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApi\Controller\Customer\ReOrder">
+        <plugin name="Webkul_Mobikulwallet::beforeReOrder" type="Webkul\Mobikulwallet\Plugin\Controller\Customer\ReOrder" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApi\Controller\Customer\WishlistToCart">
+        <plugin name="Webkul_Mobikulwallet::beforeWishlistAddToCart" type="Webkul\Mobikulwallet\Plugin\Controller\Customer\WishlistAddToCart" sortOrder="1"/>
+    </type>
+    <type name="\Webkul\MobikulApi\Controller\Checkout\CartDetails">
+        <plugin name="Webkul_Mobikulwallet::afterGetCartDetails" type="Webkul\Mobikulwallet\Plugin\Controller\Checkout\GetCartDetails" sortOrder="1"/>
+    </type>
+
+    <preference for="Magento\Framework\Controller\Result\Json" type="Webkul\Mobikulwallet\Controller\Result\Json"/>
+
+    <preference for="Webkul\Mobikulwallet\Api\AccountdetailsInterface"
+                type="Webkul\Mobikulwallet\Model\Accountdetails" />
+    <preference for="Webkul\Mobikulwallet\Api\ResponseInterface"
+                type="Webkul\Mobikulwallet\Model\WalletResponse"/>
+</config>

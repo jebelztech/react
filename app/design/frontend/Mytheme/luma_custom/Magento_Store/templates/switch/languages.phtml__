@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Store\Block\Switcher $block */
+?>
+<?php /*if (count($block->getStores())>1) : ?>
+    <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
+   			<select name="switcher-option" id="switcher-option" onchange="window.location=this.value">
+				<!--option value=""><option-->
+                <?php foreach ($block->getStores() as $_lang) : ?>
+                    <?php 
+					$select="";
+					if ($_lang->getId()== $block->getCurrentStoreId()) {
+						$select="selected";
+					}
+						?>
+                      
+					  
+					  <option class="view-<?= $block->escapeHtml($_lang->getCode()) ?> switcher-option" value="<?= $block->escapeUrl($block->getViewModel()->getTargetStoreRedirectUrl($_lang)) ?>" <?php echo $select;?>>
+                           
+                                <?= $block->escapeHtml($_lang->getName()) ?>
+                            
+                        </option>
+                   
+                <?php endforeach; ?>
+            </select>
+       
+<?php endif; */ ?>
+
+
+<?php if (count($block->getStores())>1) : ?>
+    <?php $id = $block->getIdModifier() ? '-' . $block->getIdModifier() : '' ?>
+    <?php $alsultan = $this->getLayout()->createBlock('Etail\Alsultan\Block\Alsultan');?>
+   			<?php //$ar_en_stores = array('arabic','default','sh_en','sh_ar','us_en','us_ar','tr_en','tr_ar');?>
+                <?php foreach ($block->getStores() as $_lang) : ?>
+                    <?php 
+
+                    //if(!in_array($_lang->getCode(),$ar_en_stores)) continue;
+					$select="";
+					if ($_lang->getId()!= $block->getCurrentStoreId()) {
+						//$select="selected";
+						//echo '<a href='.$block->escapeUrl($block->getViewModel()->getTargetStoreRedirectUrl($_lang)).'>'.$block->escapeHtml($_lang->getName()).'</a>';
+						$lang_name = $_lang->getName();
+						if($_lang->getCode()=="arabic") $lang_name = 'عربي';
+						echo '<a href='.$alsultan->getStoreRedirectUrl($_lang->getCode()).'>'.$block->escapeHtml($lang_name).'</a>';
+					
+					}
+						?>
+                      
+                <?php endforeach; ?>
+           
+       
+<?php endif; ?>

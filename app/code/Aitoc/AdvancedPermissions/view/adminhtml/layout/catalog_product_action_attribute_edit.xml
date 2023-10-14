@@ -1,0 +1,20 @@
+<!--
+  ~ Copyright © 2018 Aitoc. All rights reserved.
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Aitoc_AdvancedPermissions::css/edit-attributes.css"/>
+    </head>
+    <body>
+        <!-- Bugfix for empty Advanced inventory tab. @see https://github.com/magento/magento2/commit/b4005c505deb3d154e5a3244645d40b0012521da -->
+        <referenceBlock name="tab_attributes">
+            <arguments>
+                <argument name="helper" xsi:type="object">Aitoc\AdvancedPermissions\Helper\Data</argument>
+                <argument name="attribute" xsi:type="object">Aitoc\AdvancedPermissions\Model\Entity\Attribute</argument>
+                <argument name="attr" xsi:type="object">Aitoc\AdvancedPermissions\Model\ResourceModel\Eav\Attribute</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="tab_inventory" template="Magento_Catalog::catalog/product/edit/action/inventory.phtml" />
+    </body>
+</page>

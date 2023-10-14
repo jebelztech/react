@@ -1,0 +1,46 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */?>
+<?php $_product = $block->getProduct() ?>
+
+<div class="inc-vat"><?= $block->escapeHtml(__('Inclusive of VAT')) ?></div>
+
+<?php if ($block->displayProductStockStatus()) :?>
+    <?php if ($_product->isAvailable()) :?>
+        <div class="stock available" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+            <span><?= $block->escapeHtml(__('In stock')) ?></span>
+        </div>
+    <?php else :?>
+        <div class="stock unavailable" title="<?= $block->escapeHtmlAttr(__('Availability')) ?>">
+            <span><?= $block->escapeHtml(__('Out of stock')) ?></span>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+<strong></strong>
+
+
+
+<div class="ean-barcode">
+    <font face="barcode" size="10">*<?php echo $_product->getEan();?>*</font>
+</div>
+<div class="delivery-estimation">
+        Delivery Estimation : <span>Working 3-4 days</span>
+</div>
+
+<div class="shipping-details">
+    Shipping details
+    
+</div>
+<div class="free-returns">
+    Free returns
+    <a href="/return-refund">Return Policy link</a>
+</div>
+<br><br>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=61a7a7cdc18e2c00129a710b&product=inline-share-buttons" async="async"></script>
+<div class="sharethis-inline-share-buttons"></div>
+<br><br>

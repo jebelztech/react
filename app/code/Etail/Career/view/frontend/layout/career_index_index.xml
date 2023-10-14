@@ -1,0 +1,30 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+
+	<head>
+        <title>Careers</title>
+        <!--
+		demo
+		<css src="Etail_Career::css/css.css"/>
+		<script src="Etail_Career::js/js.js"/>
+		<css src="jquery/fileUploader/css/jquery.fileupload-ui.css"/>
+		<script src="path/file.js" defer="defer"/>
+		<link src="http://url.com" src_type="url"/>
+		<remove src="path/remove/file.css"/>
+
+		-->
+    </head>
+
+    <body>
+
+
+        <!-- <referenceContainer name="sidebar.main">
+            <block class="Etail\Career\Block\Index\Sidebar" name="career_index_sidebar" before="-" template="Etail_Career::career_index_sidebar.phtml"/>
+        </referenceContainer> -->
+
+        <referenceContainer name="content">
+            <block class="Etail\Career\Block\Index\Index" name="career_index_index" template="Etail_Career::career_list.phtml"/>
+        </referenceContainer>
+
+
+    </body>
+</page>

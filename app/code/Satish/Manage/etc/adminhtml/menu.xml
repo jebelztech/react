@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Satish_Manage::parent" title="Manage" module="Satish_Manage" sortOrder="100" resource="Satish_Manage::parent"/>
+        <add id="Satish_Manage::index" title="Manage Index" module="Satish_Manage" sortOrder="10" action="manage/index" resource="Satish_Manage::index" parent="Satish_Manage::parent"/>
+		<add id="Satish_Manage::forms" title="Manage Forms" module="Satish_Manage" sortOrder="20" parent="Satish_Manage::parent" action="manage/forms" resource="Satish_Manage::forms"/>
+<add id="Satish_Manage::imagess" title="Manage Imagess" module="Satish_Manage" sortOrder="30" parent="Satish_Manage::parent" action="manage/imagess" resource="Satish_Manage::imagess"/>
+
+    </menu>
+</config>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="eav_collection_abstract_load_before">
+        <observer name="aitoc_permission_eav_collection" instance="Aitoc\AdvancedPermissions\Observer\EavCollection"/>
+    </event>
+    <event name="core_collection_abstract_load_before">
+        <observer name="aitoc_permission_core_collection" instance="Aitoc\AdvancedPermissions\Observer\CoreCollection"/>
+    </event>
+    <event name="authorization_roles_delete_after">
+        <observer name="aitoc_permission_role_delete" instance="Aitoc\AdvancedPermissions\Observer\RoleDelete"/>
+    </event>
+    <event name="catalog_product_gallery_prepare_layout">
+        <observer name="change_template" instance="Aitoc\AdvancedPermissions\Observer\ChangeTemplateObserver"/>
+    </event>
+    <event name="catalog_product_save_after">
+        <observer name="global_allow_inventory" instance="Aitoc\AdvancedPermissions\Observer\InventoryObserver"/>
+        <!--<observer name="inventory" disabled="true"/>-->
+    </event>
+    <event name="catalog_product_edit_action">
+        <observer name="aitoc_permission_product_edit" instance="Aitoc\AdvancedPermissions\Observer\ProductEditObserver"/>
+    </event>
+    <event name="catalog_product_save_before">
+        <observer name="aitoc_preprocessing_product_data" instance="Aitoc\AdvancedPermissions\Observer\ProductBeforeSaveObserver"/>
+    </event>
+    <event name="catalog_product_new_action">
+        <observer name="aitoc_product_new" instance="Aitoc\AdvancedPermissions\Observer\ProductNewObserver"/>
+    </event>
+    <event name="catalog_category_prepare_save">
+        <observer name="aitoc_category_new_prepare_before_save" instance="Aitoc\AdvancedPermissions\Observer\Category\Create\SaveBeforeObserver"/>
+    </event>
+    <event name="catalog_category_save_commit_after">
+        <observer name="aitoc_category_new_after" instance="Aitoc\AdvancedPermissions\Observer\Category\Create\SaveAfterObserver"/>
+    </event>
+    <event name="controller_action_predispatch_adminhtml_dashboard_index">
+        <observer name="aitoc_permissions_dashboard" instance="Aitoc\AdvancedPermissions\Observer\DashboardPredispatchIndex"/>
+    </event>
+    <event name="controller_action_predispatch_catalog_product_edit">
+        <observer name="aitoc_permissions_catalog_edit" instance="Aitoc\AdvancedPermissions\Observer\ProductPredispatchIndex"/>
+    </event>
+</config>

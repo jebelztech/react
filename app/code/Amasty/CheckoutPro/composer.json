@@ -1,0 +1,22 @@
+{
+    "name": "amasty\/module-one-step-checkout-pro",
+    "description": "One Step Checkout Pro by Amasty",
+    "require": {
+        "php": "^7.3.0",
+        "amasty\/base": ">=1.13.1",
+        "amasty\/module-single-step-checkout": ">=2.8.1"
+    },
+    "type": "magento2-module",
+    "version": "2.0.0",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Amasty\\CheckoutPro\\": ""
+        }
+    }
+}

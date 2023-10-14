@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="deps" xsi:type="string">wms_warehouse_form.wms_warehouse_form_data_source</item>
+            <item name="provider" xsi:type="string">wms_warehouse_form.wms_warehouse_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Warehouse Information</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\BackButton</item>
+            <item name="save" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\Warehouse\SaveButton</item>
+            <item name="delete" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\Warehouse\DeleteButton</item>
+            <item name="save_and_continue" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="wms_warehouse_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="name" xsi:type="string">wms_warehouse_form_data_source</argument>
+            <argument name="class" xsi:type="string">Webkul\WMS\Model\Warehouse\DataProvider</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="wms/warehouse/save"/>
+                    <item name="validate_url" xsi:type="url" path="wms/warehouse/validate"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="wms_warehouse">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Warehouse Information</item>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                </item>
+            </argument>
+        </field>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Warehouse Title</item>
+                </item>
+            </argument>
+        </field>
+        <field name="source">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Select Source</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="options" xsi:type="object">Webkul\WMS\Model\Config\Source\Source</item>
+            </argument>
+        </field>
+        <field name="row_count">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webkul_WMS/form/inputimage</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Row Count</item>
+                </item>
+            </argument>
+        </field>
+        <field name="column_count">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webkul_WMS/form/inputimage</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Column Count</item>
+                </item>
+            </argument>
+        </field>
+        <field name="shelves_per_cluster">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webkul_WMS/form/inputimage</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Shelves Per Cluster</item>
+                </item>
+            </argument>
+        </field>
+        <field name="racks_per_shelf">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webkul_WMS/form/inputimage</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Racks Per Shelf</item>
+                </item>
+            </argument>
+        </field>
+        <field name="tote_count">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Tote Count</item>
+                </item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Webkul\WMS\Model\Warehouse\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="product_assigned" sortOrder="2">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Product Assigned</label>
+        </settings>
+        <container name="product_container" sortOrder="1">
+            <htmlContent name="html_content">
+                <block class="Webkul\WMS\Block\Adminhtml\Warehouse\Edit\Tab\Assignment" name="wms.product.assignment"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="csv_upload" sortOrder="3">
+        <settings>
+            <collapsible>false</collapsible>
+            <label translate="true">Mass Import</label>
+        </settings>
+        <container name="csv_container" sortOrder="1">
+            <htmlContent name="html_content">
+                <block class="Webkul\WMS\Block\Adminhtml\Warehouse\Edit\Tab\MassAssignment" name="wms.mass.product.assignment"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

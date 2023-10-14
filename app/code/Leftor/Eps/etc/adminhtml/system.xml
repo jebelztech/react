@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="eps" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>eps Payment</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="test_mode" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="user_id_test" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>User ID Test</label>
+                    <depends>
+                        <field id="*/*/test_mode">1</field>
+                    </depends>
+                </field>
+                <field id="pin_test" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>PIN Test</label>
+                    <depends>
+                        <field id="*/*/test_mode">1</field>
+                    </depends>
+                </field>
+                <field id="bic_test" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>BIC Test</label>
+                    <depends>
+                        <field id="*/*/test_mode">1</field>
+                    </depends>
+                </field>
+                <field id="iban_test" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>IBAN Test</label>
+                    <depends>
+                        <field id="*/*/test_mode">1</field>
+                    </depends>
+                </field>
+                <field id="user_id_production" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>User ID</label>
+                    <depends>
+                        <field id="*/*/test_mode">0</field>
+                    </depends>
+                </field>
+                <field id="pin_production" translate="label" type="text" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>PIN</label>
+                    <depends>
+                        <field id="*/*/test_mode">0</field>
+                    </depends>
+                </field>
+                <field id="bic_production" translate="label" type="text" sortOrder="29" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>BIC</label>
+                    <depends>
+                        <field id="*/*/test_mode">0</field>
+                    </depends>
+                </field>
+                <field id="iban_production" translate="label" type="text" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>IBAN</label>
+                    <depends>
+                        <field id="*/*/test_mode">0</field>
+                    </depends>
+                </field>
+                <field id="currency" translate="label" type="select" sortOrder="35" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Accepted Currency</label>
+                    <source_model>Magento\Config\Model\Config\Source\Locale\Currency</source_model>
+                </field>
+                <field id="order_status" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>New Order Status</label>
+                    <source_model>Leftor\Eps\Model\Config\Source\Order\Status\Pendingpayment</source_model>
+                </field>
+                <field id="order_status_on_success" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Order Status on Success</label>
+                    <source_model>Leftor\Eps\Model\Config\Source\Order\Status\Pendingpayment</source_model>
+                </field>
+                <field id="order_status_on_fail" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Order Status On Fail</label>
+                    <source_model>Leftor\Eps\Model\Config\Source\Order\Status\Pendingpayment</source_model>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="65" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+                <field id="instructions" translate="label" type="textarea" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Instructions</label>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

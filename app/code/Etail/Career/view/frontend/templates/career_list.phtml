@@ -1,0 +1,18 @@
+<?php $career = $block->loadCareer(); ?>
+<div data-content-type="row" data-appearance="contained" data-element="main">
+	<div data-enable-parallax="0" data-parallax-speed="0.5" data-background-images="{}" data-background-type="image" data-video-loop="true" data-video-play-only-visible="true" data-video-lazy-load="true" data-video-fallback-src="" data-element="inner" data-pb-style="WY2TDA1">
+		<div data-content-type="html" data-appearance="default" data-element="main" data-decoded="true">
+			<section class="career-details">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<h2><?= $career['name']?></h2>
+							<p class="location m-0"><?= $career['address']?></p>
+							<?= $career['description']?>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>

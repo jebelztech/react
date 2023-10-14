@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="deps" xsi:type="string">wms_staff_form.wms_staff_form_data_source</item>
+            <item name="provider" xsi:type="string">wms_staff_form.wms_staff_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Staff Information</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+            <item name="navContainerName" xsi:type="string">left</item>
+        </item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\BackButton</item>
+            <item name="save" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\Staff\SaveButton</item>
+            <item name="delete" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\Staff\DeleteButton</item>
+            <item name="save_and_continue" xsi:type="string">Webkul\WMS\Block\Adminhtml\Edit\SaveAndContinueButton</item>
+        </item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+    </argument>
+    <dataSource name="wms_staff_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="name" xsi:type="string">wms_staff_form_data_source</argument>
+            <argument name="class" xsi:type="string">Webkul\WMS\Model\Staff\DataProvider</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="wms/staff/save"/>
+                    <item name="validate_url" xsi:type="url" path="wms/staff/validate"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="wms_staff">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Staff Information</item>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                </item>
+            </argument>
+        </field>
+        <field name="filename">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Image</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="formElement" xsi:type="string">fileUploader</item>
+                    <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                    <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>
+                    <item name="uploaderConfig" xsi:type="array">
+                        <item name="url" xsi:type="url" path="wms/staff/upload"/>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Staff Name</item>
+                </item>
+            </argument>
+        </field>
+        <field name="email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">email</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-email" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Staff Email</item>
+                </item>
+            </argument>
+        </field>
+        <field name="password">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webkul_WMS/form/password</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Password</item>
+                </item>
+            </argument>
+        </field>
+        <field name="confpassword">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="elementTmpl" xsi:type="string">Webkul_WMS/form/password</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="label" xsi:type="string" translate="true">Confirm Password</item>
+                </item>
+            </argument>
+        </field>
+        <field name="contact_no">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Contact Number</item>
+                </item>
+            </argument>
+        </field>
+        <field name="dob">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="outputDateFormat" xsi:type="string">MM/dd/y</item>
+                    <item name="source" xsi:type="string">wms_staff</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-date" xsi:type="boolean">true</item>
+                    </item>
+                    
+                    <item name="dataScope" xsi:type="string">dob</item>
+                    <item name="label" xsi:type="string" translate="true">Date Of Birth</item>
+                    <item name="options" xsi:type="array">
+                        <item name="dateFormat" xsi:type="string">yyyy-MM-dd</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="age">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Age</item>
+                </item>
+            </argument>
+        </field>
+        <field name="gender">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Gender</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="options" xsi:type="object">Webkul\WMS\Model\Staff\Source\Gender</item>
+            </argument>
+        </field>
+        <field name="address">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="label" xsi:type="string" translate="true">Staff Address</item>
+                </item>
+            </argument>
+        </field>
+        <field name="warehouse_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Assigned Warehouse</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+                <item name="options" xsi:type="object">Webkul\WMS\Model\Staff\Source\Warehouse</item>
+            </argument>
+        </field>
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Webkul\WMS\Model\Warehouse\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">number</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

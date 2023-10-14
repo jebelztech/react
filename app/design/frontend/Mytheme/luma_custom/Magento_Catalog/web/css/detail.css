@@ -1,0 +1,11 @@
+.product-info-main .product-info-stock-sku .shipping-details, .product-info-stock-sku .free-returns, .product-info-stock-sku  .stock.available {
+    display: none;
+}
+div#additional {
+    display: none;
+}
+.block.widget.block-viewed-products-grid {
+ display: none;  
+}
+
+

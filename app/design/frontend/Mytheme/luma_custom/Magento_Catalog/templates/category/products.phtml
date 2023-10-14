@@ -1,0 +1,118 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @var $block \Magento\Catalog\Block\Category\View
+ */
+$baseUrl = $block->getBaseUrl();
+?>
+<?php if (!$block->isContentMode() || $block->isMixedMode()) : ?>
+    <!-- <div class="category-slider">
+        <div class="product-item">
+            <figure>
+                <img class="product-image-photo1" src="<?php echo $baseUrl; ?>media/cat-img-1.jpg" alt="sweets">
+            </figure>
+        </div>
+
+
+    </div> -->
+    <!--div class="category-slider1 owl-carousel owl-theme owl-loaded">
+        <div class="product-item">
+            <figure>
+                <img class="product-image-photo1" src="<?php echo $baseUrl; ?>media/cat-img-1.jpg" alt="sweets">
+            </figure>
+        </div>
+        <div class="product-item">
+            <figure>
+                <img class="product-image-photo1" src="<?php echo $baseUrl; ?>media/cat-img-2.jpg" alt="sweets">
+            </figure>
+        </div> 
+    </div--> 
+    <?php
+echo $this->getLayout()
+->createBlock('Magento\Cms\Block\Block')
+->setBlockId('category-slider-list')
+->toHtml();
+?>
+
+    <?= $block->getProductListHtml() ?>
+
+<?php endif; ?>
+<script type="text/javascript">
+    require(['jquery', 'bootstrap']);
+</script>
+
+<script type="text/javascript">
+    require(['jquery', 'owlcarousel3'], function(jQuery) {
+        jQuery(document).ready(function() {
+            var lang = jQuery('html').attr("lang");
+			console.log(lang);
+			if (lang == 'ar') {
+				console.log("ar");
+            jQuery('.category-slider1').owlCarousel({
+                loop: true,
+                rtl: true,
+                // margin: 15,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                lazyLoad: true,
+                autoplaySpeed: 3000,
+                paginationSpeed: 3000,
+                autoplayTimeout: 3000,
+                responsive: {
+
+                    320: {
+                        items: 1
+                    },
+
+                    580: {
+                        items: 1
+                    },
+                    768: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+    } else {
+        jQuery('.category-slider1').owlCarousel({
+                loop: true,
+                // margin: 15,
+                nav: false,
+                dots: true,
+                autoplay: true,
+                lazyLoad: true,
+                autoplaySpeed: 3000,
+                paginationSpeed: 3000,
+                autoplayTimeout: 3000,
+                responsive: {
+
+                    320: {
+                        items: 1
+                    },
+
+                    580: {
+                        items: 1
+                    },
+                    768: {
+                        items: 1
+                    },
+                    1000: {
+                        items: 1
+                    }
+                }
+            });
+    }
+        });
+    });
+</script>

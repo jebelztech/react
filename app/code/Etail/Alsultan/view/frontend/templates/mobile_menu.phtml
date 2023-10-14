@@ -1,0 +1,63 @@
+<?php $category_tree = $block->getCategoryTree();?>
+<li class="level0 category-item level-top ext  first dropdown"><a class="level-top" href="<?= $block->getBaseUrl()?>all-categories.html"><span><?= __('All Categories')?></span></a>
+    <div class="sub-content">
+        <div class="vertical-menu-wrapper">
+            <div class="tab">
+
+                <ul class="nav nav-tabs">
+                    <?php $class="active"; $p=1; foreach($category_tree as $parent_id => $parent):?>
+                        
+                        <li class="nav-item ">
+                            <a data-toggle="tab" class="toggle-menu-mobile <?= $class?>" href="<?= $parent['url']?>" data-id="<?= $parent_id?>"><?= $parent['name']?></a>
+                            <div id="<?= 'parent-'.$parent_id?>" class="tab-pane <?= $class?> <?= 'parent-submenu-'.$parent_id?>">
+                                <div class="category-navbox">
+                                    <?php $n=1; foreach($parent['categories'] as $subcat_id => $sub_cats):?>
+                                    <?php if($n==1):?>
+                                    <div class="category-navsub">
+                                        <ul class="level<?= $p?> submenu"><?php endif;?>
+                                            <li class="level<?= $p?> nav-1-<?= $p?>-1 category-item">
+                                                <h4 class="submenu-collapse" data-id="<?= $subcat_id?>"><a href="<?= $sub_cats['url']?>"><?= $sub_cats['name']?></a></h4>
+                                                <?php if(isset($sub_cats['products'])):?>
+                                                    <ul class="level<?= ($p+1).'-1'?> submenu subcat-menu subcat-menu-<?= $subcat_id?>">
+                                                        <?php $s=2; $sp=1; foreach($sub_cats['products'] as $product):?>
+                                                            <li class="level<?= ($p+1)?> nav-1-<?= ($p+1)?>-<?= $sp?> category-item"><a href="<?= $product['url']?>"><?= $product['name']?></a></li>
+                                                        <?php $s++; $sp++; endforeach; ?>
+                                                    </ul>
+                                                <?php endif;?>
+                                            </li>
+                                        <?php if($n>=count($parent['categories'])):?></ul>
+                                    </div><?php endif;?>
+                                    <?php $n++; endforeach;?>
+                                </div>
+                            </div>
+                        </li>
+                    <?php $class=""; $p++; endforeach;?>
+                </ul>    
+            </div>
+
+        </div>
+    </div>
+    <script>
+        require([
+            'jquery'
+        ], function($, $t) {
+            // Set the date we're counting down to
+            $(document).ready(function(){
+                $('.toggle-menu-mobile').on('click',function(){
+                    var id = $(this).attr('data-id');
+                    $('.tab-pane').hide();
+                    $('.nav-item').removeClass('active');
+                    $('.parent-submenu-'+id).addClass('active');
+                });
+                $(document).on('click','.submenu-collapse > .collapse',function(){
+                    console.log("submenu clicked");
+                    var id = $(this).closest('.submenu-collapse').attr('data-id');
+                    console.log("submenu id: "+id);
+                    $('.subcat-menu').hide();
+                    $('.subcat-menu-'+id).show();
+                });
+            });
+        });
+
+    </script>
+</li>

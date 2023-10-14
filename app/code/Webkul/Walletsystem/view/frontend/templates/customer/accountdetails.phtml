@@ -1,0 +1,115 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_Walletsystem
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+
+?>
+<?php
+$viewBlock = $block->getLayout()->createBlock(\Webkul\Walletsystem\Block\Walletsystem::class);
+$helper = $viewBlock->helper(\Webkul\Walletsystem\Helper\Data::class);
+$accountDataColection = $block->getUserAccountData();
+?>
+<div style="width:44%;float:left; height:100%; border-right:1px solid#c0c0c0; padding:0 20px">
+    <form
+    id="walletsystem_add_payee"
+    method="post"
+    action="<?= $block->escapeUrl($block->getUrl('walletsystem/transfer/saveaccountdetails'))?>">
+        <input type="hidden" name="customer_id" value="<?= $block->escapeHtmlAttr($helper->getCustomerId());?>">
+        <div class="fieldset">
+            <div class="wk_msg_notification">
+                <h4><?=$block->escapeHtml(__('Add New Account Details')) ?></h4>
+            </div>
+            <div>
+                <label for="holdername"><?=$block->escapeHtml(__('A/c Holder Name')); ?></label>
+                <input type="text" id="holdername" name="holdername" class="holdername" required>
+            </div>
+            <div>
+                <label for="accountno"><?=$block->escapeHtml(__('A/c Number')); ?></label>
+                <input type="text" id="accountno" name="accountno" class="accountno" required>
+            </div>
+            <div>
+                <label for="bankname"><?=$block->escapeHtml(__('Bank Name'));?></label>
+                <input
+                type="text"
+                id="bankname"
+                name="bankname"
+                class="bankname"
+                data-validate="{required:true}"
+                required>
+            </div>
+            <div>
+                <label for="bankcode"><?=$block->escapeHtml(__('Bank Code'));?></label>
+                <input
+                type="text"
+                id="bankcode"
+                name="bankcode"
+                class="bankcode"
+                data-validate="{required:true}"
+                required>
+            </div>
+            <div>
+                <label for="additional"><?=$block->escapeHtml(__('Additional Information'));?></label>
+                <textarea
+                id="additional"
+                name="additional"
+                class="additional"
+                data-validate=""
+                maxlength="100"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="wk_ws_sub_add_payee button action primary">
+                    <?=$block->escapeHtml(__('Submit Bank Details')) ?>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div style="width:49%;float:right; height:450px;overflow-y:scroll;">
+    <div class="info">
+        <div class="fieldset">
+            <div class="wk_msg_notification">
+                <h4><?=$block->escapeHtml(__('Saved Account Details')) ?></h4>
+            </div>
+            <?php if ($accountDataColection->getSize()): ?>
+                <?php foreach ($accountDataColection as $accountData): ?>
+                <div class="wk-mp-row">
+                    <div>
+                        <strong><?=$block->escapeHtml(__('A/c Holder Name')); ?>: </strong>
+                        <span><?=$block->escapeHtml($accountData->getHoldername());?></span>
+                    </div>
+                    <div>
+                        <strong><?=$block->escapeHtml(__('A/c Number')); ?>: </strong>
+                        <span><?=$block->escapeHtml($accountData->getAccountno());?></span>
+                    </div>
+                    <div>
+                        <strong><?=$block->escapeHtml(__('Bank Name'));?>: </strong>
+                        <span><?=$block->escapeHtml($accountData->getBankname());?></span>
+                    </div>
+                    <div>
+                        <strong><?=$block->escapeHtml(__('Bank Code'));?>: </strong>
+                        <span><?=$block->escapeHtml($accountData->getBankcode());?></span>
+                    </div>
+                    <div>
+                        <strong><?=$block->escapeHtml(__('Additional Information'));?>: </strong>
+                        <span><?=$block->escapeHtml($accountData->getAdditional());?></span>
+                    </div>
+                    <a
+                    href="<?= $block->escapeUrl($block->getUrl(
+                        'walletsystem/transfer/requestdelete'
+                    ));?>id/<?=$block->escapeHtml($accountData->getEntityId());?>">
+                    Request delete</a>
+                </div>
+                <hr />
+                <?php endforeach;?>
+            <?php else: ?>
+                <p><?=$block->escapeHtml(__('No Data Found'));?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

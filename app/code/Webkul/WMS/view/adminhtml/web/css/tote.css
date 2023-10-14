@@ -1,0 +1,19 @@
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+ .data-grid .data-grid-thumbnail-cell img {
+    border: none !important;
+    width: auto !important;
+}
+.data-grid .data-grid-thumbnail-cell {
+    width: 20% !important;
+}

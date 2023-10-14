@@ -1,0 +1,68 @@
+<?php $category_tree = $block->getCategoryTree();?>
+<div class="sub-content">
+    <div class="vertical-menu-wrapper">
+        <div class="tab">
+
+            <ul class="nav nav-tabs">
+                <?php $class="active"; foreach($category_tree as $parent_id => $parent):?>
+                    
+                    <li class="nav-item "> <a data-toggle="tab" class="<?= $class?>" href="<?= $parent['url']?>" data-id="#<?= 'parent-'.$parent_id?>"><?= $parent['name']?></a></li>
+                <?php $class=""; endforeach;?>
+            </ul>    
+        </div>
+
+        <div class="right-menu-wrapper tab-content">
+            <?php $class="active"; $p=1; foreach($category_tree as $parent_id => $parent):?>
+            <div class="tab-pane <?= $class?> <?= 'parent-'.$parent_id?>">
+                <div class="category-navbox">
+                    <h3><a href="<?= $parent['url']?>"><?= $parent['name']?></a></h3>
+                    <?php $n=1; foreach($parent['categories'] as $sub_cats):?>
+                    <div class="category-navsub">
+                        <ul class="level<?= $p?> submenu">
+                            <li class="level<?= $p?> nav-1-<?= $p?>-1 category-item">
+                                <h4><a href="<?= $sub_cats['url']?>"><?= $sub_cats['name']?></a></h4>
+                            </li>
+                            <?php if(isset($sub_cats['products'])):?>
+                                <?php $s=2; foreach($sub_cats['products'] as $product):?>
+                                    <li class="level<?= $p?> nav-1-<?= $p?>-<?= $s?> category-item"><a href="<?= $product['url']?>"><?= $product['name']?></a></li>
+                                <?php $s++; endforeach; ?>
+                            <?php endif;?>
+                        </ul>
+                    </div>
+                    <?php $n++; endforeach;?>
+                </div>
+            </div>
+            <?php $class=""; $p++; endforeach;?> 
+        </div>
+
+    </div>
+</div>
+<script>
+    require([
+        'jquery'
+    ], function($, $t) {
+        // Set the date we're counting down to
+        $(document).ready(function() {
+            $('.sub-menu1 ul').hide();
+            $(".sub-menu1 a").click(function() {
+                $(this).parent(".sub-menu1").children("ul").slideToggle("100");
+                $(this).find(".right").toggleClass("fa-caret-up fa-caret-down");
+            });
+        }); 
+        $(document).ready(function(){
+            // alert("hereeeeee");
+            $(".vertical-menu-wrapper .nav-item a").hover(function(){
+                // alert("sweet");
+                $(".vertical-menu-wrapper .nav-item a").removeClass('active');
+                $(this).addClass("active");
+                $('.right-menu-wrapper .tab-pane').removeClass('active');
+                var id = $(this).attr('data-id').replace('#','');
+                $('.'+id).addClass("active");
+            });
+            $(".vertical-menu-wrapper .nav-item a").on('click',function(){
+                window.location = $(this).attr('href');
+            });
+        });
+    });
+
+</script>

@@ -1,0 +1,549 @@
+.marketplace-index-index {
+    margin-top: 88px;
+}
+
+.marketplace-index-index .page-main {
+    padding: 0 !important;
+}
+
+.marketplace-index-index .page-title-wrapper,
+.marketplace-index-index .nav-sections {
+    display: none;
+}
+
+.benefits-listpanel {
+    background: #2b4cd7;
+}
+
+.point-list-benifit ul li {
+    float: left;
+    width: auto;
+    font-size: 14px;
+    color: #fff;
+    padding: 8px 0;
+    margin-right: 4%;
+    font-weight: 600;
+}
+
+.point-list-benifit ul li::before {
+    content: "\f046";
+    font-family: "fontawesome";
+    font-size: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    color: #feee00;
+}
+
+.img-margin-top-howitwork img {
+    width: 130px;
+    margin-top: 10%;
+}
+
+.how-it-work-des {
+    padding-top: 6.5%;
+}
+
+.how-it-works h4.text-center {
+    font-size: 25px;
+}
+
+.how-it-work-des h5 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.marketplace-header {
+    background: rgb(254, 238, 0);
+    padding: 7px 10px 9px;
+    z-index: 999;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+.marketplace-login {
+    padding-top: 3px;
+}
+
+.marketplace-login p {
+    font-size: 14px;
+    color: #000;
+}
+
+.marketplace-login p a {
+    float: right;
+    color: #000;
+    transition: all .5s ease-in-out;
+}
+
+.marketplace-box {
+    display: flex;
+    align-items: center;
+}
+
+.marketplace-box input {
+    font-size: 15px;
+    padding: 0 10px;
+    height: 38px;
+    margin-right: 12px;
+    border-radius: 2px;
+    border: none;
+}
+
+.marketplace-box .btn {
+    font-size: 15px;
+    padding: 7px 15px;
+    background: rgb(43, 76, 215);
+    color: #fff;
+    transition: all .5s ease-in-out;
+    border: 1px solid transparent
+}
+
+.marketplace-box .btn:hover {
+    background: #0f0f0f;
+}
+
+.marketplace-header .magicmenu .nav-desktop .level0 .level-top {
+    color: #fff;
+    padding: 8px 23px 5px 5px;
+}
+
+.marketplace-header .nav-sections {
+    background: transparent;
+}
+
+.marketplace-header .nav-sections-item-content {
+    padding: 0;
+}
+
+.seller-footer-main {
+    float: left;
+    width: 100%;
+    background: #0f0f0f;
+    padding: 20px 0;
+}
+
+.footer-info-link {
+    float: left;
+    width: 100%;
+    color: #000;
+}
+
+.footer-info-link ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.footer-info-link ul li {
+    float: left;
+    margin-bottom: 0;
+}
+
+.footer-info-link ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    border-right: 1px solid #535353;
+    padding: 0 16px;
+}
+
+.support-link-seller {
+    float: right;
+}
+
+.support-link-seller p {
+    color: #fff;
+    font-size: 14px;
+    padding: 0 16px;
+    margin: 0;
+}
+
+.support-link-seller p a {
+    text-decoration: none;
+    color: #749433;
+    font-size: 14px;
+    transition: all .5s ease-in-out;
+}
+
+.support-link-seller p a:hover {
+    color: #fff;
+}
+
+.footer-info-link ul li:last-child a {
+    border-right: none;
+}
+
+.copy-right-seller {
+    float: left;
+    width: 100%;
+    text-align: center;
+    background: #000;
+    padding: 12px 0;
+}
+
+.copy-right-seller p {
+    color: #fff;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer a,
+.footer p {
+    opacity: .8;
+    transition: all .5s ease-in-out;
+}
+
+.footer a:hover,
+.footer p:hover {
+    opacity: 1;
+}
+
+.seller-footer-main .container {
+    max-width: 93%;
+    width: 93%;
+}
+
+.navbar {
+    padding: 10px 5px 5px;
+}
+
+.marketplace-logo {
+    display: block;
+    margin: 11px 0 7px 0;
+}
+
+.marketplace-logo img {
+    width: 140px;
+}
+
+.navbar-nav .nav-item {
+    margin-bottom: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-right: 30px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding: 0;
+    color: #000;
+    transition: all .5s ease-in-out;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+    color: rgb(43, 76, 215);
+}
+
+@media (max-width:1200px) {
+    .hero-contentbox {
+        min-height: 240px;
+    }
+    .marketplace-header .nav-sections-item-content .magicmenu {
+        margin-right: 5px;
+        width: 100%;
+    }
+    .marketplace-header .magicmenu .nav-desktop .level0 .level-top>span {
+        font-size: 14px;
+    }
+    .navbar-nav .nav-item {
+        font-size: 14px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width:992px) {
+    .marketplace-index-index {
+        margin-top: 70px;
+    }
+    .marketplace-header .col-md-8,
+    .marketplace-header .col-md-4 {
+        max-width: 50%;
+        flex: 50%;
+        padding: 0 5px;
+    }
+    .hero-contentbox {
+        min-height: 250px;
+        background-size: cover;
+    }
+    .owl-theme .owl-controls .owl-nav div {
+        top: 42%;
+    }
+    .owl-prev:before,
+    .owl-next:before {
+        font-size: 25px;
+    }
+    .default-panel {
+        padding: 30px 15px;
+    }
+    .benefits-panel {
+        padding-bottom: 5px;
+    }
+    .benefits-listpanel {
+        padding-bottom: 12px;
+    }
+    .top-heading {
+        font-size: 25px;
+        margin-bottom: 25px;
+    }
+    .how-it-works {
+        padding-bottom: 36px;
+    }
+    .seller-footer-main .container {
+        max-width: 100%;
+        width: 100%;
+    }
+    .seller-footer-main {
+        padding: 15px 0;
+    }
+    .footer-info-link ul li a {
+        font-size: 12px;
+        padding: 0 8px;
+    }
+    .support-link-seller p {
+        padding: 0;
+        font-size: 12px;
+    }
+    .img-margin-top-howitwork img {
+        width: 80px;
+    }
+    .how-it-work-des h5 {
+        font-size: 20px;
+    }
+    .navbar-translate {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 0px 0 15px;
+        background: #05408d
+    }
+    .navbar-toggler {
+        padding: 5px 8px;
+        border: none !important;
+        background-color: #fff !important;
+        outline: none!important;
+        border-radius: 2px;
+        margin: 0 !important;
+        position: absolute;
+        top: -36px;
+    }
+    .navbar-toggler span {
+        width: 25px;
+        height: 2px;
+        display: block;
+        background-color: #749433;
+        margin: 5px 0;
+        transition: 0.6s;
+    }
+    .navbar-collapse {
+        position: fixed;
+        background: rgba(0, 0, 0, .5);
+        width: 0;
+        visibility: hidden;
+        opacity: 0;
+        height: 100vh;
+        left: 0;
+        top: 78px;
+        padding: 0;
+        border-top: 1px solid #ffffff;
+        transition: all .5s ease-in-out;
+    }
+    .point-list-benifit {
+        text-align: center !important;
+    }
+    .navbar-collapse.show {
+        visibility: visible;
+        width: 100%;
+        opacity: 1
+    }
+    .navbar-toggler.collapsed span {
+        transform: inherit;
+        opacity: 1;
+        width: 25px
+    }
+    .navbar-toggler .bar2 {
+        opacity: 0;
+        margin-left: 4px
+    }
+    .navbar-toggler .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-3px, 7px);
+        transform: rotate(-45deg) translate(-3px, 7px)
+    }
+    .navbar-toggler .bar3 {
+        -webkit-transform: rotate(45deg) translate(-3px, -6px);
+        transform: rotate(45deg) translate(-3px, -6px)
+    }
+    .navbar-collapse ul {
+        width: 100%!important;
+        background: #fff;
+        height: 100%;
+        display: inline-block;
+        padding-left: 0
+    }
+    .navbar .nav-item {
+        padding: 0px 20px;
+        margin: 0;
+    }
+    .navbar .nav-item.active {
+        padding-left: 20px
+    }
+    .navbar .nav-item a {
+        font-size: 16px;
+        padding: 8px 0 !important;
+        color: #749433 !important;
+    }
+    .marketplace-login {
+        padding-top: 0px;
+    }
+    .navbar {
+        padding: 0;
+    }
+    .marketplace-logo {
+        padding-left: 59px;
+        display: inline-block;
+        margin-top: 22px;
+    }
+    .marketplace-login p {
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+}
+
+@media (max-width:767px) {
+    .marketplace-index-index {
+        margin-top: 115px;
+    }
+    .marketplace-header {
+        padding: 13px 10px 12px;
+    }
+    .marketplace-header .col-md-8,
+    .marketplace-header .col-md-4 {
+        max-width: 100%;
+        flex: 100%;
+        padding: 0 0px;
+    }
+    .marketplace-box input {
+        font-size: 12px;
+        height: 30px;
+    }
+    .marketplace-box input::placeholder {
+        font-size: 12px;
+    }
+    .marketplace-box .btn {
+        font-size: 13px;
+        padding: 0px 15px;
+        height: 30px;
+        border: none;
+    }
+    .marketplace-login p {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+    .hero-contentbox {
+        min-height: 150px;
+    }
+    .owl-theme .owl-controls .owl-nav .owl-prev {
+        left: 10px;
+    }
+    .owl-theme .owl-controls .owl-nav .owl-next {
+        right: 10px;
+    }
+    .benefits-listpanel {
+        padding: 30px 0 12px;
+    }
+    .top-heading {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .point-list-benifit ul li {
+        width: 50%;
+        font-size: 12px;
+        padding: 0px 0;
+        margin-right: 0;
+        font-weight: 500;
+    }
+    .img-margin-top-howitwork img {
+        width: 80px;
+        float: none !important;
+        margin-top: 0;
+    }
+    .how-it-work-des h5 {
+        font-size: 18px;
+        text-align: center;
+    }
+    .shope-btn {
+        padding: 8px 25px;
+        font-size: 16px;
+    }
+    .how-it-works h4.text-center {
+        font-size: 16px;
+    }
+    .how-it-works .row {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 15px;
+    }
+    .how-it-works .row:last-child {
+        border: none;
+        margin: 0;
+    }
+    .how-it-works .row:nth-child(3n),
+    .how-it-works .row:nth-child(5n) {
+        flex-direction: column-reverse;
+    }
+    .how-it-work-des {
+        padding: 0;
+        margin: 12px 0;
+    }
+    .page-footer {
+        margin-top: 0;
+    }
+    .benefits-panel {
+        padding: 30px 0 0;
+    }
+    .Benefits-box {
+        box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+        margin-bottom: 30px;
+    }
+    .footer-info-link ul,
+    .support-link-seller p {
+        text-align: center;
+    }
+    .footer-info-link ul li {
+        margin-bottom: 10px;
+        float: none;
+        display: inline-block;
+    }
+    .footer-info-link ul li a {
+        border: none;
+    }
+    .seller-footer-main {
+        padding: 15px 0 10px;
+    }
+    .support-link-seller {
+        float: none;
+    }
+    .navbar-toggler {
+        padding: 3px 7px;
+        top: -43px;
+        right: 0;
+        z-index: 9999;
+    }
+    .marketplace-logo {
+        padding-left: 0;
+        margin-top: 0;
+        margin-bottom: 18px;
+    }
+    .navbar-collapse {
+        top: 0;
+        z-index: 999;
+    }
+    .navbar-collapse ul {
+        padding-top: 53px;
+    }
+    .navbar-collapse ul .nav-item:first-child {
+        border-top: 1px solid #e1d7d7;
+    }
+    .point-list-benifit {
+        text-align: left !important;
+    }
+}

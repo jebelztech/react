@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Etail_Career::parent" title="Career" module="Etail_Career" sortOrder="100" resource="Etail_Career::parent"/>
+        <add id="Etail_Career::index" title="Career Index" module="Etail_Career" sortOrder="10" action="career/index" resource="Etail_Career::index" parent="Etail_Career::parent"/>
+		<add id="Etail_Career::careers" title="Career Careers" module="Etail_Career" sortOrder="20" parent="Etail_Career::parent" action="career/careers" resource="Etail_Career::careers"/>
+
+    </menu>
+</config>

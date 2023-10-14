@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webkul" sortOrder="10">
+            <label>Ezmartech</label>
+        </tab>
+        <section id="wms" translate="label" type="text" sortOrder="310" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Warehouse Management System</label>
+            <tab>webkul</tab>
+            <resource>Webkul_WMS::warehouse_config</resource>
+            <group id="configuration" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Api Configuration</label>
+                <field id="apiusername" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Username</label>
+                </field>
+                <field id="apikey" translate="label" type="obscure" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="fcmkey" translate="label" sortOrder="3" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>FCM Notification API key</label>
+                </field>
+                <field id="barcode_attribute" translate="label" sortOrder="4" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Choose attribute for product barcode</label>
+                    <source_model>Webkul\WMS\Model\Config\Source\Attribute</source_model>
+                </field>
+                <field id="layout_theme" translate="label" sortOrder="5" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Choose warehouse layout theme</label>
+                    <source_model>Webkul\WMS\Model\Config\Source\Theme</source_model>
+                </field>
+                <field id="enablesinglelogin" translate="label" sortOrder="3" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Staff Single Login</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

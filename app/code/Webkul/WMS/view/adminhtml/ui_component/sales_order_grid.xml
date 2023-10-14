@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction">
+            <action name="is_action">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">is_action</item>
+                        <item name="label" xsi:type="string" translate="true">Print Barcode Slip</item>
+                        <item name="url" xsi:type="url" path="wms/barcode/massprintorderbarcode"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+    </listingToolbar>
+    <columns name="sales_order_columns">
+        <column name="barcode" class="Webkul\WMS\Ui\Component\Listing\Columns\OrderBarCodeImage" component="Webkul_WMS/js/grid/columns/barcodeimage">
+            <settings>
+                <label translate="true">Bar Code</label>
+                <sortable>false</sortable>
+                <!-- <filterable>false</filterable> -->
+            </settings>
+        </column>
+    </columns>
+</listing>

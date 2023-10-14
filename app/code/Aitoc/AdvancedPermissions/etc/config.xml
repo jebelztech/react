@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+<!--
+  ~ Copyright © 2019 Aitoc. All rights reserved.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <advancedpermissions>
+            <general>
+                <show_all_products>0</show_all_products>
+                <show_all_customers>1</show_all_customers>
+                <allow_delete>0</allow_delete>
+                <allow_null_category>0</allow_null_category>
+                <show_admin_on_product_grid>0</show_admin_on_product_grid>
+                <view_all>0</view_all>
+                <manage_global_attribute>0</manage_global_attribute>
+            </general>
+            <su>
+                <enable>0</enable>
+                <email></email>
+                <template>admin_su_template</template>
+            </su>
+            <sucategories>
+                <enable>0</enable>
+                <email></email>
+                <template>admin_sucategory_template</template>
+            </sucategories>
+        </advancedpermissions>
+    </default>
+</config>

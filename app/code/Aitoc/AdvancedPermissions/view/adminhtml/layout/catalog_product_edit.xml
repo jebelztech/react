@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+<!--
+  ~ Copyright © 2018 Aitoc. All rights reserved.
+  -->
+
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <referenceContainer name="js">
+        <block class="Aitoc\AdvancedPermissions\Block\Product\Edit"
+               name="permission_disable_qty_field"
+               template="product/edit.phtml" />
+    </referenceContainer>
+</layout>

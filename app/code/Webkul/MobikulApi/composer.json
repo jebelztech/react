@@ -1,0 +1,20 @@
+{
+    "name": "webkul/module-mobikul-api",
+    "description": "Webkul Magento2 Mobikul Api Module",
+    "require": {
+        "webkul/module-mobikul-core": "5.*.*"
+    },
+    "type": "magento2-module",
+    "version": "5.0.1",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\MobikulApi\\": ""
+        }
+    }
+}

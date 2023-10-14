@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+<!--
+  ~ Copyright © 2018 Aitoc. All rights reserved.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/system_file.xsd">
+    <system>
+        <section id="advancedpermissions" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <label>Advanced Permissions</label>
+            <tab>aitoc_extensions</tab>
+            <resource>Aitoc_AdvancedPermissions::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Settings</label>
+                <attribute type="expanded">1</attribute>
+                <field id="show_all_customers" translate="label comment" sortOrder="30" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show All Customers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If this is set to "No", sub-admin with restricted permissions will see customers from the website of the allowed store only.]]></comment>
+                </field>
+                <field id="allow_null_category" translate="label comment" sortOrder="40" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show products without categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If this is set to "No", sub-admin will not be able to see products that don’t have any category assigned. Only Super Admin will be able to see such products.]]></comment>
+                </field>
+                <field id="allow_delete" translate="label comment" sortOrder="50" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow deleting products, images, categories</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[If this is set to "Yes", sub-admin with restricted permissions can delete products, product images or categories.]]></comment>
+                </field>
+                <field id="view_all" translate="label comment" sortOrder="80" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Hide Content with “All Store Views” scope</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="manage_global_attribute" translate="label comment" sortOrder="90" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allow to update global attributes</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

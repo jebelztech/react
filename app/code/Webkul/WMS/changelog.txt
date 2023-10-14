@@ -1,0 +1,10 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 1.0.0 -------------------------------
+	+ admin can create staff.
+	+ admin can assigned order to staff.
+	+ admin can assign location to products.
+	+ admin can create warehouse and assign source to warehouse.

@@ -1,0 +1,384 @@
+<section class="media-gallery">
+    <div class="gallerybanner-img">
+        <img src="/media/gallery/inner.jpg" alt="">
+        <div class="topBanner-text">
+            <h1><?= __('Franchising Application Form')?></h1>
+            <p><?= __('Tell us about yourself')?><br>*<?= __('Indicates a required field')?></p>
+        </div>
+    </div>
+</section>
+
+<?php if(isset($_GET['msg']) && $_GET['msg']=="success"):?>
+<div class="message success"><?= __('Thanks, We have received your franchise application!')?></div>
+<?php elseif(isset($_GET['msg']) && $_GET['msg']=="error"):?>
+<div class="message error"><?= __('You have an error in the form, please fill the form again')?></div>
+<?php endif;?>
+<div class="container">
+    <div class="content-wrapper" data-content-type="row" data-appearance="contained" data-element="main">
+        <div class="inner-wrapper">
+            <form class="form subscribe" novalidate action="<?= $block->getBaseUrl()?>alsultan/index/franchise" method="post" data-mage-init='{"validation": {"errorClass": "mage-error"}}' id="franchise-validate-detail">
+                <fieldset class="fieldset">
+                    <div class="col-md-12 pt-0">
+                        <h3 class="headtitle"><?= __('Contact Information')?></h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="field firstname required">
+                                <label class="label" for="firstname"><span><?= __('First Name')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="firstname" id="firstname" title="<?= __('First Name')?>" value="" class="input-text" type="text" data-validate="{required:true,'validate-name':true}" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field middle-name required">
+                                <label class="label" for="middlename"><span><?= __('Middle Name')?></span></label>
+                                <div class="form-group control">
+                                    <input name="middlename" id="middlename" title="<?= __('Middle Name')?>" value="" class="input-text" type="text" data-validate="" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field lastname required">
+                                <label class="label" for="lastname"><span><?= __('Last Name')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="lastname" id="lastname" title="<?= __('Last Name')?>" value="" class="input-text" type="text" data-validate="{required:true,'validate-name':true}" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field telephone">
+                                <label class="label" for="telephone"><span><?= __('Contact Number')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="telephone" id="telephone" title="<?= __('Contact Number')?>" value="" class="input-text" type="tel" data-validate="{required:true, 'validate-phone':true}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field email required">
+                                <label class="label" for="email"><span><?= __('Email')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="email" id="email" title="<?= __('Email')?>" value="" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field country required">
+                                <div class="form-group control">
+                                    <label class="label" for="country"><span><?= __('Country')?>*</span></label>
+                                    <select class="select" name="country" id="country">
+                                        <option value="UAE">UAE</option>
+                                        <option value="USA">USA</option>
+                                        <option value="Turkey">Turkey</option>
+                                        <option value="Bahrain">Bahrain</option>
+                                        <option value="International">International</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field city required">
+                                <label class="label" for="city"><span><?= __('City')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="city" id="city" title="<?= __('City')?>" value="" class="input-text" type="text" data-validate="{required:true,'validate-city':true}" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field address required">
+                                <label class="label" for="address"><span><?= __('Current Address')?></span></label>
+                                <div class="form-group control">
+                                    <input name="address" id="address" title="Address" value="" class="input-text" type="text" data-validate="{required:true,'validate-address':true}" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="field date required">
+                                <label class="label" for="date"><span><?= __('Date of application')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="date" id="date" title="<?= __('Date of application')?>" value="" class="input-text" type="date" data-validate="{required:true,'validate-date':true}" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h3 class="headtitle"><?= __('Franchised Business information')?></h3>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field ownership required">
+                                <label class="label" for="ownership"><span><?= __('Territory of Ownership')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="territoryOwnership" id="territoryOwnership" title="<?= __('Territory of Ownership')?>" value="" class="input-text" type="text" data-validate="" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field franchise required">
+                                <label class="label" for="franchise"><span><?= __('Type of the franchise')?>*</span></label>
+                                <div class="form-group control">
+                                    <input name="typefranchise" id="typefranchise" title="<?= __('Type of the franchise')?>" value="" class="input-text" type="text" data-validate="" aria-required="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--div class="field zipcode required">
+                        <label class="label" for="zipcode"><span>Zip</span></label>
+                        <div class="form-group control">
+                            <input name="zipcode" id="zipcode" title="Zip" value="" class="input-text" type="text" data-validate="{required:true,'validate-postcode':true}" aria-required="true">
+                        </div>
+                    </div-->
+
+                </fieldset>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <input type="hidden" name="hideit" id="hideit" value="">
+                        <button type="submit" title="Submit" class="action submit primary">
+                            <span><?= __('Submit')?></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="supreme-container"> 
+    <button type="button" class="btn btn-primary mybtn " data-toggle="modal" data-target="#myModal" style="display:none;"> 
+        Click Me !
+    </button>
+</div> 
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content"> 
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <!--center> <span class="modal-title">Login form</span></center-->
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div> 
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p class="text-intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> 
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+ 
+
+<script type="text/javascript">
+    require(['jquery', 'bootstrap']);
+
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Customer/js/block-submit-on-send": {
+                "formId": "franchise-validate-detail"
+            }
+        }
+    }
+</script>
+
+
+<style>
+    .breadcrumbs {
+        display: none;
+    }
+
+    .gallerybanner-img img {
+        width: 100%;
+        display: block;
+    }
+
+    .cms-media-gallery main#maincontent {
+        padding: 0 0px !important;
+    }
+
+    .gallerybanner-img {
+        position: relative;
+    }
+
+    .topBanner-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        z-index: 1;
+    }
+
+    .media-gallery {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    .media-gallery:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, .24) 0%, rgba(0, 0, 0, .24) 100%);
+    }
+
+    .topBanner-text h1 {
+        font-weight: 600;
+        font-size: 39px;
+        padding: 0;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #fff;
+        line-height: 36px;
+        z-index: 1;
+    }
+
+    .topBanner-text p {
+        font-size: 17px;
+        color: #fff;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .form .fieldset .control {
+        margin: 0px 0px 15px;
+    }
+
+    .form .fieldset .label {
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+
+    .input-text,
+    .select {
+        border: 1px solid #c2c2c2 !important;
+        border-radius: 0 !important;
+        height: 42px !important;
+        margin-top: 1px !important;
+        font-size: 15px;
+        font-size: 13px !important;
+    }
+
+    .email::before {
+        display: none;
+    }
+
+    .content-wrapper {
+        min-width: 70% !important;
+        margin: 0 auto;
+        background: #f7f7fa;
+        padding: 20px 30px;
+        width: 70%;
+    }
+
+    .form .fieldset [class*="row"] {
+        margin: 0 -10px;
+    }
+
+    .form .fieldset [class*="col-"] {
+        padding: 0 10px;
+    }
+
+    .address::before {
+        display: none;
+    }
+
+    h3.headtitle {
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 10px 0px 15px;
+        padding: 0;
+        line-height: 21px;
+    }
+
+    .form .fieldset .pt-0 {
+        padding: 0;
+    }
+
+    .form .fieldset {
+        margin-bottom: 20px;
+    }
+
+    .actions-toolbar button.action.submit.primary {
+        max-width: 500px;
+        min-width: 185px;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    @media (max-width:767px) {
+        .content-wrapper {
+            min-width: 100% !important;
+            margin: 0 auto;
+            background: #f7f7fa;
+            padding: 10px 20px;
+            width: 100%;
+        }
+
+        .cms-media-gallery .columns .column.main {
+            padding: 0 0px;
+        }
+
+        .topBanner-text {
+            position: static;
+            top: 0;
+            left: unset;
+            transform: unset;
+            padding: 2% 1%;
+        }
+
+        .cms-media-gallery .page-main {
+            margin-top: 37px !important;
+        }
+
+        .topBanner-text h1 {
+            font-size: 23px;
+            margin-bottom: 5px;
+            line-height: 24px;
+            margin-top: 10px;
+            color: #000;
+        }
+
+        .topBanner-text p {
+            font-size: 13px;
+            margin-bottom: 0px;
+            color: #000;
+        }
+
+        .columns .column.main {
+            padding: 0 0px;
+        }
+
+        .page-main,
+        .page-main-full-width {
+            margin-top: 38px !important;
+        }
+
+        .media-gallery {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .input-text,
+        .select {
+            height: 38px !important;
+        }
+
+        .media-gallery:after {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, .05) 0%, rgba(0, 0, 0, .05) 100%);
+        }
+    }
+
+</style>

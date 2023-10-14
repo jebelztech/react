@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_WMS::css/warehouse.css"/>
+        <link src="Webkul_WMS::js/bootstrap/warehouse-post-action.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="wms_warehouse_form"/>
+            <block class="Magento\Backend\Block\Template" name="warehouse_hint" after="-" template="Webkul_WMS::warehouse/hint.phtml"/>
+            <block class="Webkul\WMS\Block\Adminhtml\Warehouse\Location" name="assign_product_location" after="-" template="Webkul_WMS::warehouse/locationAssign.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Webkul_WMS::warehouse" title="Warehouse Management System" sortOrder="10">
+                    <resource id="Webkul_WMS::menu" title="Menu" sortOrder="10">
+                        <resource id="Webkul_WMS::warehousemanagement" title="Manage Warehouse" sortOrder="1"/>
+                        <resource id="Webkul_WMS::staffmanagement" title="Manage Staff" sortOrder="2"/>
+                        <resource id="Webkul_WMS::ordermanagement" title="Manage Orders" sortOrder="3"/>
+                        <resource id="Webkul_WMS::tote" title="Manage Tote" sortOrder="4"/>
+                        <resource id="Webkul_WMS::configuration" title="WMS Configuration" sortOrder="6"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Webkul_WMS::warehouse_config" title="WMS Configuration Section" sortOrder="50"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

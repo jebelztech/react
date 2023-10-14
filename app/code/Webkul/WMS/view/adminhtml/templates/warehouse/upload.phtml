@@ -1,0 +1,188 @@
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<div class="massupload_main_container">
+    <div class="mass_upload_overlay hidden">
+        <span class="spinner mass_upload_spinner">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </div>
+    <div id="messages">
+        <div class="messages">
+            <div class="message message-notice notice">
+                <div>
+                    <?= $block->escapeHtml(__("Make sure your file isn't more than 1000M.")); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="admin__field field field-import_file with-note">
+        <label class="label admin__field-label" for="import_file">
+            <span><?= $block->escapeHtml(__("Select CSV File to Import")); ?></span>
+        </label>
+        <div class="admin__field-control control">
+            <input id="import_file" name="import_file" title="<?= $block->escapeHtml(
+                __("Select CSV File to Import")
+            ); ?>" class="input-file" type="file">
+            <div class="note admin__field-note" id="import_file-note">
+                <?= $block->escapeHtml(
+                    __("File must be saved in UTF-8 encoding for proper import")
+                ); ?>
+            </div>
+            <label class="addafter">
+                <span id="sample-file-span" class="no-display" style="display:inline;">
+                    <a id="sample-file-link" target="_blank" href="<?= $block->escapeHtml(
+                        $block->getSampleFileUrl()
+                    ); ?>">
+                    <?= $block->escapeHtml(
+                        __("Download Sample CSV File")
+                    ); ?></a>
+                </span>
+            </label><br><br><br>
+            <button id="upload_button" title="<?= $block->escapeHtml(
+                __("Check Data")
+            ); ?>" type="button" class="action-default scalable save primary">
+                <span><?= $block->escapeHtml(
+                    __("Check Data")
+                ); ?></span>
+            </button>
+        </div>
+    </div>
+    <div class="entry-edit fieldset hidden" id="import_validation_container">
+        <div class="entry-edit-head legend">
+            <span class="icon-head head-edit-form fieldset-legend" id="import_validation_container_header">
+                <?= $block->escapeHtml(
+                    __("Validation Results")
+                ); ?>
+            </span>
+        </div><br>
+        <div id="import_validation_messages" class="fieldset">
+            <div class="messages">
+
+                <div class="message message-success success hidden">
+                    <div>
+                        <?= $block->escapeHtml(
+                            __("File is valid! To start import process press \"Import\" button&nbsp;&nbsp;")
+                        ); ?>
+                        <button class="scalable save importLocation" type="button">
+                            <span>
+                                <span>
+                                    <span><?= $block->escapeHtml(
+                                        __("Import")
+                                    ); ?></span>
+                                </span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="message message-error error hidden">
+                    <div></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(
+        [
+            "jquery"
+        ],
+        function($) {
+
+            var ajaxInProgress = false;
+
+            $("#upload_button").on("click", function() {
+                if (!ajaxInProgress) {
+                    ajaxInProgress = true;
+                    $(".entry-edit, .message-success, .message-error").addClass("hidden");
+                    $("mass_upload_overlay").removeClass("hidden");
+                    var formData = new FormData();
+                    formData.append("file", $("#import_file")[0].files[0]);
+                    formData.append("form_key", "<?= $block->escapeHtml($block->getFormKey()); ?>");
+                    $.ajax({
+                        url: "<?= $block->escapeHtml($block->getCheckCsvUrl()); ?>",
+                        type: "POST",
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: (content) => {
+                            $(".mass_upload_overlay").addClass("hidden");
+                            ajaxInProgress = false;
+                            if (content.success == 1) {
+                                $(".entry-edit, .message-success").removeClass("hidden");
+                            } else {
+                                $(".message-error").find("div").text(content.message);
+                                $(".entry-edit, .message-error").removeClass("hidden");
+                            }
+                        },
+                        error: () => {
+                            $(".mass_upload_overlay").addClass("hidden");
+                            ajaxInProgress = false;
+                        }
+                    });
+                }
+
+            });
+
+            $(".importLocation").on("click", function() {
+                if (!ajaxInProgress) {
+                    ajaxInProgress = true;
+                    $("mass_upload_overlay").removeClass("hidden");
+
+                    var formData = new FormData();
+                    formData.append("file", $("#import_file")[0].files[0]);
+                    formData.append("form_key", "<?= $block->escapeHtml($block->getFormKey()); ?>");
+                    $.ajax({
+                        url: "<?= $block->escapeHtml($block->getImportCsvUrl()); ?>",
+                        type: "POST",
+                        data: formData,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: (content) => {
+                            $(".mass_upload_overlay").addClass("hidden");
+                            ajaxInProgress = false;
+                            if (content.success == 1) {
+                                $(".message-success").find("div").text(content.message);
+                                $(".entry-edit, .message-success").removeClass("hidden");
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
+                            } else {
+                                $(".message-error").find("div").text(content.message);
+                                $(".entry-edit, .message-error").removeClass("hidden");
+                            }
+                        },
+                        error: () => {
+                            $(".mass_upload_overlay").addClass("hidden");
+                            ajaxInProgress = false;
+                        }
+                    });
+
+                }
+            });
+
+        }
+    );
+</script>

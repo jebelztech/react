@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+-->
+
+<!--
+  ~ Copyright © 2018 Aitoc. All rights reserved.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="aitocadvancedpermissions" frontName="aitocadvancedpermissions">
+            <module name="Aitoc_AdvancedPermissions"/>
+        </route>
+    </router>
+</config>

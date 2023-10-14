@@ -1,0 +1,96 @@
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<div id="hintOverlay">
+    <div id="hintContainer">
+        <span class="closeButton"></span>
+        <div class="tab_container">
+            <ul class="tabnav nav-pills">
+                <li data-for="column" class="active">
+                    <a href="#"><?= $block->escapeHtml(__("Columns")); ?></a>
+                </li>
+                <li data-for="row">
+                    <a href="#"><?= $block->escapeHtml(__("Rows")); ?></a>
+                </li>
+                <li data-for="shelf">
+                    <a href="#"><?= $block->escapeHtml(__("Shelves")); ?></a>
+                </li>
+                <li data-for="rack">
+                    <a href="#"><?= $block->escapeHtml(__("Racks")); ?></a>
+                </li>
+            </ul>
+        </div>
+        <div class="sliderContainer">
+            <img class="column slider" src="<?= $block->escapeHtml(
+                $block->getViewFileUrl('Webkul_WMS::images/col.png')
+            ); ?>"/>
+            <img class="row slider hidden" src="<?= $block->escapeHtml(
+                $block->getViewFileUrl('Webkul_WMS::images/rows.png')
+            ); ?>"/>
+            <img class="shelf slider hidden" src="<?= $block->escapeHtml(
+                $block->getViewFileUrl('Webkul_WMS::images/shelves.png')
+            ); ?>"/>
+            <img class="rack slider hidden" src="<?= $block->escapeHtml(
+                $block->getViewFileUrl('Webkul_WMS::images/racks.png')
+            ); ?>"/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require(
+        [
+            "jquery"
+        ], function($) {
+            $(".closeButton").on("click", function(){
+                $("#hintContainer").animate(
+                    {
+                        "right": "-61%"
+                    }, 500, ()=>{
+                        $("#hintOverlay").hide();
+                    }
+                );
+            });
+
+            $("#hintOverlay").on("click", function(){
+                if (event.target == event.currentTarget) {
+                    $("#hintContainer").animate(
+                        {
+                            "right": "-61%"
+                        }, 500, ()=>{
+                            $("#hintOverlay").hide();
+                        }
+                    );
+                }
+            });
+
+            $("body").on("click", ".info_button", function() {
+                $("#hintOverlay").show();
+                $("#hintContainer").animate(
+                    {
+                        "right": "0px"
+                    }, 500
+                );
+            });
+
+            $(".tabnav li").on("click", function(){
+                var target = $(this).attr("data-for");
+                $(".tabnav li").removeClass("active");
+                $(".slider").addClass("hidden");
+                $(this).addClass("active");
+                $("."+target).removeClass("hidden");
+            });
+
+        }
+    );
+</script>

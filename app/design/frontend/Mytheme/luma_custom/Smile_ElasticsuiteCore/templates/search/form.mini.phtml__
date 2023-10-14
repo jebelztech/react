@@ -1,0 +1,137 @@
+<?php
+/**
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Smile ElasticSuite to newer
+ * versions in the future.
+ *
+ * @category  Smile
+ * @package   Smile\ElasticsuiteCore
+ * @author    Romain Ruaud <romain.ruaud@smile.fr>
+ * @copyright 2020 Smile
+ * @license   Open Software License ("OSL") v. 3.0
+ */
+
+/**
+ * Template for quick search mini form.
+ * Overriden to manage template injection for the rendering of autocomplete results.
+ *
+ * @var $block \Smile\ElasticsuiteCore\Block\Search\Form\Autocomplete
+ */
+?>
+<?php //  get customer id
+  $objectManager =  \Magento\Framework\App\ObjectManager::getInstance();
+  $customer_session = $objectManager->get('\Magento\Customer\Model\Session');
+  //$$customer_id=$customer_session->getCustomer()->getId()
+  ?>
+
+
+
+<div class="left-header-sec">
+
+  
+    <div class="wishlist">
+        <a href="#"></a>
+    </div>
+    <div class="reward">
+        <a href="#"></a>
+    </div>
+</div>
+<?php
+/** @var $helper \Magento\Search\Helper\Data */
+$helper = $this->helper('Magento\Search\Helper\Data');
+?>
+<div class="block block-search">
+    <div class="block block-title"><strong><?php /* @escapeNotVerified */ echo __('Search'); ?></strong></div>
+    <div class="block block-content">
+        <form class="form minisearch" id="search_mini_form" action="<?php /* @escapeNotVerified */ echo $helper->getResultUrl() ?>" method="get">
+            <div class="field search">
+                <label class="label" for="search" data-role="minisearch-label">
+                    <span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+                </label>
+                <div class="control">
+                    <input id="search"
+                           type="text"
+                           name="<?php /* @escapeNotVerified */ echo $helper->getQueryParamName() ?>"
+                           value="<?php /* @escapeNotVerified */ echo $helper->getEscapedQueryText() ?>"
+                           placeholder="<?php /* @escapeNotVerified */ echo __('Search entire store here...'); ?>"
+                           class="input-text"
+                           maxlength="<?php /* @escapeNotVerified */ echo $helper->getMaxQueryLength();?>"
+                           role="combobox"
+                           aria-haspopup="false"
+                           aria-autocomplete="both"
+                           aria-expanded="false"
+                           autocomplete="off"
+                           data-block="autocomplete-form"/>
+                    <div id="search_autocomplete" class="search-autocomplete"></div>
+                    <?php // echo $block->getChildHtml() ?>
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit"
+                        title="<?php echo $block->escapeHtml(__('Search')) ?>"
+                        class="action search">
+                    <span><?php /* @escapeNotVerified */ echo __('Search'); ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<?php 
+// languages box
+//echo $this->getLayout()->createBlock("Magento\Store\Block\Switcher")->setTemplate("Magento_Store::switch/languages.phtml")->toHtml();
+
+?>
+<div id="customer-login"></div>
+<?php /*if ($customer_session->isLoggedIn()){?>
+		<div class="header-profile"><a href="<?php echo $block->getUrl('customer/account/'); ?>">Profile</a></div>
+		
+  <?php } else { ?>
+		<div class="header-login"><a href="<?php echo $block->getUrl('customer/account/login/'); ?>">Login</a></div>
+  <?php }*/ ?>
+  <script>
+     require([
+          'jquery',
+          'uiComponent',
+          'Magento_Customer/js/customer-data',
+          "mage/cookies"
+      ], function ($, Component, customer) {
+        $.ajax({
+          url: '<?= $block->getBaseUrl()?>career/index/customer',
+          dataType: 'json',
+          method: 'get',
+          success: function(response){
+            if(response['loggedIn']=="true") {
+              var a = '<a href="<?php echo $block->getUrl('customer/account/'); ?>"><?= __('Profile')?></a>';
+              $('#customer-login').removeClass('header-login').addClass('header-profile').html(a);
+            } else {
+              var a = '<a href="<?php echo $block->getUrl('customer/account/login/'); ?>"><?= __('Login')?></a>';
+              $('#customer-login').removeClass('header-profile').addClass('header-login').html(a);
+            }
+          }
+        });
+    });
+</script>
+
+  <div class="language-switcher">
+    <?= $this->getLayout()->createBlock("Magento\Store\Block\Switcher")->setTemplate("Magento_Store::switch/languages.phtml")->toHtml()?>
+    </div>
+ 
+ <!-- <div class="sell-seller"><a href="https://seller-qader.ezmartech.com/" title="Sell on Qaderexpress" class="" target="_blank">Sell on Qaderexpress</a></div> -->
+ 
+<script type="text/x-magento-init">
+{
+    "#search" :
+    {
+        "quickSearch" :
+        {
+            "formSelector":"#search_mini_form",
+            "url":"<?php /* @escapeNotVerified */ echo $block->getUrl('search/ajax/suggest'); ?>",
+            "destinationSelector":"#search_autocomplete",
+            "templates": <?php /* @noEscape */ echo $block->getJsonSuggestRenderers();?>,
+            "priceFormat" : <?php /* @noEscape */ echo $block->getJsonPriceFormat();?>,
+            "minSearchLength" : <?php /* @escapeNotVerified */ echo $helper->getMinQueryLength();?>
+        }
+    }
+}
+</script>

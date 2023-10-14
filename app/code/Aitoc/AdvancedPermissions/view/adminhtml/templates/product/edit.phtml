@@ -1,0 +1,36 @@
+<?php
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+?>
+<?php
+/**
+ * Copyright © 2018 Aitoc. All rights reserved.
+ */
+
+use Aitoc\AdvancedPermissions\Plugin\Catalog\Block\Adminhtml\Product\Helper\Form\AbstractElement;
+
+/**
+ * inventory_qty and inventory_stock_availability removing property "disable", we adding readonly
+ * @var AbstractElement $block
+ */
+?>
+<?php if ($block->isNeedDisable()) : ?>
+    <script type="text/x-magento-init">
+            {
+                "*": {
+                    "editInventoryFields": {
+                        "classes":["#category_ids-suggest","#inventory_qty","#inventory_stock_availability"],
+                        "param":["disabled","readonly","readonly"]
+                    }
+                 }
+            }
+            </script>
+<?php endif; ?>
+<script>
+    window.GlobalEnabled = <?php /* @escapeNotVerified */ echo ($block->isNeedDisable()) ? 0 : 1 ?>;
+    window.LevelScope = <?php /* @escapeNotVerified */ echo ($block->levelScope()) ? $block->levelScope() : 0 ?>;
+    window.attributesArr = <?php /* @escapeNotVerified */ echo json_encode($block->getAllAttributesArray()) ?>;
+</script>

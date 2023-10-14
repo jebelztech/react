@@ -1,0 +1,219 @@
+<section class="media-gallery">
+    <div class="gallerybanner-img">
+        <img src="/media/gallery/galry-banner.jpg" alt="">
+        <div class="topBanner-text">
+            <h1>Press coverage</h1>
+        </div>
+    </div>
+</section>
+<section class="sweets-gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall01.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall02.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall03.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall04.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall05.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall01.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 ">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall02.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <a href="<?= $block->getBaseUrl()?>media-gallery-details" class="column" id="caption">
+                    <img src="/media/gallery/gall03.jpg">
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1r8b5ymeZuA" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .cms-media-gallery .breadcrumbs {
+        display: none;
+    }
+
+    .gallerybanner-img img {
+        width: 100%;
+        display: block;
+    }
+
+    .cms-media-gallery main#maincontent {
+        padding: 0 0px !important;
+    }
+
+    .gallerybanner-img {
+        position: relative;
+    }
+
+    .topBanner-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    section.media-gallery {
+        position: relative;
+        margin-bottom: 40px;
+    }
+
+    section.media-gallery:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, .12) 0%, rgba(0, 0, 0, .12) 100%);
+    }
+
+    .topBanner-text h1 {
+        font-weight: 600;
+        font-size: 39px;
+        padding: 0;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #0d4c26;
+        line-height: 36px;
+    }
+
+    .topBanner-text p {
+        font-size: 17px;
+        color: #000;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /*With Simple Caption*/
+    .column#caption {
+        position: relative;
+    }
+
+    .column#caption .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        opacity: 0;
+        transition: all 0.8s ease;
+        width: 72%;
+        padding: 2% 2%;
+        background: rgba(255, 255, 255, 0.9);
+
+    }
+
+    .column#caption .text h1 {
+        margin: 0;
+        color: #fff;
+    }
+
+    .column#caption:hover .text {
+        opacity: 1;
+
+    }
+
+    .column#caption:hover img {
+        -webkit-filter: sepia(10%);
+    }
+
+    .sweets-gallery .row {
+        margin: 0px -10px;
+    }
+
+    .sweets-gallery [class*=" col-"] {
+        padding: 0px 10px;
+        margin-bottom: 20px;
+    }
+
+    .column#caption .text h2 {
+        text-align: center;
+        font-size: 21px;
+        line-height: 24px;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .column#caption .text h2 {
+        text-align: center;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 700;
+        color: #333;
+    }
+
+    @media (max-width:767px) {
+
+        .cms-media-gallery .columns .column.main {
+            padding: 0 0px;
+        }
+
+        .topBanner-text {
+            position: static;
+            top: 0;
+            left: unset;
+            transform: unset;
+            padding: 2% 1%;
+        }
+
+        .cms-media-gallery .page-main {
+            margin-top: 37px !important;
+        }
+
+        .topBanner-text h1 {
+            font-size: 26px;
+            margin-bottom: 5px;
+            line-height: 24px;
+            margin-top: 10px;
+        }
+
+        .topBanner-text p {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .column#caption .text h2 {
+            text-align: center;
+            font-size: 15px;
+            line-height: 22px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .column#caption .text {
+            width: 90%;
+        }
+    }
+
+</style>

@@ -1,0 +1,98 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Pos
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<div class="page-main-actions">
+    <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+        <div class="page-actions-inner" data-title="Joust Duffle Bag">
+            <div class="page-actions-buttons">
+                <button 
+                    onclick="printBarcode()"
+                    id="print" 
+                    title="Print"
+                    type="button"
+                    class="action- scalable action-secondary">
+                    <span>&#128438;</span>
+                    <?= $block->escapeHtml(__("Print"));?>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+    $orderCollection = $block->filter->getCollection($block->orderCollection->create());
+    $target = $block->storeManager->getStore()->getBaseUrl(
+        \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
+    );
+    $targetDir = $block->directoryList->getPath("media"); ?>
+<div id="printall">
+<?php
+foreach ($orderCollection as $order) {
+    if (!$block->driverInterface->isFile($block->escapeHtml(
+        $targetDir
+    )."/"."wms"."/"."order"."/".$block->escapeHtml(
+        $order->getId()
+    )."/".$block->escapeHtml(
+        $order->getIncrementId()
+    ).".png")) {
+        $basePath = $block->escapeHtml(
+            $targetDir
+        )."/"."wms"."/"."order"."/".$block->escapeHtml(
+            $order->getId()
+        )."/";
+        $fileName = str_replace(" ", "_", $block->escapeHtml(
+            $order->getIncrementId()
+        )).".png";
+        if (!$block->driverInterface->isFile($basePath.$fileName)) {
+            $block->ioFile->mkdir($basePath, 0777);
+            $block->helperBarcode->generatebarcode(
+                $basePath.$fileName,
+                $order->getIncrementId(),
+                20,
+                "horizontal",
+                "code128",
+                false,
+                1
+            );
+        }
+    }
+    echo '<div class="eachBlock"><div><b>#'.$block->escapeHtml(
+        $order->getIncrementId()
+    ).'</b></div><div><img src="'.$block->escapeHtml(
+        $target
+    )."/"."wms"."/"."order"."/".$block->escapeHtml(
+        $order->getId()
+    )."/".$block->escapeHtml(
+        $order->getIncrementId()
+    ).'.png"/></div></div>';
+}
+if (!$orderCollection->getSize()) {
+    echo '<div class="eachBlock">'.$block->escapeHtml(
+        __("No BarCode Found")
+    ).'</div>';
+}
+?>
+</div>
+<script type="text/javascript">
+    function printBarcode()  {
+        var printWindow = window.open("", "PRINT", "height=400,width=600");
+        printWindow.document.write("<html><head><style>body,html{width:100%;}"+
+        "#printall{display:grid;grid-template-columns:50% 50%;grid-gap:10px;"+
+        "background-color:#FFFFFF;padding:10px;}.eachBlock{background-color:rgba(239, 239, 239, 0.8);"+
+        "text-align:center;padding:20px 0;font-size:30px;}</style><title>Barcode</title></head><body>");
+        printWindow.document.write("<div id='printall'>"+document.getElementById("printall").innerHTML+"</div>");
+        printWindow.document.write("</body></html>");
+        printWindow.document.close();
+        printWindow.focus(); // necessary for IE >= 10
+        printWindow.print();
+        printWindow.close();
+        return true;
+    }
+</script>

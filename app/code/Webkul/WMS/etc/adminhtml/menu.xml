@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Webkul_WMS::warehouse"
+            title="Warehouse Management System"
+            module="Webkul_WMS"
+            sortOrder="10"
+            resource="Webkul_WMS::warehouse"/>
+
+        <add
+            id="Webkul_WMS::warehousemanagement"
+            title="Manage Warehouse"
+            module="Webkul_WMS"
+            sortOrder="1"
+            parent="Webkul_WMS::warehouse"
+            action="wms/warehouse/index/"
+            resource="Webkul_WMS::warehousemanagement"/>
+
+        <add
+            id="Webkul_WMS::staffmanagement"
+            title="Manage Staff"
+            module="Webkul_WMS"
+            sortOrder="2"
+            parent="Webkul_WMS::warehouse"
+            action="wms/staff/index/"
+            resource="Webkul_WMS::staffmanagement"/>
+
+        <add
+            id="Webkul_WMS::ordermanagement"
+            title="Manage Orders"
+            module="Webkul_WMS"
+            sortOrder="3"
+            parent="Webkul_WMS::warehouse"
+            action="wms/order/index/"
+            resource="Webkul_WMS::ordermanagement"/>
+
+        <add
+            id="Webkul_WMS::tote"
+            title="Manage Tote"
+            module="Webkul_WMS"
+            sortOrder="4"
+            parent="Webkul_WMS::warehouse"
+            action="wms/tote/index/"
+            resource="Webkul_WMS::tote"/>
+
+        <add
+            id="Webkul_WMS::configuration"
+            title="WMS Configuration"
+            module="Webkul_WMS"
+            parent="Webkul_WMS::warehouse"
+            sortOrder="5"
+            action="adminhtml/system_config/edit/section/warehouse/"
+            resource="Webkul_WMS::configuration"/>
+    </menu>
+</config>

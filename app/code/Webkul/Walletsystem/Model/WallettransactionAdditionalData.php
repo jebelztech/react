@@ -1,0 +1,76 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category Webkul
+ * @package Webkul_Walletsystem
+ * @author Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license https://store.webkul.com/license.html
+ */
+
+namespace Webkul\Walletsystem\Model;
+
+use Webkul\Walletsystem\Api\Data\WallettransactionAdditionalDataInterface;
+use Magento\Framework\Model\AbstractModel;
+
+/**
+ * Webkul Walletsystem Class
+ */
+class WallettransactionAdditionalData extends AbstractModel implements WallettransactionAdditionalDataInterface
+{
+    const CACHE_TAG = 'walletsystem_wallettransactionAdditionalData';
+
+    /**
+     * @var string
+     */
+    protected $_cacheTag = 'walletsystem_wallettransactionAdditionalData';
+    
+    /**
+     * Prefix of model events names
+     *
+     * @var string
+     */
+    protected $_eventPrefix = 'walletsystem_wallettransactionAdditionalData';
+    
+    /**
+     * Initialize resource model
+     *
+     * @return void
+     */
+    protected function _construct()
+    {
+        $this->_init(\Webkul\Walletsystem\Model\ResourceModel\WallettransactionAdditionalData::class);
+    }
+    
+    /**
+     * Return unique ID(s) for each object in system
+     *
+     * @return array
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getEntityId()];
+    }
+
+    /**
+     * Get ID
+     *
+     * @return int|null
+     */
+    public function getEntityId()
+    {
+        return $this->getData(self::ENTITY_ID);
+    }
+
+    /**
+     * Set Entity ID
+     *
+     * @param int $id
+     * @return Webkul\Walletsystem\Api\Data\WalletPayeeInterface
+     */
+    public function setEntityId($id)
+    {
+        return $this->setData(self::ENTITY_ID, $id);
+    }
+}

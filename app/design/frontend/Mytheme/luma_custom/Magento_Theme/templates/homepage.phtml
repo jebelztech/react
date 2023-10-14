@@ -1,0 +1,343 @@
+<?php
+
+//$_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); //instance of\Magento\Framework\App\ObjectManager
+//$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface'); 
+//$currentStore = $storeManager->getStore();
+$baseUrl = $block->getBaseUrl();
+
+?>
+
+
+<?php
+$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $_objectManager->get('Magento\Store\Model\StoreManagerInterface');
+$currentStore = $storeManager->getStore();
+$mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+$slider_list = $_objectManager->get('Satish\Manage\Model\Imagess')->getCollection()
+	->addFieldToFilter("status", 1)->addFieldToFilter("type", 0)->setOrder('sorting', 'ASC');
+
+$brand_list = $_objectManager->get('Satish\Manage\Model\Imagess')->getCollection()
+	->addFieldToFilter("status", 1)->addFieldToFilter("type", 1)->setOrder('sorting', 'ASC');
+
+$category_list = $_objectManager->get('Satish\Manage\Model\Imagess')->getCollection()
+	->addFieldToFilter("status", 1)->addFieldToFilter("type", 3)->setOrder('sorting', 'ASC');
+/*echo '<pre>';
+print_r($Homebanner_data->getData());*/
+?>
+
+
+
+
+
+
+
+<section class="hero-panel">
+	<div class="hero-slider">
+
+		<?php
+		$count = 1;
+		foreach ($slider_list as $row) { ?>
+			<div class="item">
+				<div class="hero-contentbox">
+					<a href="<?php echo $row->getLink(); ?>"><img src="<?php echo $mediaUrl . $row->getImage(); ?>" /></a>
+				</div>
+			</div>
+
+		<?php } ?>
+	</div>
+</section>
+
+
+ 
+<div class="product-home-grid  default-panel p50">
+	<div class="inner-wrap">
+		<div class="heading-section">
+			<h2><?= __('Best Sellers')?></h2>
+		</div>
+		<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('home-new-products')->toHtml();?>
+	</div>
+
+</div>
+<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('homepage-deserts')->toHtml();?>
+
+<!-- 
+<section class="home-category">
+	<section class="home-category">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="store-sec col-md-6">
+					<div class="inner-store-sec">
+						<img src="<?php echo $baseUrl; ?>media/cat1.png" alt="">
+						<div class="overlay-sec">
+							<h3>Best Arabic Desserts</h3>
+							<a href="#">Shop Now</a>
+						</div>
+					</div>
+				</div>
+				<div class="store-sec  col-md-6">
+					<div class="inner-store-sec">
+						<img src="<?php echo $baseUrl; ?>media/cat2.png" alt="">
+						<div class="overlay-sec">
+							<h3>Best Arabic Desserts</h3>
+							<a href="#">Shop Now</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+</section> -->
+
+<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('home-shop-by-categories')->toHtml(); ?>
+ 
+
+
+
+<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('homepage-specials')->toHtml(); ?>
+
+<script type="text/javascript">
+	require(['jquery', 'bootstrap']);
+</script>
+
+
+
+
+<script type="text/javascript">
+	require(['jquery', 'owlcarousel3'], function(jQuery) {
+		jQuery(document).ready(function() {
+
+
+
+			var lang = jQuery('html').attr("lang");
+			console.log(lang);
+			if (lang == 'ar') {
+				console.log("ar");
+				jQuery('.shopcategory').owlCarousel({
+					rtl: true,
+					loop: true,
+					margin: 15,
+					nav: false,
+					dots: false,
+					autoplay: true,
+					lazyLoad: true,
+					autoplaySpeed: 2000,
+					paginationSpeed: 2000,
+					autoplayTimeout: 2000,
+					responsive: {
+
+						320: {
+							items: 2
+						},
+
+						580: {
+							items: 2
+						},
+						768: {
+							items: 4
+						},
+						1000: {
+							items: 4
+						},
+					},
+				});
+
+				jQuery('.store-slider').owlCarousel({
+					loop: true,
+					rtl: true,
+					margin: 0,
+					nav: false,
+					dots: true,
+					autoplay: true,
+					lazyLoad: true,
+					autoplaySpeed: 2000,
+					paginationSpeed: 2000,
+					autoplayTimeout: 2000,
+					responsive: {
+
+						320: {
+							items: 1
+						},
+
+						580: {
+							items: 1
+						},
+						768: {
+							items: 3
+						},
+						1000: {
+							items: 3
+						}
+					}
+				});
+				jQuery('.hero-slider').owlCarousel({
+					loop: true,
+					rtl: true,
+					nav: true,
+					dots: false,
+					autoplay: true,
+					lazyLoad: true,
+					autoplaySpeed: 3000,
+					paginationSpeed: 3000,
+					autoplayTimeout: 3000,
+					responsive: {
+
+						320: {
+							items: 1
+						},
+
+						580: {
+							items: 1
+						},
+						768: {
+							items: 1
+						},
+						1000: {
+							items: 1
+						}
+					}
+				});
+			} else {
+				jQuery('.shopcategory').owlCarousel({
+					loop: true,
+					margin: 15,
+					nav: false,
+					dots: false,
+					autoplay: true,
+					lazyLoad: true,
+					autoplaySpeed: 2000,
+					paginationSpeed: 2000,
+					autoplayTimeout: 2000,
+					responsive: {
+
+						320: {
+							items: 2
+						},
+
+						580: {
+							items: 2
+						},
+						768: {
+							items: 4
+						},
+						1000: {
+							items: 4
+						}
+					}
+				});
+				jQuery('.store-slider').owlCarousel({
+					loop: true,
+					margin: 0,
+					nav: false,
+					dots: true,
+					autoplay: true,
+					lazyLoad: true,
+					autoplaySpeed: 2000,
+					paginationSpeed: 2000,
+					autoplayTimeout: 2000,
+					responsive: {
+
+						320: {
+							items: 1
+						},
+
+						580: {
+							items: 1
+						},
+						768: {
+							items: 3
+						},
+						1000: {
+							items: 3
+						}
+					}
+				});
+				jQuery('.hero-slider').owlCarousel({
+				loop: true,
+				nav: true,
+				dots: false,
+				autoplay: true,
+				lazyLoad: true,
+				autoplaySpeed: 3000,
+				paginationSpeed: 3000,
+				autoplayTimeout: 3000,
+				responsive: {
+
+					320: {
+						items: 1
+					},
+
+					580: {
+						items: 1
+					},
+					768: {
+						items: 1
+					},
+					1000: {
+						items: 1
+					}
+				}
+			});
+			}
+
+
+			jQuery('.best-seller').owlCarousel({
+				loop: true,
+				margin: 15,
+				nav: true,
+				dots: false,
+				autoplay: true,
+				lazyLoad: true,
+				autoplaySpeed: 3000,
+				paginationSpeed: 3000,
+				autoplayTimeout: 3000,
+				responsive: {
+
+					320: {
+						items: 1
+					},
+
+					580: {
+						items: 2
+					},
+					768: {
+						items: 2
+					},
+					1000: {
+						items: 5
+					}
+				}
+			});
+			jQuery('.related-product_slider').owlCarousel({
+				loop: true,
+				margin: 15,
+				nav: true,
+				dots: false,
+				autoplay: true,
+				lazyLoad: true,
+				autoplaySpeed: 3000,
+				paginationSpeed: 3000,
+				autoplayTimeout: 3000,
+				responsive: {
+
+					320: {
+						items: 1
+					},
+
+					580: {
+						items: 1
+					},
+					768: {
+						items: 3
+					},
+					1000: {
+						items: 5
+					}
+				}
+			});
+
+
+		});
+	});
+</script>

@@ -1,0 +1,96 @@
+.marketplace-index-index .page-main {
+    padding: 0 !important;
+}
+.marketplace-index-index .page-title-wrapper{
+    display: none;
+}
+.benefits-listpanel {
+    background: #383636;
+}
+.point-list-benifit ul li {
+    float: left;
+    width: auto;
+    font-size: 14px;
+    color: #fff;
+    padding: 8px 0;
+    margin-right: 4%;
+    font-weight: 600;
+}
+.point-list-benifit ul li::before {
+    content: "\f046";
+    font-family: "fontawesome";
+    font-size: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+    color: #749433;
+}
+.img-margin-top-howitwork img {
+    width: 130px;
+    margin-top: 10%;
+}
+.how-it-work-des {
+    padding-top: 6.5%;
+}
+.how-it-works h4.text-center {
+    font-size: 25px;
+}
+.how-it-work-des h5 {
+    font-size: 25px;
+    font-weight: 600;
+}
+.marketplace-index-index .page-header , .marketplace-index-index .nav-sections{
+    display: none;
+}
+.marketplace-header {
+    background: #fff;
+    padding:5px 10px;
+    z-index: 999;
+    width: 100%;
+}
+.marketplace-login {
+    padding-top: 8px;
+}
+.marketplace-login p {
+    font-size: 15px;
+    color: #040404;
+}
+.marketplace-login p a {
+    float: right;
+    color: #040404;
+    transition: all .5s ease-in-out;
+}
+.marketplace-login p a:hover {
+    color: #749433;
+    text-decoration: underline;
+}
+.marketplace-box {
+    display: flex;
+    align-items: center;
+}
+.marketplace-box input {
+    font-size: 15px;
+    padding: 0 10px;
+    height: 38px;
+    margin-right: 12px;
+}
+.marketplace-box .btn {
+    font-size: 15px;
+    padding: 7px 15px;
+    background: #749433;
+    color: #fff;
+    transition: all .5s ease-in-out;
+}
+.marketplace-box .btn:hover {
+    background: #040404;
+}
+
+.marketplace-header .magicmenu .nav-desktop .level0 .level-top {
+    color: #000;
+    padding: 8px 23px 5px 5px;
+}
+.marketplace-header .nav-sections {
+    background: transparent;
+}
+.marketplace-header .nav-sections-item-content{
+    padding-left: 0;
+}

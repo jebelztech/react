@@ -1,0 +1,9 @@
+[05-Apr-2022 13:50:58 UTC] PHP Fatal error:  Uncaught Error: Cannot call constructor in /home/alsultanezmartec/public_html/vendor/symfony/finder/Comparator/DateComparator.php:48
+Stack trace:
+#0 phar:///usr/bin/magento2-cli/vendor/symfony/finder/Finder.php(154): Symfony\Component\Finder\Comparator\DateComparator->__construct()
+#1 /home/alsultanezmartec/public_html/vendor/composer/composer/src/Composer/Cache.php(205): Symfony\Component\Finder\Finder->date()
+#2 /home/alsultanezmartec/public_html/vendor/composer/composer/src/Composer/Downloader/FileDownloader.php(69): Composer\Cache->gc()
+#3 /home/alsultanezmartec/public_html/vendor/composer/composer/src/Composer/Downloader/XzDownloader.php(37): Composer\Downloader\FileDownloader->__construct()
+#4 /home/alsultanezmartec/public_html/vendor/composer/composer/src/Composer/Factory.php(491): Composer\Downloader\XzDownloader->__construct()
+#5 /home/alsultanezmartec/public_html/vendor/composer/composer/src/Composer/Factory.php(360): Composer\Factory->createDownloadManager()
+#6 /home/alsultanezmartec/public_html/ve in /home/alsultanezmartec/public_html/vendor/symfony/finder/Comparator/DateComparator.php on line 48

@@ -1,0 +1,527 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Customer\Helper\Address;
+
+/** @var \Magento\Customer\Block\Form\Register $block */
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+/** @var Magento\Customer\Helper\Address $addressHelper */
+$addressHelper = $block->getData('addressHelper');
+/** @var \Magento\Directory\Helper\Data $directoryHelper */
+$directoryHelper = $block->getData('directoryHelper');
+$formData = $block->getFormData();
+?>
+<?php $displayAll = $block->getConfig('general/region/display_all'); ?>
+<?= $block->getChildHtml('form_fields_before') ?>
+<?php /* Extensions placeholder */ ?>
+<?= $block->getChildHtml('customer.form.register.extra') ?>
+
+
+
+<div class="register-panel panel panel-default register-form">
+		<div class="panel-heading">
+			<h1>Create Seller Account</h1>
+		</div>
+		<div class="panel-body">
+									
+									
+									
+									
+									<form class="form create account form-create-account"
+      action="<?= $escaper->escapeUrl($block->getPostActionUrl()) ?>"
+      method="post"
+      id="form-validate"
+      enctype="multipart/form-data"
+      autocomplete="off">
+    <?= /* @noEscape */ $block->getBlockHtml('formkey') ?>
+	
+	
+	
+	 <input type="hidden" name="success_url" value="<?= $escaper->escapeUrl($block->getSuccessUrl()) ?>">
+        <input type="hidden" name="error_url" value="<?php echo $block->getUrl('manage/seller/register'); ?>">
+      
+	
+	
+	
+									
+									
+				<fieldset class="">
+					<div class="panel panel-default">
+						
+						<div class="panel-heading">Personal Information</div>
+						<div class="panel-body">
+													
+						
+						
+						<div class="field">
+									<label style="padding-left:0;" class="label"><label for="">First Name<span class="required">*</span></label></label>
+										<div class="input-box">
+											<input type="text" name="firstname" id="firstname" value="" title="Firstname" class="form-control input-text required-entry validate-alpha">
+										</div>
+									</div>
+									
+									
+							<div class="field">
+									<label style="padding-left:0;" class="label"><label for="">Last Name<span class="required">*</span></label></label>
+										<div class="input-box">
+											<input type="text" name="lastname" id="lastname" value="" title="Lastname" class="form-control input-text required-entry validate-alpha">
+										</div>
+									</div>
+						
+						
+						
+						
+								<div class="field">
+									<label style="padding-left:0;" class="label"><label for="">Mobile<span class="required">*</span></label></label>
+										<div class="input-box">
+											<input type="text" name="contact_number" id="contact_number" value="" title="Mobile" class="form-control input-text required-entry validate-digits">
+										</div>
+									</div>
+									
+									
+									
+								<div class="field">
+										<label style="padding-left:0;" class="label"><label for="">Email Address<span class="required">*</span></label></label>
+								<div class="input-box">
+									 <input type="email"
+                       name="email"
+                       autocomplete="email"
+                       id="email_address"
+                       value="<?= $escaper->escapeHtmlAttr($formData->getEmail()) ?>"
+                       title="<?= $escaper->escapeHtmlAttr(__('Email')) ?>"
+                       class="input-text"
+                       data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true, 'validate-email':true}">
+								</div>
+								</div>
+								
+								
+								
+							<br><br>
+								
+								
+								
+							
+							  <?php if ($block->isNewsletterEnabled()): ?>								
+								<div class="checkbox">
+									<label>
+										  <input type="checkbox"
+                       name="is_subscribed"
+                       title="<?= $escaper->escapeHtmlAttr(__('Sign Up for Newsletter')) ?>"
+                       value="1"
+                       id="is_subscribed"
+                       <?php if ($formData->getIsSubscribed()): ?>checked="checked"<?php endif; ?>
+                       class="checkbox">  Sign Up for Newsletter									</label>
+								</div>
+								
+								    <?= $block->getChildHtml('customer.form.register.newsletter') ?>
+							<?php endif ?>
+							
+
+
+
+							
+		<?php $_dob = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Dob::class) ?>
+        <?php if ($_dob->isEnabled()): ?>
+            <?= $_dob->setDate($formData->getDob())->toHtml() ?>
+        <?php endif ?>
+
+        <?php $_taxvat = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Taxvat::class) ?>
+        <?php if ($_taxvat->isEnabled()): ?>
+            <?= $_taxvat->setTaxvat($formData->getTaxvat())->toHtml() ?>
+        <?php endif ?>
+
+        <?php $_gender = $block->getLayout()->createBlock(\Magento\Customer\Block\Widget\Gender::class) ?>
+        <?php if ($_gender->isEnabled()): ?>
+            <?= $_gender->setGender($formData->getGender())->toHtml() ?>
+        <?php endif ?>
+        <?= $block->getChildHtml('fieldset_create_info_additional') ?>
+								
+								
+																																																							</div>
+					</div>
+				</fieldset>
+			
+			
+			<br>
+			
+				<fieldset class="">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							
+							Order Pickup Location						</div>
+							
+							
+						<div class="panel-body">
+							<ul class="form-list nav">
+								<li class="fields">
+									<div class="field">
+										<label style="padding-left:0;" class="label"><label for="">Company</label></label>
+										<div class="input-box">
+											<input type="text" name="vendor_company" id="vendor_company" value="" title="Company" class="form-control input-text">
+										</div>
+									</div>
+									
+								</li>
+								
+								
+								
+								
+								
+								
+								
+								<li class="wide">
+								<label style="padding-left:0;" class="label"><label for="">Pick Up Address</label></label>
+									<div class="input-box">
+										<input type="text" name="vendor_address" value="" title="Pick Up Address" id="street_1" class="form-control input-text required-entry">
+									</div>
+								</li>
+															<li class="fields">
+									<div class="field">
+										<div class="input-box">
+									
+											<div class="field">
+										<label style="padding-left:0;" class="label"><label for="">City<span class="required">*</span></label></label>
+										<div class="input-box">
+										<select name="company_locality" id="city" class="validate-select" title="city">
+										<option value="">Please select city</option>
+										<option value="Abu Dhabi">Abu Dhabi</option>
+										<option value="Ajman">Ajman</option>
+										<option value="Al Ain">Al Ain</option>
+										<option value="Dubai">Dubai</option>
+										<option value="Fujairah">Fujairah</option>
+										<option value="Ras Al Khaimah">Ras Al Khaimah</option>
+										<option value="Sharjah">Sharjah</option>
+										<option value="Um Al Quwain">Um Al Quwain</option>
+										
+										</select>						
+										
+											
+										</div>
+									</div>
+										
+													</div>
+									
+								</li>
+								
+							</ul>
+								
+							<div class="field">
+										<label for="country">Country</label>
+										<div class="input-box">
+										<select name="country_pic" id="country" class="validate-select" title="Country">
+										<option value="AE">United Arab Emirates </option></select>
+										
+										
+																					</div>
+									</div>
+						 </div>
+					 </div>
+				</fieldset>
+						
+			
+			<br>
+			<fieldset>
+					<div class="panel panel-default">
+						<div class="panel-heading">Document</div>
+						<div class="panel-body">
+							<?php /*
+							<div class="field" style="display:none">
+								
+							
+								
+								<div class="checkbox">
+									<label>
+													<input type="radio" class="input-radio validate-one-required-by-name" name="verification_type" title="Business" value="Business" id="account_type2">  Business									</label>
+								</div>
+							</div>
+							
+							<div class="field Individual " style="display:none;">
+								
+															
+								<div class="input-box">
+									<label for="passport">Upload Passport</label>
+									<input type="file" name="passport" id="passport" class="" accept=".png, .jpg, .jpeg, .pdf">
+								</div>
+								
+								<div class="input-box">
+									<label for="passport">Upload Emirates id</label>
+									<input type="file" name="emiratesid" id="emiratesid" class="" accept=".png, .jpg, .jpeg, .pdf">
+								</div>
+								<p>Accepted document types are JPEG, PNG and PDF Format, only 2MB File Size.</p>
+							</div>
+							
+							*/?>
+							
+							<div class="field Business">
+								
+												
+								
+									<div class="input-box">
+									<label for="trade_license">Upload Trade license</label>
+									<input type="file" name="trade_license" id="trade_license" class="" accept=".png, .jpg, .jpeg, .pdf">
+								</div>
+								
+								
+									<div class="input-box">
+									<label for="vat_certificate">Upload VAT Certificate</label>
+									<input type="file" name="vat_certificate" id="vat_certificate" class="" accept=".png, .jpg, .jpeg, .pdf">
+								</div>
+								<p>Accepted document types are JPEG, PNG and PDF Format, only 2MB File Size.</p>
+							</div>
+							
+							
+							
+						</div>						
+					</div>
+				</fieldset>
+			
+			
+
+			
+			<br>
+	<fieldset class="fieldset">
+		<div class="panel panel-default">
+		<div class="panel-heading">Bank Details</div>
+		<div class="panel-body bank_details_box">
+		
+			
+			
+			
+			<div class="hor-scroll">
+                  
+	<div class="checkbox" style="display:none">
+				<label for="bank_detail_hide">
+				<input type="checkbox" id="bank_detail_hide" value="1">I will do it later 
+				</label>
+			</div>
+	<div class="wide form-group">
+        <label style="padding-left:0;" class="label"><label for="vbanktransfer-bank_account_name">Beneficiary Name <span class="required">*</span></label></label>
+    <div class="input-box">
+        <input id="vbanktransfer-bank_account_name" name="bank_account_name" value="" type="text" class=" input-text required-entry bank_details_div ">            </div>
+    </div>
+	
+	<div class="wide form-group">
+        <label style="padding-left:0;" class="label"><label for="vbanktransfer-bank_name">Bank Name<span class="required">*</span></label></label>
+    <div class="input-box">
+        <input id="vbanktransfer-bank_name" name="bank_name" value="" type="text" class=" input-text required-entry bank_details_div">            </div>
+    </div>
+	
+	<div class="wide form-group">
+        <label style="padding-left:0;" class="label"><label for="vbanktransfer-bank_branch_number">Branch<span class="required">*</span></label></label>
+    <div class="input-box">
+        <input id="vbanktransfer-bank_branch_number" name="bank_branch_number" value="" type="text" class=" input-text required-entry bank_details_div">            </div>
+    </div>
+	
+	<div class="wide form-group">
+        <label style="padding-left:0;" class="label"><label for="vbanktransfer-bank_account_number">Account Number<span class="required">*</span></label></label>
+    <div class="input-box">
+        <input id="vbanktransfer-bank_account_number" name="bank_account_number" value="" type="text" class=" input-text required-entry validate-digits bank_details_div">            </div>
+    </div>
+	
+	
+	<div class="wide form-group">
+        <label style="padding-left:0;" class="label"><label for="vbanktransfer-bank_account_iban">IBAN<span class="required">*</span></label></label>
+    <div class="input-box">
+        <input id="vbanktransfer-bank_account_iban" name="bank_account_iban" value="" type="text" class=" input-text required-entry bank_details_div">            </div>
+    </div>
+	
+	
+	<div class="wide form-group">
+        <label style="padding-left:0;" class="label"><label for="vbanktransfer-bank_swift_code">Swift Code<span class="required">*</span></label></label>
+    <div class="input-box">
+        <input id="vbanktransfer-bank_swift_code" name="bank_swift_code" value="" type="text" class=" input-text required-entry bank_details_div">            </div>
+    </div>
+	
+
+            </div>
+			
+			
+			
+		</div>
+	</div>
+	</fieldset>
+			
+			
+			
+			<br>
+				<fieldset class="">
+					<div class="panel panel-default">
+						
+						<div class="panel-heading">Login Information</div>
+						<div class="panel-body">
+			
+       
+        <div class="field password required">
+            <label for="password" class="label"><span><?= $escaper->escapeHtml(__('Password')) ?></span></label>
+            <div class="control">
+                <input type="password" name="password" id="password"
+                       title="<?= $escaper->escapeHtmlAttr(__('Password')) ?>"
+                       class="input-text"
+                       data-password-min-length="<?=
+                        $escaper->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                       data-password-min-character-sets="<?=
+                        $escaper->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+                       data-validate="{required:true, 'validate-customer-password':true}"
+                       autocomplete="off">
+                <div id="password-strength-meter-container" data-role="password-strength-meter" aria-live="polite">
+                    <div id="password-strength-meter" class="password-strength-meter">
+                        <?= $escaper->escapeHtml(__('Password Strength')) ?>:
+                        <span id="password-strength-meter-label" data-role="password-strength-meter-label">
+                            <?= $escaper->escapeHtml(__('No Password')) ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="field confirmation required">
+            <label for="password-confirmation" class="label">
+                <span><?= $escaper->escapeHtml(__('Confirm Password')) ?></span>
+            </label>
+            <div class="control">
+                <input type="password"
+                       name="password_confirmation"
+                       title="<?= $escaper->escapeHtmlAttr(__('Confirm Password')) ?>"
+                       id="password-confirmation"
+                       class="input-text"
+                       data-validate="{required:true, equalTo:'#password'}"
+                       autocomplete="off">
+            </div>
+        </div>
+        <div class="field choice" data-bind="scope: 'showPassword'">
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        </div>
+        </div>
+        </div>
+    </fieldset>
+				
+				
+				
+		<br>		
+	<fieldset class="fieldset additional_info">
+					<div class="panel panel-default">
+						
+						<div class="panel-heading">Store</div>
+						<div class="panel-body">
+			
+        <?= $block->getChildHtml('form_additional_info') ?>
+		</div>
+		</div>
+    </fieldset>		
+				
+				<br>
+		  <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit"
+                    class="action submit primary"
+                    title="<?= $escaper->escapeHtmlAttr(__('Create an Account')) ?>">
+                <span><?= $escaper->escapeHtml(__('Create an Account')) ?></span>
+            </button>
+        </div>
+        <div class="secondary">
+            <a class="action back"
+               href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>">
+                <span><?= $escaper->escapeHtml(__('Back')) ?></span>
+            </a>
+        </div>
+    </div>		
+				
+
+
+  <fieldset class="fieldset create account" data-hasrequired="<?= $escaper->escapeHtmlAttr(__('* Required Fields')) ?>">
+			</form>
+			
+		</div>
+	</div>
+
+<?php $ignore = /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null';
+$scriptString = <<<script
+require([
+    'jquery',
+    'mage/mage'
+], function($){
+
+    var dataForm = $('#form-validate');
+    var ignore = {$ignore};
+
+    dataForm.mage('validation', {
+script;
+if ($_dob->isEnabled()):
+    $scriptString .= <<<script
+        errorPlacement: function(error, element) {
+            if (element.prop('id').search('full') !== -1) {
+                var dobElement = $(element).parents('.customer-dob'),
+                    errorClass = error.prop('class');
+                error.insertAfter(element.parent());
+                dobElement.find('.validate-custom').addClass(errorClass)
+                    .after('<div class="' + errorClass + '"></div>');
+            }
+            else {
+                error.insertAfter(element);
+            }
+        },
+        ignore: ':hidden:not(' + ignore + ')'
+script;
+else:
+    $scriptString .= <<<script
+        ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+script;
+endif;
+$scriptString .= <<<script
+    }).find('input:text').attr('autocomplete', 'off');
+});
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?php if ($block->getShowAddressFields()): ?>
+    <?php
+    $regionJson = /* @noEscape */ $directoryHelper->getRegionJson();
+    $regionId = (int) $formData->getRegionId();
+    $countriesWithOptionalZip = /* @noEscape */ $directoryHelper->getCountriesWithOptionalZip(true);
+    ?>
+<script type="text/x-magento-init">
+    {
+        "#country": {
+            "regionUpdater": {
+                "optionalRegionAllowed": <?= /* @noEscape */ $displayAll ? 'true' : 'false' ?>,
+                "regionListId": "#region_id",
+                "regionInputId": "#region",
+                "postcodeId": "#zip",
+                "form": "#form-validate",
+                "regionJson": <?= $regionJson ?>,
+                "defaultRegion": <?= $regionId ?>,
+                "countriesWithOptionalZip": <?= $countriesWithOptionalZip ?>
+            }
+        }
+    }
+</script>
+<?php endif; ?>
+
+<script type="text/x-magento-init">
+    {
+        ".field.password": {
+            "passwordStrengthIndicator": {
+                "formSelector": "form.form-create-account"
+            }
+        },
+        "*": {
+            "Magento_Customer/js/block-submit-on-send": {
+                "formId": "form-validate"
+            },
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "showPassword": {
+                        "component": "Magento_Customer/js/show-password",
+                        "passwordSelector": "#password,#password-confirmation"
+                    }
+                }
+            }
+        }
+    }
+</script>

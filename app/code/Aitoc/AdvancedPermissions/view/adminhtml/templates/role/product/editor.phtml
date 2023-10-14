@@ -1,0 +1,70 @@
+<?php
+/**
+ * @author Aitoc Team
+ * @copyright Copyright (c) 2022 Aitoc (https://www.aitoc.com)
+ * @package Aitoc_AdvancedPermissions
+ */
+?>
+<div class="entry-edit">
+    <fieldset id="tabs" class="fieldset admin__fieldset form-inline ">
+        <legend class="admin__legend legend">
+            <span><?php echo __('Block product tabs') ?></span>
+        </legend>
+        <span><?php echo __('Selected tabs will be invisible to this Role:') ?></span>
+        <a href="#" id="select_all"  style="margin-left:10px;"><?php echo __('select all') ?></a>
+        <span class="separator">|</span>
+        <a href="#" id="unselect_all"><?php echo __('unselect all') ?></a>
+        <?php echo $this->getChildHtml('tabs'); ?>
+    </fieldset>
+
+    <input id="is_allow_ids" type="hidden" value="" name="is_allow_ids">
+    <input id="is_allow_ids_old" type="hidden" value="" name="is_allow_ids_old">
+    <input id="is_disable_ids" type="hidden" value="" name="is_disable_ids">
+    <input id="is_disable_ids_old" type="hidden" value="" name="is_disable_ids_old">
+    <input id="is_hidden_ids" type="hidden" value="" name="is_hidden_ids">
+    <input id="is_hidden_ids_old" type="hidden" value="" name="is_hidden_ids_old">
+    <input id="default_ids" type="hidden" value="" name="default_ids">
+    <input id="default_ids_old" type="hidden" value="" name="default_ids_old">
+    <fieldset id="attribute_fields" class="fieldset admin__fieldset form-inline">
+        <legend class="admin__legend legend">
+            <span><?php echo __('Attribute permissions') ?></span>
+        </legend>
+        <?php echo $this->getChildHtml('attribute'); ?>
+    </fieldset>
+</div>
+
+<script>
+    require([
+        "jquery"
+    ], function(jQuery){
+        jQuery("#select_all").click(function() {
+            jQuery.each( jQuery('fieldset#permissions_product_editor input'), function( i, val ) {
+                aitCheck(val)
+            });
+        });
+
+        jQuery("#unselect_all").click(function() {
+            jQuery.each( jQuery('fieldset#permissions_product_editor input'), function( i, val ) {
+                aitUncheck(val)
+            });
+        });
+
+        function aitCheck(checkbox)
+        {
+            if(checkbox.checked == false)
+            {
+                checkbox.checked = true;
+                fireEvent(checkbox,'change');
+            }
+        }
+        function aitUncheck(checkbox)
+        {
+            if(checkbox.checked == true)
+            {
+                checkbox.checked = false;
+                fireEvent(checkbox,'change');
+            }
+        }
+
+    });
+</script>

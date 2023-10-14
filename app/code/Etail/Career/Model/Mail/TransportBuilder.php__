@@ -1,0 +1,41 @@
+<?php
+namespace Etail\Career\Model\Mail;
+
+class TransportBuilder extends \Magento\Framework\Mail\Template\TransportBuilder
+{
+    const TYPE_OCTETSTREAM         = 'application/octet-stream';
+    const DISPOSITION_ATTACHMENT   = 'attachment';
+    const ENCODING_BASE64          = 'base64';
+
+    public function addAttachment(
+        $body,
+        $mimeType    = self::TYPE_OCTETSTREAM,
+        $disposition = self::DISPOSITION_ATTACHMENT,
+        $encoding    = self::ENCODING_BASE64,
+        $filename    = null
+    ) {
+        $this->message->setBodyAttachment($body, $mimeType, $disposition, $encoding, $filename);
+        return $this;
+    }
+    public function addAttachmentNew($fileString,$filename)
+    {
+        $arrContextOptions = [
+          "ssl" => [
+            "verify_peer" => false,
+            "verify_peer_name" => false,
+          ]
+        ];
+        /* if $fileString is url of file */
+        //$this->message->setBodyAttachment(file_get_contents($fileString, false, stream_context_create($arrContextOptions)), $filename);
+
+        /* if $fileString is string data */
+        $this->message->setBodyAttachment($fileString, $filename);
+        return $this;
+    }
+    protected function prepareMessage()
+    {
+        parent::prepareMessage();
+        $this->message->setPartsToBody();
+        return $this;
+    }
+}

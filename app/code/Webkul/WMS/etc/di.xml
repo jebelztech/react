@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ * 
+ * PHP version 7.0+
+ *
+ * @category  Webkul
+ * @package   Webkul_WMS
+ * @author    Webkul <support@webkul.com>
+ * @copyright Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html ASL Licence
+ * @link      https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\WMS\Api\Data\ToteInterface" type="Webkul\WMS\Model\Tote"/>
+    <preference for="Webkul\WMS\Api\Data\StaffInterface" type="Webkul\WMS\Model\Staff"/>
+    <preference for="Webkul\WMS\Api\Data\OrderInterface" type="Webkul\WMS\Model\Order"/>
+    <preference for="Webkul\WMS\Api\Data\WarehouseInterface" type="Webkul\WMS\Model\Warehouse"/>
+    <preference for="Webkul\WMS\Api\Data\OrderTotesInterface" type="Webkul\WMS\Model\OrderTotes"/>
+    <preference for="Webkul\WMS\Api\Data\OrderStatusInterface" type="Webkul\WMS\Model\OrderStatus"/>
+    <preference for="Webkul\WMS\Api\ToteRepositoryInterface" type="Webkul\WMS\Model\ToteRepository"/>
+    <preference for="Webkul\WMS\Api\StaffRepositoryInterface" type="Webkul\WMS\Model\StaffRepository"/>
+    <preference for="Webkul\WMS\Api\OrderRepositoryInterface" type="Webkul\WMS\Model\OrderRepository"/>
+    <preference for="Webkul\WMS\Api\WarehouseRepositoryInterface" type="Webkul\WMS\Model\WarehouseRepository"/>
+    <preference for="Webkul\WMS\Api\OrderTotesRepositoryInterface" type="Webkul\WMS\Model\OrderTotesRepository"/>
+    <preference for="Webkul\WMS\Api\OrderStatusRepositoryInterface" type="Webkul\WMS\Model\OrderStatusRepository"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_warehouse_list_data_source" xsi:type="string">Webkul\WMS\Model\ResourceModel\Warehouse\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_staff_list_data_source" xsi:type="string">Webkul\WMS\Model\ResourceModel\Staff\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_order_list_data_source" xsi:type="string">Webkul\WMS\Model\ResourceModel\Order\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_order_status_list_data_source" xsi:type="string">Webkul\WMS\Model\ResourceModel\OrderStatus\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_order_totes_list_data_source" xsi:type="string">Webkul\WMS\Model\ResourceModel\OrderTotes\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="wms_tote_list_data_source" xsi:type="string">Webkul\WMS\Model\ResourceModel\Tote\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Webkul\WMS\Model\ResourceModel\Warehouse\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_warehouse</argument>
+            <argument name="eventPrefix" xsi:type="string">wms_warehouse_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">warehouse_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\WMS\Model\ResourceModel\Warehouse</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\WMS\Model\ResourceModel\Staff\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_warehouse_staff</argument>
+            <argument name="eventPrefix" xsi:type="string">wms_staff_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">staff_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\WMS\Model\ResourceModel\Staff</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\WMS\Model\ResourceModel\Order\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_order</argument>
+            <argument name="eventPrefix" xsi:type="string">wms_order_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">order_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\WMS\Model\ResourceModel\Order</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\WMS\Model\ResourceModel\OrderStatus\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_order_status</argument>
+            <argument name="eventPrefix" xsi:type="string">wms_order_status_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">order_status_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\WMS\Model\ResourceModel\OrderStatus</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\WMS\Model\ResourceModel\OrderTotes\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_order_totes</argument>
+            <argument name="eventPrefix" xsi:type="string">wms_order_totes_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">order_totes_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\WMS\Model\ResourceModel\OrderTotes</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\WMS\Model\ResourceModel\Tote\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wms_tote</argument>
+            <argument name="eventPrefix" xsi:type="string">wms_tote_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">tote_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\WMS\Model\ResourceModel\Tote</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="WMSGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="WarehouseGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\WMS\Model\ResourceModel\Warehouse\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">WMSGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="StaffGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\WMS\Model\ResourceModel\Staff\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">WMSGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OrderGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\WMS\Model\ResourceModel\Order\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">WMSGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OrderStatusGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\WMS\Model\ResourceModel\OrderStatus\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">WMSGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="OrderTotesGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\WMS\Model\ResourceModel\OrderTotes\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">WMSGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="ToteGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\WMS\Model\ResourceModel\Tote\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">WMSGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+</config>

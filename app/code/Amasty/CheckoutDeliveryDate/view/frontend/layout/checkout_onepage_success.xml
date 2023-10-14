@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2022 Amasty (https://www.amasty.com)
+* @package Amasty_CheckoutDeliveryDate
+*/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="checkout.success" remove="true"/>
+        <referenceContainer name="content">
+            <block ifconfig="amasty_checkout/general/enabled" class="Magento\Framework\View\Element\Messages" name="messages" as="messages" template="Magento_Theme::messages.phtml"/>
+            <block class="Amasty\CheckoutDeliveryDate\Block\Sales\Order\Info\Delivery" name="delivery" as="delivery" template="Amasty_CheckoutDeliveryDate::onepage/details/delivery.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
